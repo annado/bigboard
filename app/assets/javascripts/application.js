@@ -13,5 +13,6 @@
 //= require underscore/underscore-min
 //= require typeahead.js/dist/typeahead.jquery.min
 //= require jquery
+//= require bootstrap/dist/js/bootstrap.min
 //= require turbolinks
 //= require_tree .

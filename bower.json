@@ -1,7 +1,10 @@
 {
-  "name": "bigboard",
+  "vendor": {
+    "name": "bigboard",
     "dependencies": {
-    "underscore": "~1.4.4",
-    "typeahead.js": "~0.10.2"
+      "underscore": "~1.4.4",
+      "typeahead.js": "~0.10.2",
+      "bootstrap": "~3.1.1"
+    }
   }
 }
