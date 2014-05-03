@@ -1,0 +1,7 @@
+{
+  "name": "bigboard",
+    "dependencies": {
+    "underscore": "~1.4.4",
+    "typeahead.js": "~0.10.2"
+  }
+}

@@ -10,7 +10,8 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+//= require underscore/underscore-min
+//= require typeahead.js/dist/typeahead.jquery.min
 //= require jquery
-//= require jquery_ujs
 //= require turbolinks
 //= require_tree .
