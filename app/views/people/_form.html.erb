@@ -22,8 +22,11 @@
   <div class="field">
     <%= f.hidden_field :image %>
   </div>
+  <div class="field">
+    <%= f.select :location, ['SF', 'UK', 'YN'] %>
+  </div>
   <div class="form-group">
-    <%= f.collection_select :team_id, @teams, :id, :name %>
+    <%= f.collection_select :team_id, Team.all, :id, :name %>
   </div>
   <div class="form-group actions">
     <%= f.submit %>
