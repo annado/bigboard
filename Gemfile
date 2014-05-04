@@ -32,6 +32,7 @@ group :development, :test do
 end
 
 # user authentication
+gem 'devise', "~> 3.2.2"
 gem 'omniauth', '~> 1.0'
 gem 'omniauth-yammer'
 gem 'yam'
