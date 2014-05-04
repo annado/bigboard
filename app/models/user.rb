@@ -7,15 +7,18 @@ class User < ActiveRecord::Base
   devise :omniauthable, :omniauth_providers => [:yammer]
 
   def self.find_for_yammer_oauth(auth)
-    Rails::logger.debug "find_for_yammer_oauth ? #{auth}"
-    where(provider: auth[:provider], uid: "#{auth[:uid]}").first_or_create do |user|
+    user = where(provider: auth[:provider], uid: "#{auth[:uid]}").first_or_create do |user|
       user.provider = auth.provider
       user.uid = auth.uid
       user.email = auth.info.email
       user.password = Devise.friendly_token[0,20]
-      user.name = auth.info.name   # assuming the user model has a name
-      user.image = auth.info.image # assuming the user model has an image
     end
+    user.update({
+      access_token: auth.credentials.token,
+      name: auth.info.name,
+      image: auth.info.image
+    })
+    user
   end
 
   def self.new_with_session(params, session)
