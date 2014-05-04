@@ -14,13 +14,10 @@
   <% end %>
 
   <div id="autocomplete" class="form-group">
-    <input class="typeahead form-control" type="text" placeholder="Search on Yammer..." />
+    <%= f.text_field :name, :class => "typeahead", :placeholder => "Search on Yammer..." %>
   </div>
   <div class="field">
-    <%= f.hidden_field :uid %>
-  </div>
-  <div class="field">
-    <%= f.hidden_field :name %>
+    <%= f.text_field :uid %>
   </div>
   <div class="field">
     <%= f.hidden_field :image %>

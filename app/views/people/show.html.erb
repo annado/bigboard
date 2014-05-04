@@ -12,22 +12,12 @@
 
 <p>
   <strong>Image:</strong>
-  <%= @person.image %>
+  <img class="avatar" src="<%= @person.image %>" />
 </p>
 
 <p>
   <strong>Team:</strong>
-  <%= @person.team %>
-</p>
-
-<p>
-  <strong>Project:</strong>
-  <%= @person.project %>
-</p>
-
-<p>
-  <strong>Role:</strong>
-  <%= @person.role %>
+  <%= @person.team.name %>
 </p>
 
 <%= link_to 'Edit', edit_person_path(@person) %> |

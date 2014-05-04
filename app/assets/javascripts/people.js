@@ -50,7 +50,7 @@ jQuery(function ($) {
     // kicks off the loading/processing of `local` and `prefetch`
     users.initialize();
      
-    $('#autocomplete .typeahead').typeahead({
+    $typeahead.typeahead({
       hint: true,
       minLength: 1
     },
@@ -66,8 +66,15 @@ jQuery(function ($) {
           'No users found.',
           '</div>'
         ].join('\n'),
-        suggestion: _.compile('<p><img src="<%= mugshot_url %>" height="40" /> <%= full_name %></p>')
+        suggestion: _.compile('<p><img class="avatar" src="<%= mugshot_url %>" height="40" /> <%= full_name %></p>')
       }
+    });
+    $typeahead.on('typeahead:selected', function (e, o, name) {
+      if (name == "users") {
+        $('#person_uid').val(o.id);
+        $('#person_image').val(o.mugshot_url);
+      }
+      $typeahead.typeahead('close');
     });
   }
 });
