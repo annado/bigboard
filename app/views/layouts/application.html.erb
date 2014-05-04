@@ -6,8 +6,6 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
   <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
       <div class="navbar-header">
@@ -17,6 +15,7 @@
         <ul class="nav navbar-nav">
           <li class="<%= 'active' if params[:controller] == 'home' %>"><a href="/">Home</a></li>
           <li><a class="<%= 'active' if params[:controller] == 'projects' %>" href="/projects">Projects</a></li>
+          <li><a class="<%= 'active' if params[:controller] == 'teams' %>" href="/teams">Teams</a></li>
         </ul>
 
         <ul class="nav navbar-nav navbar-right">
@@ -35,6 +34,8 @@
       </div><!--/.nav-collapse -->
     </div>
   </div>
+  <p class="notice"><%= notice %></p>
+  <p class="notice"><%= alert %></p>
 <%= yield %>
 
 <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
