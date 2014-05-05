@@ -3,4 +3,6 @@ class Initiative < ActiveRecord::Base
   belongs_to :analyst, class_name: "Person"
   belongs_to :owner, class_name: "Person"
   has_many :projects
+
+  validates :name, presence: { message: "Please specify a name"}
 end

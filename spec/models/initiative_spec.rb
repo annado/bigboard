@@ -1,5 +1,7 @@
 require 'spec_helper'
 
 describe Initiative do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it "should require a name" do
+    Initiative.new(:name => "").should_not be_valid
+  end
 end
