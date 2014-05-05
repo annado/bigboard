@@ -11,13 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140504221351) do
+ActiveRecord::Schema.define(version: 20140505044409) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "boards", force: true do |t|
     t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "initiatives", force: true do |t|
+    t.string   "name"
+    t.date     "start_date"
+    t.date     "end_date"
+    t.integer  "manager_id"
+    t.integer  "analyst_id"
+    t.integer  "owner_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -34,17 +45,29 @@ ActiveRecord::Schema.define(version: 20140504221351) do
 
   add_index "people", ["team_id"], name: "index_people_on_team_id", using: :btree
 
+  create_table "project_members", force: true do |t|
+    t.integer  "project_id"
+    t.integer  "person_id"
+    t.integer  "role_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.date     "start_date"
+    t.date     "end_date"
+  end
+
   create_table "projects", force: true do |t|
     t.string   "name"
     t.date     "kickoff"
     t.date     "rolloff"
     t.string   "status"
     t.string   "location"
-    t.string   "type"
-    t.string   "initiative"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "initiative_id"
+    t.string   "project_type"
   end
+
+  add_index "projects", ["initiative_id"], name: "index_projects_on_initiative_id", using: :btree
 
   create_table "roles", force: true do |t|
     t.string   "name"

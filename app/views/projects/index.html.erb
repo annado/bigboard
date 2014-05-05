@@ -23,8 +23,8 @@
           <td><%= project.rolloff %></td>
           <td><%= project.status %></td>
           <td><%= project.location %></td>
-          <td><%= project.type %></td>
-          <td><%= project.initiative %></td>
+          <td><%= project.project_type %></td>
+          <td><%= project.initiative ? project.initiative.name : '' %></td>
           <td><%= link_to 'Show', project %></td>
           <td><%= link_to 'Edit', edit_project_path(project) %></td>
           <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>

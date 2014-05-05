@@ -14,8 +14,11 @@ jQuery(function ($) {
 
   if ($typeahead.length) {
     var users = new Bloodhound({
-      datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
+      datumTokenizer: function (d) {
+        return Bloodhound.tokenizers.whitespace(d.full_name);
+      },
       queryTokenizer: Bloodhound.tokenizers.whitespace,
+      limit: 10,
       remote: {
         // url: 'https://api.yammer.com/api/v1/autocomplete/ranked?models=users:10&prefix=%QUERY',
         url: 'https://api.yammer.com/api/v1/users/in_group/976603.json',
@@ -44,7 +47,6 @@ jQuery(function ($) {
           return parsedResponse.users;
         }
       }
-
     });
      
     // kicks off the loading/processing of `local` and `prefetch`

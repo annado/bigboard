@@ -51,6 +51,7 @@
 
 .avatar {
   border-radius: 20px;
+  height: 40px;
 }
 
 .tt-suggestion.tt-cursor {

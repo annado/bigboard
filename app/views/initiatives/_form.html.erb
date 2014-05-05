@@ -1,0 +1,40 @@
+<div class="row">
+  <div class="col-md-4">
+    <%= bootstrap_form_for(@initiative) do |f| %>
+      <% if @initiative.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@initiative.errors.count, "error") %> prohibited this initiative from being saved:</h2>
+
+          <ul>
+          <% @initiative.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="field">
+        <%= f.text_field :name %>
+      </div>
+      <div class="field">
+        <%= f.date_select :start_date %>
+      </div>
+      <div class="field">
+        <label><%= check_box_tag "ended" %> Ended? 
+        </label>
+      </div>
+      <div class="field">
+        <%= f.collection_select :manager_id, @managers, :id, :name, { :include_blank => true } %>
+      </div>
+      <div class="field">
+        <%= f.collection_select :analyst_id, @analysts, :id, :name, { :include_blank => true } %>
+      </div>
+      <div class="field">
+        <%= f.collection_select :owner_id, @pms, :id, :name, { :include_blank => true } %>
+      </div>
+      <div class="actions">
+        <%= f.submit %>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :initiatives
+
   resources :people
 
   resources :roles

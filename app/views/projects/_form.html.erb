@@ -1,37 +1,36 @@
-<%= form_for(@project) do |f| %>
-  <% if @project.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:</h2>
+<div class="row">
+  <div class="col-md-4">
+    <%= bootstrap_form_for(@project) do |f| %>
+      <% if @project.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:</h2>
 
-      <ul>
-      <% @project.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+          <ul>
+          <% @project.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
       <% end %>
-      </ul>
-    </div>
-  <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
+      <div class="field">
+        <%= f.text_field :name %>
+      </div>
+      <div class="field">
+        <%= f.select :status, ['', 'Product Planning', 'Engineering'] %>
+      </div>
+      <div class="field">
+        <%= f.select :location, ['SF', 'UK', 'YN'] %>
+      </div>
+      <div class="field">
+        <%= f.select :project_type, ['', 'Product', 'Internal Projects'] %>
+      </div>
+      <div class="field">
+        <%= f.collection_select :initiative_id, Initiative.all, :id, :name %>
+      </div>
+      <div class="actions form-group">
+        <%= f.submit %>
+      </div>
+    <% end %>
   </div>
-  <div class="field">
-    <%= f.label :status %><br>
-    <%= f.text_field :status %>
-  </div>
-  <div class="field">
-    <%= f.label :location %><br>
-    <%= f.text_field :location %>
-  </div>
-  <div class="field">
-    <%= f.label :type %><br>
-    <%= f.text_field :type %>
-  </div>
-  <div class="field">
-    <%= f.label :initiative %><br>
-    <%= f.text_field :initiative %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+</div>
