@@ -20,8 +20,8 @@ jQuery(function ($) {
       queryTokenizer: Bloodhound.tokenizers.whitespace,
       limit: 10,
       remote: {
-        // url: 'https://api.yammer.com/api/v1/autocomplete/ranked?models=users:10&prefix=%QUERY',
-        url: 'https://api.yammer.com/api/v1/users/in_group/976603.json',
+        url: 'https://api.yammer.com/api/v1/autocomplete/ranked?models=users:10&prefix=%QUERY',
+        // url: 'https://api.yammer.com/api/v1/users/in_group/1024046.json',
         ajax: {
           crossDomain: true,
           headers: {
@@ -34,8 +34,8 @@ jQuery(function ($) {
         }
       },
       prefetch: {
-        // url: 'https://api.yammer.com/api/v1/autocomplete/ranked?models=users:10&prefix=%QUERY',
-        url: 'https://api.yammer.com/api/v1/users/in_group/976603.json',
+        url: 'https://api.yammer.com/api/v1/autocomplete/ranked?models=users:10',
+        // url: 'https://api.yammer.com/api/v1/users/in_group/1024046.json',
         ajax: {
           crossDomain: true,
           headers: {
