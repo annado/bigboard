@@ -6,17 +6,22 @@ class User < ActiveRecord::Base
 
   devise :omniauthable, :omniauth_providers => [:yammer]
 
+  belongs_to :network
+
   def self.find_for_yammer_oauth(auth)
+    network = Network.find_or_create_by(nid: auth.extra.raw_info.network_id,  name: auth.extra.raw_info.network_name)
     user = where(provider: auth[:provider], uid: "#{auth[:uid]}").first_or_create do |user|
       user.provider = auth.provider
       user.uid = auth.uid
       user.email = auth.info.email
       user.password = Devise.friendly_token[0,20]
+      user.network = network
     end
     user.update({
       access_token: auth.credentials.token,
       name: auth.info.name,
-      image: auth.info.image
+      image: auth.info.image,
+      network: network
     })
     user
   end

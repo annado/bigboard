@@ -11,15 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140505044409) do
+ActiveRecord::Schema.define(version: 20140508063335) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "boards", force: true do |t|
+    t.integer  "network_id"
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
 
   create_table "initiatives", force: true do |t|
@@ -32,6 +34,15 @@ ActiveRecord::Schema.define(version: 20140505044409) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "networks", force: true do |t|
+    t.integer  "nid"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "networks", ["nid"], name: "index_networks_on_nid", unique: true, using: :btree
 
   create_table "people", force: true do |t|
     t.string   "uid"
@@ -102,9 +113,11 @@ ActiveRecord::Schema.define(version: 20140505044409) do
     t.string   "name"
     t.string   "image"
     t.string   "access_token"
+    t.integer  "network_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["network_id"], name: "index_users_on_network_id", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end
