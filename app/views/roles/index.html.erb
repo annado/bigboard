@@ -1,29 +1,27 @@
-<div class="container">
-  <h1>Roles</h1>
+<h1>Roles</h1>
 
-  <div class="row">
-    <div class="col-md-3">
-      <table class="table">
-        <thead>
+<div class="row">
+  <div class="col-md-3">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th colspan="2"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @roles.each do |role| %>
           <tr>
-            <th>Name</th>
-            <th colspan="2"></th>
+            <td><%= role.name %></td>
+            <td><%= link_to 'Edit', edit_role_path(role) %></td>
+            <td><%= button_to 'Delete', role, method: :delete, :class => 'btn btn-danger btn-xs' %></td>
           </tr>
-        </thead>
-
-        <tbody>
-          <% @roles.each do |role| %>
-            <tr>
-              <td><%= role.name %></td>
-              <td><%= link_to 'Edit', edit_role_path(role) %></td>
-              <td><%= button_to 'Delete', role, method: :delete, :class => 'btn btn-danger btn-xs' %></td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
+        <% end %>
+      </tbody>
+    </table>
   </div>
-  <br>
-
-  <%= link_to 'New Role', new_role_path %>
 </div>
+<br>
+
+<%= link_to 'New Role', new_role_path %>

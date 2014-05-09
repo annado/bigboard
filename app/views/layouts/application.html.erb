@@ -13,7 +13,7 @@
       </div>
       <div class="collapse navbar-collapse">
         <ul class="nav navbar-nav">
-          <li class="<%= 'active' if params[:controller] == 'home' %>"><a href="/">Home</a></li>
+          <li class="<%= 'active' if params[:controller] == 'boards' %>"><a href="/">Boards</a></li>
           <li class="<%= 'active' if params[:controller] == 'projects' %>"><a href="/projects">Projects</a></li>
           <li class="<%= 'active' if params[:controller] == 'initiatives' %>"><a href="/initiatives">Initiatives</a></li>
           <li class="<%= 'active' if params[:controller] == 'teams' %>"><a href="/teams">Teams</a></li>
@@ -36,9 +36,30 @@
       </div><!--/.nav-collapse -->
     </div>
   </div>
-  <p class="notice"><%= notice %></p>
-  <p class="notice"><%= alert %></p>
+
+  <div class="container">
+    <div class="row alerts-row">
+      <% if !notice.nil? %>
+      <div class="alert alert-warning alert-dismissable">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <%= notice %>
+      </div>
+      <% end %>
+      
+      <% if !alert.nil? %>
+      <div class="alert alert-warning alert-dismissable">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <%= alert %>
+      </div>
+      <% end %>
+    </div>
 <%= yield %>
+  </div>
+  <footer>
+    <div class="container">
+
+    </div>
+  </footer>
 <script type="text/javascript">
   var ACCESS_TOKEN = "<%= current_user.access_token if user_signed_in? && current_user['access_token'] %>";
 </script>

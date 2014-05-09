@@ -14,5 +14,15 @@
 //= require underscore/underscore-min
 //= require typeahead.js/dist/typeahead.bundle
 //= require bootstrap/dist/js/bootstrap.min
+//= require bootstrap-datepicker
 //= require turbolinks
 //= require_tree .
+
+  $(document).ready(function(){
+    $('[data-behaviour~=datepicker]').datepicker({
+      format: "yyyy-mm-dd",
+      todayBtn: "linked",
+      autoclose: true,
+      todayHighlight: true
+    });
+  })

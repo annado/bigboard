@@ -15,15 +15,6 @@ class InitiativesController < ApplicationController
   # GET /initiatives/new
   def new
     @initiative = Initiative.new
-
-    manager_id = Team.find_by name: 'Manager'
-    @managers = Person.where team_id: manager_id
-
-    analyst_team_id = Team.find_by name: 'Analytics'
-    @analysts = Person.where team_id: analyst_team_id
-
-    product_team_id = Team.find_by name: 'PM'
-    @pms = Person.where team_id: product_team_id
   end
 
   # GET /initiatives/1/edit
@@ -74,6 +65,17 @@ class InitiativesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_initiative
       @initiative = Initiative.find(params[:id])
+  
+      manager_id = Team.find_by name: 'Manager'
+      @managers = Person.where team_id: manager_id
+
+      analyst_team_id = Team.find_by name: 'Analytics'
+      @analysts = Person.where team_id: analyst_team_id || []
+
+      product_team_id = Team.find_by name: 'PM'
+      @pms = Person.where team_id: product_team_id || []
+
+      @boards = Board.where network_id: current_user.network_id
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

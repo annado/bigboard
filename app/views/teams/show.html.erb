@@ -1,15 +1,12 @@
+<p>
+  <strong>Name:</strong>
+  <%= @team.name %>
+</p>
 
-<div class="container">
-  <p>
-    <strong>Name:</strong>
-    <%= @team.name %>
-  </p>
+<p>
+  <strong>Color:</strong>
+  <%= @team.color %>
+</p>
 
-  <p>
-    <strong>Color:</strong>
-    <%= @team.color %>
-  </p>
-
-  <%= link_to 'Edit', edit_team_path(@team) %> |
-  <%= link_to 'Back', teams_path %>
-</div>
+<%= link_to 'Edit', edit_team_path(@team) %> |
+<%= link_to 'Back', teams_path %>

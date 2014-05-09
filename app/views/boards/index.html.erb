@@ -1,11 +1,8 @@
-<div class="container">
-  <h1>Boards <span><%= link_to 'Create New', new_board_path, :class => 'btn btn-primary btn-xs' %>
+<h1>Boards <span><%= link_to 'Create New', new_board_path, :class => 'btn btn-primary btn-xs' %>
 </h1>
 
-  <ul class="list-unstyled">
-  <% @boards.each do |board| %>
-    <li><h3><%= link_to board.name, board %></h3></li>
-  <% end %>
-  </ul>
-
-</div>
+<ul class="list-unstyled">
+<% @boards.each do |board| %>
+  <li><h3><%= link_to board.name, board %></h3></li>
+<% end %>
+</ul>
