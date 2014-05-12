@@ -17,8 +17,13 @@
  */
 
 body {
-  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-family: "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
   padding-top: 50px;
+}
+
+.table-board {
+  font-size: 12px;
 }
 
 .alerts-row .alert {
@@ -27,6 +32,13 @@ body {
 
 .actions {
   margin: 20px 0;
+}
+
+.person-tag {
+  border-radius: 5px;
+  color: #333;
+  font-size: 12px;
+  padding: 3px 5px;
 }
 
 footer {

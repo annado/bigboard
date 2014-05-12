@@ -20,6 +20,12 @@
         <%= f.select :status, ['', 'Product Planning', 'Engineering'] %>
       </div>
       <div class="field">
+        <%= f.text_field :start_date, :data => { :behaviour => "datepicker" } %>
+      </div>
+      <div class="field">
+        <%= f.text_field :end_date, :data => { :behaviour => "datepicker" } %>
+      </div>
+      <div class="field">
         <%= f.select :location, ['SF', 'UK', 'YN'] %>
       </div>
       <div class="field">

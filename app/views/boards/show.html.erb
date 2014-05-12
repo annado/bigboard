@@ -1,14 +1,30 @@
 <div class="row">
-  <p>
-    <strong>Network:</strong>
-    <%= @board.network_id %>
-  </p>
-
-  <p>
-    <strong>Name:</strong>
-    <%= @board.name %>
-  </p>
-
-  <%= link_to 'Edit', edit_board_path(@board) %> |
-  <%= link_to 'Back', boards_path %>
+  <h1><%= @board.name %></h1>
+  <table class="table table-condensed table-hover table-bordered table-board">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Tech Lead</th>
+        <th>Engineering</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @board.initiatives.each do |i| %>
+      <tr>
+        <th colspan="3"><%= i.name %></th>
+        <td><%= person_tag i.manager %></td>
+        <td><%= person_tag i.analyst %></td>
+      </tr>
+      <% i.projects.order(start_date: :asc).each do |p| %>
+      <tr>
+        <td><%= link_to p.name, edit_project_path(p) %></td>
+        <td><%= p.start_date %></td>
+        <td><%= p.end_date %></td>
+      </tr>
+      <% end %>
+    <% end %>
+    </tbody>
+  </table>
 </div>

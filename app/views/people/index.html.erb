@@ -1,4 +1,4 @@
-<h1>People</h1>
+<h1>People <span><%= link_to 'Add New', new_person_path, :class => 'btn btn-primary btn-xs' %></h1>
 
 <table class="table table-striped">
   <thead>
@@ -23,7 +23,3 @@
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Person', new_person_path %>

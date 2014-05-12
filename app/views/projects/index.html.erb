@@ -1,11 +1,11 @@
-<h1 class="page-header">Projects</h1>
+<h1 class="page-header">Projects <span><%= link_to 'Create New', new_project_path, :class => 'btn btn-primary btn-xs' %></h1>
 
 <table class="table table-striped">
   <thead>
     <tr>
       <th>Name</th>
-      <th>Kickoff</th>
-      <th>Rolloff</th>
+      <th>Start Date</th>
+      <th>End Date</th>
       <th>Status</th>
       <th>Location</th>
       <th>Type</th>
@@ -18,8 +18,8 @@
     <% @projects.each do |project| %>
       <tr>
         <td><%= project.name %></td>
-        <td><%= project.kickoff %></td>
-        <td><%= project.rolloff %></td>
+        <td><%= project.start_date %></td>
+        <td><%= project.end_date %></td>
         <td><%= project.status %></td>
         <td><%= project.location %></td>
         <td><%= project.project_type %></td>
@@ -31,7 +31,3 @@
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Project', new_project_path, :class => 'btn btn-primary' %>

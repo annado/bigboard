@@ -19,9 +19,9 @@
         <td><%= initiative.name %></td>
         <td><%= initiative.start_date %></td>
         <td><%= initiative.end_date %></td>
-        <td><%= initiative.manager.name %></td>
+        <td><%= initiative.manager ? initiative.manager.name : '' %></td>
         <td><%= initiative.analyst ? initiative.analyst.name : '' %></td>
-        <td><%= initiative.owner.name %></td>
+        <td><%= initiative.owner ? initiative.owner.name : '' %></td>
         <td><%= link_to 'Show', initiative %></td>
         <td><%= link_to 'Edit', edit_initiative_path(initiative) %></td>
         <td><%= link_to 'Destroy', initiative, method: :delete, data: { confirm: 'Are you sure?' } %></td>

@@ -1,5 +1,7 @@
 class InitiativesController < ApplicationController
   before_action :set_initiative, only: [:show, :edit, :update, :destroy]
+  before_action :set_select_fields, only: [:new, :edit, :update]
+
 
   # GET /initiatives
   # GET /initiatives.json
@@ -65,7 +67,9 @@ class InitiativesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_initiative
       @initiative = Initiative.find(params[:id])
-  
+    end
+
+    def set_select_fields
       manager_id = Team.find_by name: 'Manager'
       @managers = Person.where team_id: manager_id
 
@@ -83,6 +87,6 @@ class InitiativesController < ApplicationController
       if (params[:ended]) 
         params[:end_date] = today
       end
-      params.require(:initiative).permit(:name, :start_date, :end_date, :manager_id, :analyst_id, :owner_id)
+      params.require(:initiative).permit(:name, :start_date, :end_date, :manager_id, :analyst_id, :owner_id, :board_id)
     end
 end
