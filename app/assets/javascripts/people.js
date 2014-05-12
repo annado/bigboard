@@ -3,41 +3,8 @@
 
 jQuery(function ($) {
   var $typeahead = $('#autocomplete .typeahead');
-
-  _.compile = function(templ) {
-      var compiled = this.template(templ);
-      compiled.render = function(ctx) {
-         return this(ctx);
-      }
-      return compiled;
-   }
-
   if ($typeahead.length) {
-    var users = new Bloodhound({
-      datumTokenizer: function (d) {
-        return Bloodhound.tokenizers.whitespace(d.full_name);
-      },
-      queryTokenizer: Bloodhound.tokenizers.whitespace,
-      limit: 10,
-      remote: {
-        url: 'https://www.yammer.com/api/v1/autocomplete/ranked?models=user:10&prefix=%QUERY',
-        // url: 'https://api.yammer.com/api/v1/users/in_group/1024046.json',
-        ajax: {
-          crossDomain: true,
-          headers: {
-            "Accept": "application/json",
-            'Authorization': 'Bearer ' + ACCESS_TOKEN
-          }
-        },
-        filter: function (parsedResponse) {
-          return parsedResponse.user;
-        }
-      }
-    });
-     
-    // kicks off the loading/processing of `local` and `prefetch`
-    users.initialize();
-     
+       
     $typeahead.typeahead({
       hint: true,
       minLength: 1
@@ -47,7 +14,7 @@ jQuery(function ($) {
       displayKey: 'full_name',
       // `ttAdapter` wraps the suggestion engine in an adapter that
       // is compatible with the typeahead jQuery plugin
-      source: users.ttAdapter(),
+      source: BB.sources.users.ttAdapter(),
       templates: {
         empty: [
           '<div class="empty-message">',

@@ -18,11 +18,70 @@
 //= require turbolinks
 //= require_tree .
 
-  $(document).ready(function(){
-    $('[data-behaviour~=datepicker]').datepicker({
-      format: "yyyy-mm-dd",
-      todayBtn: "linked",
-      autoclose: true,
-      todayHighlight: true
-    });
-  })
+if (typeof BB == "undefined") {
+  var BB = { sources: {} };
+};
+
+BB.sources.users = new Bloodhound({
+  datumTokenizer: function (d) {
+    return Bloodhound.tokenizers.whitespace(d.full_name);
+  },
+  queryTokenizer: Bloodhound.tokenizers.whitespace,
+  limit: 10,
+  remote: {
+    url: 'https://www.yammer.com/api/v1/autocomplete/ranked?models=user:10&prefix=%QUERY',
+    ajax: {
+      crossDomain: true,
+      headers: {
+        "Accept": "application/json",
+        'Authorization': 'Bearer ' + ACCESS_TOKEN
+      }
+    },
+    filter: function (parsedResponse) {
+      return parsedResponse.user;
+    }
+  }
+});
+ 
+// kicks off the loading/processing of `local` and `prefetch`
+BB.sources.users.initialize();
+
+
+BB.sources.people = new Bloodhound({
+  datumTokenizer: function (d) {
+    return Bloodhound.tokenizers.whitespace(d.name);
+  },
+  queryTokenizer: Bloodhound.tokenizers.whitespace,
+  limit: 10,
+  remote: {
+    url: 'https://www.yammer.com/api/v1/autocomplete/ranked?models=user:10&prefix=%QUERY',
+    ajax: {
+      crossDomain: true,
+      headers: {
+        "Accept": "application/json",
+        'Authorization': 'Bearer ' + ACCESS_TOKEN
+      }
+    },
+    filter: function (parsedResponse) {
+      return parsedResponse.user;
+    }
+  }
+});
+
+_.compile = function(templ) {
+    var compiled = this.template(templ);
+    compiled.render = function(ctx) {
+       return this(ctx);
+    }
+    return compiled;
+ }
+
+$(document).ready(function(){
+
+  $('[data-behaviour~=datepicker]').datepicker({
+    format: "yyyy-mm-dd",
+    todayBtn: "linked",
+    autoclose: true,
+    todayHighlight: true
+  });
+});
