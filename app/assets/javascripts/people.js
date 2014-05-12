@@ -20,7 +20,7 @@ jQuery(function ($) {
       queryTokenizer: Bloodhound.tokenizers.whitespace,
       limit: 10,
       remote: {
-        url: 'https://api.yammer.com/api/v1/autocomplete/ranked?models=users:10&prefix=%QUERY',
+        url: 'https://www.yammer.com/api/v1/autocomplete/ranked?models=user:10&prefix=%QUERY',
         // url: 'https://api.yammer.com/api/v1/users/in_group/1024046.json',
         ajax: {
           crossDomain: true,
@@ -30,21 +30,7 @@ jQuery(function ($) {
           }
         },
         filter: function (parsedResponse) {
-          return parsedResponse.users;
-        }
-      },
-      prefetch: {
-        url: 'https://api.yammer.com/api/v1/autocomplete/ranked?models=users:10',
-        // url: 'https://api.yammer.com/api/v1/users/in_group/1024046.json',
-        ajax: {
-          crossDomain: true,
-          headers: {
-            "Accept": "application/json",
-            'Authorization': 'Bearer ' + ACCESS_TOKEN
-          }
-        },
-        filter: function (parsedResponse) {
-          return parsedResponse.users;
+          return parsedResponse.user;
         }
       }
     });
@@ -68,13 +54,13 @@ jQuery(function ($) {
           'No users found.',
           '</div>'
         ].join('\n'),
-        suggestion: _.compile('<p><img class="avatar" src="<%= mugshot_url %>" height="40" /> <%= full_name %></p>')
+        suggestion: _.compile('<div class="media"><img class="avatar pull-left media-object" src="<%= photo %>" /><div class="media-body"><p><%= full_name %><br /><%= job_title %></p></div></div>')
       }
     });
     $typeahead.on('typeahead:selected', function (e, o, name) {
       if (name == "users") {
         $('#person_uid').val(o.id);
-        $('#person_image').val(o.mugshot_url);
+        $('#person_image').val(o.photo);
       }
       $typeahead.typeahead('close');
     });
