@@ -54,19 +54,13 @@ BB.sources.people = new Bloodhound({
   queryTokenizer: Bloodhound.tokenizers.whitespace,
   limit: 10,
   remote: {
-    url: 'https://www.yammer.com/api/v1/autocomplete/ranked?models=user:10&prefix=%QUERY',
-    ajax: {
-      crossDomain: true,
-      headers: {
-        "Accept": "application/json",
-        'Authorization': 'Bearer ' + ACCESS_TOKEN
-      }
-    },
+    url: '/people.json?prefix=%QUERY',
     filter: function (parsedResponse) {
-      return parsedResponse.user;
+      return parsedResponse;
     }
   }
 });
+BB.sources.people.initialize();
 
 _.compile = function(templ) {
     var compiled = this.template(templ);

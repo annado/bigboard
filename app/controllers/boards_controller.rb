@@ -69,6 +69,9 @@ class BoardsController < ApplicationController
       board = Board.find(params[:id])
       if board.network_id == current_user.network_id
         @board = board
+        @tl_role = Role.find_by_name "TL"
+        @eng_role = Role.find_by_name "Engineering"
+        @prod_role = Role.find_by_name "Product"
       end
     end
 

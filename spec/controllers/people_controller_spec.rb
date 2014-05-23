@@ -28,7 +28,7 @@ describe PeopleController do
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # PeopleController. Be sure to keep this updated too.
-  let(:valid_session) { {} }
+  let(:valid_session) { { "current_user" => { "network_id" => 1 }} }
 
   describe "GET index" do
     it "assigns all people as @people" do

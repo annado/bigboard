@@ -1,7 +1,13 @@
 Rails.application.routes.draw do
-  resources :boards
+  resources :project_members
 
-  resources :initiatives
+  resources :boards do
+    resources :initiatives
+  end
+
+  resources :initiatives do
+    resources :projects
+  end
 
   resources :people
 

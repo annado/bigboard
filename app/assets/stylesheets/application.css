@@ -37,8 +37,18 @@ body {
 .person-tag {
   border-radius: 5px;
   color: #333;
+  display: inline-block;
   font-size: 12px;
   padding: 3px 5px;
+}
+
+.table-board .list-inline {
+  display: inline;
+}
+
+.table-board .list-inline > li {
+  margin: 0 0 3px;
+  padding-left: 0;
 }
 
 footer {
