@@ -57,8 +57,9 @@
       <% if v.changeset.empty? %>
       <%= v.event %> on <%= v.created_at.strftime("%m/%d/%y") %>
       <% else %>
-      <%= Project.human_attribute_name(v.changeset.first[0]) %> changed: <%= v.changeset.first[1].join(' → ') %>
+      <%= Project.human_attribute_name(v.changeset.first[0]) %> changed: <strong><%= v.changeset.first[1].join(' → ') %></strong>
       <% end %>
+      by <%= User.find_by_id(v.whodunnit).name %>
     </li>
   <% end %>
   <% @project.project_members.each do |pm| %>
@@ -69,6 +70,7 @@
       <% else %>
       ?? <%= v.event %>
       <% end %>
+      by <%= User.find_by_id(v.whodunnit).name %>
       </li>
     <% end %>
   <% end %>
