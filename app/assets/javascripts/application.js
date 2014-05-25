@@ -69,16 +69,3 @@ _.compile = function(templ) {
     return compiled;
  }
 
-$(document).ready(function(){
-
-  $dates = $('[data-behaviour~=datepicker]');
-  if ($dates.length) {
-    $('[data-behaviour~=datepicker]').datepicker({
-      format: "yyyy-mm-dd",
-      todayBtn: "linked",
-      autoclose: true,
-      todayHighlight: true
-    });
-  }
-
-});
