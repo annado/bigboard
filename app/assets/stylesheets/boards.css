@@ -1,0 +1,31 @@
+
+.row-board {
+  margin: 0 10px;
+}
+
+.table-board {
+  font-size: 12px;
+}
+
+.table-board .people .btn {
+  vertical-align: top;
+}
+
+.table-board .date {
+  min-width: 6em;
+}
+
+.table-board .project {
+  min-width: 10em;
+}
+
+.table-board .list-inline {
+  display: inline;
+  margin: 0;
+}
+
+.table-board .list-inline > li {
+  margin: 0 2px 2px 0;
+  padding: 0;
+  max-width: 10em;
+}

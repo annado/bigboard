@@ -22,10 +22,6 @@ body {
   padding-top: 50px;
 }
 
-.table-board {
-  font-size: 12px;
-}
-
 .alerts-row .alert {
   margin-top: 20px;
 }
@@ -35,20 +31,21 @@ body {
 }
 
 .person-tag {
-  border-radius: 5px;
   color: #333;
   display: inline-block;
   font-size: 12px;
-  padding: 3px 5px;
+  padding: 2px 5px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 10em;
+  overflow: hidden;
+  cursor: default;
 }
 
-.table-board .list-inline {
-  display: inline;
-}
-
-.table-board .list-inline > li {
-  margin: 0 0 3px;
-  padding-left: 0;
+.person-tag:hover {
+  max-width: 20em;
+  z-index: 1000;
+  position: relative;
 }
 
 footer {

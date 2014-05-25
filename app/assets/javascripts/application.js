@@ -72,10 +72,14 @@ _.compile = function(templ) {
 
 $(document).ready(function(){
 
-  $('[data-behaviour~=datepicker]').datepicker({
-    format: "yyyy-mm-dd",
-    todayBtn: "linked",
-    autoclose: true,
-    todayHighlight: true
-  });
+  $dates = $('[data-behaviour~=datepicker]');
+  if ($dates.length) {
+    $('[data-behaviour~=datepicker]').datepicker({
+      format: "yyyy-mm-dd",
+      todayBtn: "linked",
+      autoclose: true,
+      todayHighlight: true
+    });
+  }
+
 });
