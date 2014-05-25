@@ -69,3 +69,27 @@ _.compile = function(templ) {
     return compiled;
  }
 
+$(document).ready(function(){
+
+  $actions = $('[data-model=project-member]');
+  if ($actions.length) {
+    $actions.on('click', function (e) {
+      var $target = $(e.target),
+        id = $target.data('id'),
+        url = "/project_members/" + id + ".json";
+
+      $.ajax({
+      type: "DELETE",
+      url: url,
+      headers: {
+       'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+      },
+      success: function(o) {
+        $target.parent().fadeOut();
+      },
+      dataType: 'json'
+    })
+    });
+  }
+
+});

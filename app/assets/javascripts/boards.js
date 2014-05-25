@@ -90,4 +90,5 @@ jQuery(function ($) {
     return $target.closest('td').find('ul');
   }
 
+  $('.person-tag').popover({ placement: 'top', trigger: 'hover', html: true });
 });

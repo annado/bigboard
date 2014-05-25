@@ -25,7 +25,7 @@
           <td class="date"><%= p.end_date.strftime("%m/%d/%y") unless p.end_date.nil? %></td>
           <td class="people tl">
             <ul class="list-inline">
-            <% project_members = ProjectMember.where(role_id: @tl_role.id, project_id: p.id)
+            <% project_members = p.project_members.where(role_id: @tl_role.id)
             project_members.each do |pm| %>
             <li><%= person_tag pm.person %></li>
             <% end %>
@@ -35,14 +35,14 @@
             <% end %>
           </td>
           <td class="people eng">
-            <ul class="list-inline"><% ProjectMember.where(role_id: @eng_role.id, project_id: p.id).each do |pm| %>
+            <ul class="list-inline"><% p.project_members.where(role_id: @eng_role.id).each do |pm| %>
               <li><%= person_tag pm.person %></li>
             <% end %></ul>
             <button class="btn btn-default btn-xs add-person" data-project-id="<%= p.id %>" data-role-id="<%= @eng_role.id %>">+ Person</button>
           </td>
           <td class="people product">
             <ul class="list-inline">
-              <% ProjectMember.where(role_id: @prod_role.id, project_id: p.id).each do |prod| %>
+              <% p.project_members.where(role_id: @prod_role.id).each do |prod| %>
               <li><%= person_tag prod.person %></li>
               <% end %>
             </ul>
@@ -71,8 +71,8 @@
           <%= f.hidden_field :project_id %>
           <%= f.submit "Add" %>
         <% end %>
+        </div>
       </div>
     </div>
   </div>
-</div>
-</div>
+  </div>

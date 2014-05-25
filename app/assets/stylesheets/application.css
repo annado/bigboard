@@ -43,8 +43,6 @@ body {
 
 .person-tag:hover {
   max-width: 20em;
-  z-index: 1000;
-  position: relative;
 }
 
 footer {
