@@ -1,4 +1,5 @@
 class Initiative < ActiveRecord::Base
+  has_paper_trail
   belongs_to :manager, class_name: "Person"
   belongs_to :analyst, class_name: "Person"
   belongs_to :owner, class_name: "Person"

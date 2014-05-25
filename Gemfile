@@ -9,6 +9,8 @@ gem 'uglifier', '>= 1.3.0'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer',  platforms: :ruby
 
+gem 'paper_trail', '~> 3.0.2'
+
 gem "bower-rails", "~> 0.7.1"
 
 # Use jquery as the JavaScript library
