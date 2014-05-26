@@ -1,23 +1,22 @@
 Rails.application.routes.draw do
-  resources :project_members
 
   resources :boards do
     resources :initiatives
+    resources :teams
+    resources :roles
   end
 
   resources :initiatives do
     resources :projects
   end
 
+  resources :projects do
+    resources :project_members, shallow: true
+  end
+  
   resources :people
 
-  resources :roles
-
-  resources :teams
-
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
-
-  resources :projects
 
   get 'home/index'
 

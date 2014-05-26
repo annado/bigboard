@@ -4,7 +4,7 @@ class ProjectMembersController < ApplicationController
   # GET /project_members
   # GET /project_members.json
   def index
-    @project_members = ProjectMember.all
+    @project_members = []
   end
 
   # GET /project_members/1
