@@ -1,4 +1,5 @@
 class InitiativesController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_initiative, only: [:show, :edit, :update, :destroy]
   before_action :set_select_fields, only: [:new, :edit, :update]
 
