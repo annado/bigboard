@@ -6,6 +6,9 @@ describe "teams/show" do
       :name => "Name",
       :color => "Color"
     ))
+    @board = assign(:board, stub_model(Board,
+      :id => 1
+    ))
   end
 
   it "renders attributes in <p>" do

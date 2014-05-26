@@ -8,5 +8,5 @@
   <%= @team.color %>
 </p>
 
-<%= link_to 'Edit', edit_team_path(@team) %> |
-<%= link_to 'Back', teams_path %>
+<%= link_to 'Edit', edit_board_team_path(@board, @team) %> |
+<%= link_to 'Back', board_teams_path(@board) %>
