@@ -1,12 +1,13 @@
 class InitiativesController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_board
   before_action :set_initiative, only: [:show, :edit, :update, :destroy]
   before_action :set_select_fields, only: [:new, :edit, :update]
 
   # GET /initiatives
   # GET /initiatives.json
   def index
-    @initiatives = Initiative.all
+    @initiatives = Initiative.where(:board_id => @board.id)
   end
 
   # GET /initiatives/1
@@ -30,7 +31,7 @@ class InitiativesController < ApplicationController
 
     respond_to do |format|
       if @initiative.save
-        format.html { redirect_to @initiative, notice: 'Initiative was successfully created.' }
+        format.html { redirect_to board_initiative_url(@board, @initiative), notice: 'Initiative was successfully created.' }
         format.json { render :show, status: :created, location: @initiative }
       else
         format.html { render :new }
@@ -44,7 +45,7 @@ class InitiativesController < ApplicationController
   def update
     respond_to do |format|
       if @initiative.update(initiative_params)
-        format.html { redirect_to @initiative, notice: 'Initiative was successfully updated.' }
+        format.html { redirect_to board_initiative_url(@board, @initiative), notice: 'Initiative was successfully updated.' }
         format.json { render :show, status: :ok, location: @initiative }
       else
         format.html { render :edit }
@@ -58,7 +59,7 @@ class InitiativesController < ApplicationController
   def destroy
     @initiative.destroy
     respond_to do |format|
-      format.html { redirect_to initiatives_url }
+      format.html { redirect_to board_initiatives_url(@board) }
       format.json { head :no_content }
     end
   end
@@ -67,6 +68,10 @@ class InitiativesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_initiative
       @initiative = Initiative.find(params[:id])
+    end
+
+    def set_board
+      @board = Board.find(params[:board_id])
     end
 
     def set_select_fields

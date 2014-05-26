@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   end
 
   resources :projects do
-    resources :project_members, shallow: true
+    resources :project_members
   end
   
   resources :people

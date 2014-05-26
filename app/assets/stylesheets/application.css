@@ -18,7 +18,6 @@
 body {
   font-family: "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
-  padding-top: 50px;
 }
 
 .alerts-row .alert {

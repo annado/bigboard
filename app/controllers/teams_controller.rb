@@ -1,11 +1,12 @@
 class TeamsController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_board
   before_action :set_team, only: [:show, :edit, :update, :destroy]
 
   # GET /teams
   # GET /teams.json
   def index
-    @teams = Team.where network_id: current_user.network_id
+    @teams = Team.where(:board_id => @board.id)
   end
 
   # GET /teams/1
@@ -29,7 +30,7 @@ class TeamsController < ApplicationController
 
     respond_to do |format|
       if @team.save
-        format.html { redirect_to @team, notice: 'Team was successfully created.' }
+        format.html { redirect_to edit_board_team_path(@board, @team), notice: 'Team was successfully created.' }
         format.json { render :show, status: :created, location: @team }
       else
         format.html { render :new }
@@ -43,7 +44,7 @@ class TeamsController < ApplicationController
   def update
     respond_to do |format|
       if @team.update(team_params)
-        format.html { redirect_to @team, notice: 'Team was successfully updated.' }
+        format.html { redirect_to edit_board_team_path(@board, @team), notice: 'Team was successfully updated.' }
         format.json { render :show, status: :ok, location: @team }
       else
         format.html { render :edit }
@@ -57,7 +58,7 @@ class TeamsController < ApplicationController
   def destroy
     @team.destroy
     respond_to do |format|
-      format.html { redirect_to teams_url }
+      format.html { redirect_to board_teams_url(@board) }
       format.json { head :no_content }
     end
   end
@@ -68,8 +69,12 @@ class TeamsController < ApplicationController
       @team = Team.find(params[:id])
     end
 
+    def set_board
+      @board = Board.find(params[:board_id])
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def team_params
-      params.require(:team).permit(:name, :color)
+      params.require(:team).permit(:name, :color, :board_id)
     end
 end

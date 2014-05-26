@@ -1,4 +1,6 @@
 class RolesController < ApplicationController
+  before_action :authenticate_user!
+  before_action :set_board
   before_action :set_role, only: [:show, :edit, :update, :destroy]
 
   # GET /roles
@@ -28,7 +30,7 @@ class RolesController < ApplicationController
 
     respond_to do |format|
       if @role.save
-        format.html { redirect_to @role, notice: 'Role was successfully created.' }
+        format.html { redirect_to edit_board_role_path(@board, @role), notice: 'Role was successfully created.' }
         format.json { render :show, status: :created, location: @role }
       else
         format.html { render :new }
@@ -42,7 +44,7 @@ class RolesController < ApplicationController
   def update
     respond_to do |format|
       if @role.update(role_params)
-        format.html { redirect_to @role, notice: 'Role was successfully updated.' }
+        format.html { redirect_to edit_board_role_path(@board, @role), notice: 'Role was successfully updated.' }
         format.json { render :show, status: :ok, location: @role }
       else
         format.html { render :edit }
@@ -56,7 +58,7 @@ class RolesController < ApplicationController
   def destroy
     @role.destroy
     respond_to do |format|
-      format.html { redirect_to roles_url }
+      format.html { redirect_to board_roles_url(@board) }
       format.json { head :no_content }
     end
   end
@@ -67,8 +69,12 @@ class RolesController < ApplicationController
       @role = Role.find(params[:id])
     end
 
+    def set_board
+      @board = Board.find(params[:board_id])
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def role_params
-      params.require(:role).permit(:name)
+      params.require(:role).permit(:name, :board_id)
     end
 end

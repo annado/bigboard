@@ -9,7 +9,7 @@
       <th>Manager</th>
       <th>Analyst</th>
       <th>Owner</th>
-      <th colspan="3"></th>
+      <th colspan="2"></th>
     </tr>
   </thead>
 
@@ -22,9 +22,8 @@
         <td><%= initiative.manager ? initiative.manager.name : '' %></td>
         <td><%= initiative.analyst ? initiative.analyst.name : '' %></td>
         <td><%= initiative.owner ? initiative.owner.name : '' %></td>
-        <td><%= link_to 'Show', initiative %></td>
-        <td><%= link_to 'Edit', edit_initiative_path(initiative) %></td>
-        <td><%= link_to 'Destroy', initiative, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Edit', edit_board_initiative_path(@board, initiative) %></td>
+        <td><%= link_to 'Destroy', board_initiative_url(@board, initiative), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

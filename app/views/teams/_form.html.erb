@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-md-4">
-  <%= bootstrap_form_for(@team) do |f| %>
+  <%= bootstrap_form_for [@board, @team] do |f| %>
     <% if @team.errors.any? %>
       <div id="error_explanation">
         <h2><%= pluralize(@team.errors.count, "error") %> prohibited this team from being saved:</h2>

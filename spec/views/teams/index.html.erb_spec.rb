@@ -12,6 +12,9 @@ describe "teams/index" do
         :color => "Color"
       )
     ])
+    assign(:board, stub_model(Board,
+      :id => 123
+    ))
   end
 
   it "renders a list of teams" do

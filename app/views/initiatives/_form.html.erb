@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-md-4">
-    <%= bootstrap_form_for(@initiative) do |f| %>
+    <%= bootstrap_form_for([@board, @initiative]) do |f| %>
       <% if @initiative.errors.any? %>
         <div id="error_explanation">
           <h2><%= pluralize(@initiative.errors.count, "error") %> prohibited this initiative from being saved:</h2>
