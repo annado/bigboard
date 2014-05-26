@@ -1,10 +1,11 @@
 class ProjectsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_project, only: [:show, :edit, :update, :destroy]
 
   # GET /projects
   # GET /projects.json
   def index
-    @projects = Project.all
+    @projects = Project.where network_id: current_user.network_id
   end
 
   # GET /projects/1
