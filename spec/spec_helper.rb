@@ -39,4 +39,8 @@ RSpec.configure do |config|
   # the seed, which is printed after each run.
   #     --seed 1234
   config.order = "random"
+  config.include Devise::TestHelpers, type: :controller
 end
+
+OmniAuth.config.test_mode = true
+OmniAuth.config.mock_auth[:yammer] = {:provider => 'yammer', :uid => '123545'}
