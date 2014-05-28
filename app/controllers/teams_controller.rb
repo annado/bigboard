@@ -16,7 +16,7 @@ class TeamsController < ApplicationController
 
   # GET /teams/new
   def new
-    @team = Team.new
+    @team = @board.teams.build
   end
 
   # GET /teams/1/edit
@@ -26,11 +26,11 @@ class TeamsController < ApplicationController
   # POST /teams
   # POST /teams.json
   def create
-    @team = Team.new(team_params)
+    @team = @board.teams.build(team_params)
 
     respond_to do |format|
       if @team.save
-        format.html { redirect_to edit_board_team_path(@board, @team), notice: 'Team was successfully created.' }
+        format.html { redirect_to board_teams_url(@board, @team), notice: 'Team was successfully created.' }
         format.json { render :show, status: :created, location: @team }
       else
         format.html { render :new }
@@ -44,7 +44,7 @@ class TeamsController < ApplicationController
   def update
     respond_to do |format|
       if @team.update(team_params)
-        format.html { redirect_to edit_board_team_path(@board, @team), notice: 'Team was successfully updated.' }
+        format.html { redirect_to board_teams_url(@board, @team), notice: 'Team was successfully updated.' }
         format.json { render :show, status: :ok, location: @team }
       else
         format.html { render :edit }
@@ -71,6 +71,7 @@ class TeamsController < ApplicationController
 
     def set_board
       @board = Board.find(params[:board_id])
+      @show_boards_nav = !@board.nil? && !@board.new_record?
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

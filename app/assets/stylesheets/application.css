@@ -20,8 +20,8 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-.alerts-row .alert {
-  margin-top: 20px;
+.container-fluid .alerts-row {
+  margin: 0 10px;
 }
 
 .actions {

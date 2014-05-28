@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-md-6">
-    <%= bootstrap_form_for(@project, layout: :horizontal, label_col: "col-md-2", control_col: "col-md-6") do |f| %>
+    <%= bootstrap_form_for([@board, @project], layout: :horizontal, label_col: "col-md-2", control_col: "col-md-6") do |f| %>
       <% if @project.errors.any? %>
         <div id="error_explanation">
           <h2><%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:</h2>
@@ -17,9 +17,6 @@
         <%= f.text_field :name %>
       </div>
       <div class="field">
-        <%= f.select :status, ['', 'Product Planning', 'Engineering'] %>
-      </div>
-      <div class="field">
         <%= f.date_field :start_date %>
       </div>
       <div class="field">
@@ -32,7 +29,7 @@
         <%= f.select :project_type, ['', 'Product', 'Internal Projects'] %>
       </div>
       <div class="field">
-        <%= f.collection_select :initiative_id, Initiative.all, :id, :name %>
+        <%= f.collection_select :initiative_id, @initiatives, :id, :name %>
       </div>
       <div class="form-group">
         <div class="col-sm-offset-2 col-sm-4">

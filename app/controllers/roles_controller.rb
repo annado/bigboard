@@ -6,7 +6,7 @@ class RolesController < ApplicationController
   # GET /roles
   # GET /roles.json
   def index
-    @roles = Role.all
+    @roles = Role.where(:board_id => @board.id)
   end
 
   # GET /roles/1
@@ -16,7 +16,7 @@ class RolesController < ApplicationController
 
   # GET /roles/new
   def new
-    @role = Role.new
+    @role = @board.roles.build
   end
 
   # GET /roles/1/edit
@@ -26,11 +26,11 @@ class RolesController < ApplicationController
   # POST /roles
   # POST /roles.json
   def create
-    @role = Role.new(role_params)
+    @role = @board.roles.build(role_params)
 
     respond_to do |format|
       if @role.save
-        format.html { redirect_to edit_board_role_path(@board, @role), notice: 'Role was successfully created.' }
+        format.html { redirect_to board_roles_url(@board), notice: 'Role was successfully created.' }
         format.json { render :show, status: :created, location: @role }
       else
         format.html { render :new }
@@ -71,6 +71,7 @@ class RolesController < ApplicationController
 
     def set_board
       @board = Board.find(params[:board_id])
+      @show_boards_nav = !@board.nil? && !@board.new_record?
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

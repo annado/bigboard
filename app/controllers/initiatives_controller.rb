@@ -17,7 +17,7 @@ class InitiativesController < ApplicationController
 
   # GET /initiatives/new
   def new
-    @initiative = Initiative.new
+    @initiative = @board.initiatives.build
   end
 
   # GET /initiatives/1/edit
@@ -27,11 +27,11 @@ class InitiativesController < ApplicationController
   # POST /initiatives
   # POST /initiatives.json
   def create
-    @initiative = Initiative.new(initiative_params)
+    @initiative = @board.initiatives.build(initiative_params)
 
     respond_to do |format|
       if @initiative.save
-        format.html { redirect_to board_initiative_url(@board, @initiative), notice: 'Initiative was successfully created.' }
+        format.html { redirect_to edit_board_initiative_path(@board, @initiative), notice: 'Initiative was successfully created.' }
         format.json { render :show, status: :created, location: @initiative }
       else
         format.html { render :new }
@@ -59,7 +59,7 @@ class InitiativesController < ApplicationController
   def destroy
     @initiative.destroy
     respond_to do |format|
-      format.html { redirect_to board_initiatives_url(@board) }
+      format.html { redirect_to edit_board_initiative_path(@board) }
       format.json { head :no_content }
     end
   end
@@ -72,6 +72,7 @@ class InitiativesController < ApplicationController
 
     def set_board
       @board = Board.find(params[:board_id])
+      @show_boards_nav = !@board.nil? && !@board.new_record?
     end
 
     def set_select_fields

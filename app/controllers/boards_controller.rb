@@ -74,6 +74,7 @@ class BoardsController < ApplicationController
         @eng_role = Role.find_by_name "Engineering"
         @prod_role = Role.find_by_name "Product"
       end
+      @show_boards_nav = !@board.nil? && !@board.new_record?
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

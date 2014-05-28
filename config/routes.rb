@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     resources :initiatives
     resources :teams
     resources :roles
+    resources :projects
   end
 
   resources :initiatives do

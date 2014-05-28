@@ -1,5 +1,8 @@
-<h1>Teams <span><%= link_to 'Create New', new_board_team_path(@board), :class => 'btn btn-primary btn-xs' %></h1>
-
+<h1>Teams</h1>
+<p>A person's Team will show up with the specificed background color.</p>
+<% if @teams.empty? %>
+<p class="text-muted"><em>No <%= @board.name %> teams created yet.</em></p>
+<% else %>
 <table class="table">
   <thead>
     <tr>
@@ -20,7 +23,7 @@
     <% end %>
   </tbody>
 </table>
-
+<% end %>
 <br>
 
 <%= link_to 'New Team', new_board_team_path(@board), :class => 'btn btn-primary' %>

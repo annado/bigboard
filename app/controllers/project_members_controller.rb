@@ -25,10 +25,11 @@ class ProjectMembersController < ApplicationController
   # POST /project_members.json
   def create
     @project_member = ProjectMember.new(project_member_params)
+    @project = @project_member.project
 
     respond_to do |format|
       if @project_member.save
-        format.json { render :show, status: :created, location: @project_member }
+        format.json { render :show, status: :created, location: project_project_member_url(@project, @project_member) }
       else
         format.json { render json: @project_member.errors, status: :unprocessable_entity }
       end
@@ -40,7 +41,7 @@ class ProjectMembersController < ApplicationController
   def update
     respond_to do |format|
       if @project_member.update(project_member_params)
-        format.json { render :show, status: :ok, location: @project_member }
+        format.json { render :show, status: :ok, location: project_project_member_url(@project, @project_member) }
       else
         format.json { render json: @project_member.errors, status: :unprocessable_entity }
       end
