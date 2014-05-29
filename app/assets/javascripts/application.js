@@ -53,7 +53,7 @@ BB.sources.people = new Bloodhound({
   queryTokenizer: Bloodhound.tokenizers.whitespace,
   limit: 10,
   remote: {
-    url: '/people.json?prefix=%QUERY',
+    url: '/people/autocomplete.json?query=%QUERY',
     filter: function (parsedResponse) {
       return parsedResponse;
     }
