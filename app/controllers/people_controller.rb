@@ -8,6 +8,10 @@ class PeopleController < ApplicationController
     @people = Person.where :network_id => current_user.network_id
   end
 
+  def autocomplete
+    render json: Person.search(params[:query], where: {network_id: current_user.network_id}, autocomplete: true, limit: 10)
+  end
+
   # GET /people/1
   # GET /people/1.json
   def show
@@ -26,6 +30,7 @@ class PeopleController < ApplicationController
   # POST /people.json
   def create
     @person = Person.new(person_params)
+    @person.network_id = current_user.network_id
 
     respond_to do |format|
       if @person.save

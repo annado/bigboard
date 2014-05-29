@@ -1,4 +1,5 @@
 class ProjectMembersController < ApplicationController
+  before_action :set_project, only: [:new, :edit, :create]
   before_action :set_project_member, only: [:show, :edit, :update, :destroy]
 
   # GET /project_members
@@ -14,7 +15,7 @@ class ProjectMembersController < ApplicationController
 
   # GET /project_members/new
   def new
-    @project_member = ProjectMember.new
+    @project_member = @project.project_members.build
   end
 
   # GET /project_members/1/edit
@@ -24,8 +25,7 @@ class ProjectMembersController < ApplicationController
   # POST /project_members
   # POST /project_members.json
   def create
-    @project_member = ProjectMember.new(project_member_params)
-    @project = @project_member.project
+    @project_member = @project.project_members.build(project_member_params)
 
     respond_to do |format|
       if @project_member.save
@@ -63,8 +63,12 @@ class ProjectMembersController < ApplicationController
       @project_member = ProjectMember.find(params[:id])
     end
 
+    def set_project
+      @project = Project.find(params[:project_id])
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_member_params
-      params.require(:project_member).permit(:role_id, :project_id, :person_id)
+      params.require(:project_member).permit(:role_id, :project_id, :person_id, :uid)
     end
 end

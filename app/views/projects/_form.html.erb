@@ -44,7 +44,7 @@
   <ul class="project-members-list">
   <% @project.project_members.order(role_id: :asc).each do |pm| %>
     <li>
-      <%= person_tag pm.person %> (<%= pm.role.name %>) 
+      <%= person_tag pm %> (<%= pm.role.name %>) 
       <button class="btn btn-xs btn-danger" data-model="project-member" data-method="delete" data-id="<%= pm.id %>">Remove</button>
     </li>
   <% end %>
@@ -66,7 +66,7 @@
     <% pm.versions.each do |v| %>
       <li class="project-changelog-list">
       <% if v.event == 'create' %>
-        <%= person_tag pm.person %> added
+        <%= person_tag pm %> added
       <% else %>
       ?? <%= v.event %>
       <% end %>

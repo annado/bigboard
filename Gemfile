@@ -23,6 +23,9 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0',          group: :doc
 
 gem 'bootstrap_form'
+gem 'backbone-on-rails'
+
+gem 'searchkick'
 
 # heroku
 gem 'rails_12factor', group: :production

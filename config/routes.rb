@@ -15,7 +15,11 @@ Rails.application.routes.draw do
     resources :project_members
   end
   
-  resources :people
+  resources :people do
+    collection do
+      get :autocomplete
+    end
+  end
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 

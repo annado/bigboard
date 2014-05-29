@@ -77,5 +77,6 @@
   var ACCESS_TOKEN = "<%= current_user.access_token if user_signed_in? && current_user['access_token'] %>";
 </script>
 <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+<%= yield :javascript %>
 </body>
 </html>
