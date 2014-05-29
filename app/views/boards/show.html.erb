@@ -1,3 +1,12 @@
+<% content_for :stylesheets do %>
+<style type="text/css">
+<% @board.teams.each do |t| %>
+.team-<%= t.id %> {
+  background-color: <%= t.color %>;
+}
+<% end %>
+</style>
+<% end %>
 <div class="row row-board">
     <h2><%= @board.name %></h2>
 <div class="panel panel-default">

@@ -11,7 +11,7 @@ module ApplicationHelper
       end
       if !person.nil?
         color = person.team.color
-        "<span class=\"person-tag\" data-project-member-id=\"#{id}\" style=\"background-color:#{color}\" data-toggle=\"popover\" data-content=\"<img src='#{person.image}' class='avatar' /> #{person.name} | #{person.team.name}\">#{person.name}</span>".html_safe
+        "<span class=\"person-tag team-#{person.team.id}\" data-project-member-id=\"#{id}\" data-toggle=\"popover\" data-content=\"<img src='#{person.image}' class='avatar' /> #{person.name} | #{person.team.name}\">#{person.name}</span>".html_safe
       end
     end
   end
