@@ -8,13 +8,14 @@
           <th></th>
           <th class="date">Start Date</th>
           <th class="date">End Date</th>
-          <th>Tech Lead</th>
-          <th colspan="2">Team</th>
+          <% @board.roles.each do |r| %>
+          <th><%= r.name %></th>
+          <% end %>
         </tr>
       </thead>
       <tbody>
       <% @board.initiatives.each do |i| %>
-        <tr class="initiative active">
+        <tr class="initiative">
           <th colspan="3"><%= link_to i.name, edit_board_initiative_path(@board, i) %></th>
           <td><%= person_tag i.manager %></td>
           <td colspan="2"><%= person_tag i.analyst %></td>
@@ -24,31 +25,18 @@
           <td class="project"><%= link_to p.name, edit_board_project_path(@board, p) %></td>
           <td class="date"><%= p.start_date.strftime("%m/%d/%y") unless p.start_date.nil? %></td>
           <td class="date"><%= p.end_date.strftime("%m/%d/%y") unless p.end_date.nil? %></td>
-          <td class="people tl" data-role-id="<%= @tl_role.id %>">
+
+          <% @board.roles.each do |r| %>
+          <td class="people role-<%= r.name.parameterize %>" data-role-id="<%= r.id %>">
             <ul class="list-inline">
-            <% project_members = p.project_members.where(role_id: @tl_role.id)
-            project_members.each do |pm| %>
+            <% project_members = p.project_members.where(role_id: r.id) %>
+            <% project_members.each do |pm| %>
             <li><%= person_tag pm %></li>
             <% end %>
             </ul>
-            <% if project_members.empty? %>
-            <button class="btn btn-default btn-xs add-person" data-project-id="<%= p.id %>" data-role-id="<%= @tl_role.id %>">+ Person</button>
-            <% end %>
+            <button class="btn btn-default btn-xs add-person" data-project-id="<%= p.id %>" data-role-id="<%= r.id %>">+ Person</button>
           </td>
-          <td class="people eng" data-role-id="<%= @eng_role.id %>">
-            <ul class="list-inline"><% p.project_members.where(role_id: @eng_role.id).each do |pm| %>
-              <li><%= person_tag pm %></li>
-            <% end %></ul>
-            <button class="btn btn-default btn-xs add-person" data-project-id="<%= p.id %>" data-role-id="<%= @eng_role.id %>">+ Person</button>
-          </td>
-          <td class="people product" data-role-id="<%= @prod_role.id %>">
-            <ul class="list-inline">
-              <% p.project_members.where(role_id: @prod_role.id).each do |pm| %>
-              <li><%= person_tag pm %></li>
-              <% end %>
-            </ul>
-              <button class="btn btn-default btn-xs add-person" data-project-id="<%= p.id %>" data-role-id="<%= @prod_role.id %>">+ Person</button>
-            </td>
+          <% end %>
         </tr>
         <% end %>
       <% end %>
