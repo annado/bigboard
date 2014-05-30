@@ -44,11 +44,6 @@ body {
   text-decoration: none;
 }
 
-.person-tag:hover {
-  max-width: 20em;
-  width: auto;
-}
-
 .project-changelog-list .person-tag,
 .project-members-list .person-tag {
   display: inline;
