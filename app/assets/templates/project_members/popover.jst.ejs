@@ -1,2 +1,7 @@
-<img src=<%= person.image %> class="avatar" /> <%= person.name %>
-<p><%= team.name %> @<%= person.location %></p>
+<div class="media">
+  <img class="pull-left media-object avatar" src="<%= person.image %>" alt="<%= person.name %>">
+  <div class="media-body">
+    <h4 class="media-heading"><%= person.name %></h4>
+    <div><%= team.name %> @<%= person.location %></div>
+  </div>
+</div>

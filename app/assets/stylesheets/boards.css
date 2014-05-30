@@ -39,6 +39,6 @@
   max-width: 10em;
 }
 
-.popover-content > img {
-  margin: 0 5px 0 -5px;
+.table-board .popover-content {
+  padding: 10px;
 }
