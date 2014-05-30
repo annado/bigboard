@@ -24,8 +24,8 @@
         <% i.projects.order(:created_at, start_date: :asc).each do |p| %>
         <tr data-project-id="<%= p.id %>">
           <td class="project"><%= link_to p.name, edit_board_project_path(@board, p) %></td>
-          <td class="date"><%= p.start_date.strftime("%m/%d/%y") unless p.start_date.nil? %></td>
-          <td class="date"><%= p.end_date.strftime("%m/%d/%y") unless p.end_date.nil? %></td>
+          <td class="date"><%= p.start_date.strftime("%d %b %y") unless p.start_date.nil? %></td>
+          <td class="date"><%= p.end_date.strftime("%d %b %y") unless p.end_date.nil? %></td>
 
           <% @board.roles.reverse.each do |r| %>
           <td class="people role-<%= r.name.parameterize %>" data-role-id="<%= r.id %>">
