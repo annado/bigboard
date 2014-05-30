@@ -50,7 +50,7 @@ class PeopleController < ApplicationController
   def update
     respond_to do |format|
       if @person.update(person_params)
-        format.html { redirect_to board_people_path(@board, @person), notice: @person.name + ' was successfully added.' }
+        format.html { redirect_to board_people_path(@board, @person), notice: @person.name + ' was successfully updated.' }
         format.json { render :show, status: :ok, location: @person }
       else
         format.html { render :edit }
