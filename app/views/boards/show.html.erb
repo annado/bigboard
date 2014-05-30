@@ -10,7 +10,7 @@
           <th class="date">Start Date</th>
           <th class="date">End Date</th>
           <% @board.roles.reverse.each do |r| %>
-          <th><%= r.name %></th>
+          <th class="people"><%= r.name %></th>
           <% end %>
         </tr>
       </thead>

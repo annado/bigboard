@@ -29,7 +29,6 @@ body {
 }
 
 .person-tag {
-  color: #FFF;
   display: inline-block;
   font-size: 12px;
   padding: 2px 5px;
@@ -37,11 +36,17 @@ body {
   white-space: nowrap;
   max-width: 10em;
   overflow: hidden;
-  cursor: default;
+}
+
+.person-tag,
+.person-tag:hover {
+  color: #FFF;
+  text-decoration: none;
 }
 
 .person-tag:hover {
   max-width: 20em;
+  width: auto;
 }
 
 .project-changelog-list .person-tag,

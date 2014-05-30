@@ -29,11 +29,12 @@ BigBoard.Views.ProjectMember = Backbone.View.extend({
     }
     
     this.$el.popover({ 
-      placement: 'top', 
-      trigger: 'click', 
+      placement: 'bottom', 
+      trigger: 'hover', 
       html: true,
       content: _.bind(function () {
         return this.popoverTemplate({
+          project_member: this.model.attributes,
           person: person,
           team: team.attributes
         });

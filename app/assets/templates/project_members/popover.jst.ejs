@@ -1,7 +1,8 @@
 <div class="media">
-  <img class="pull-left media-object avatar" src="<%= person.image %>" alt="<%= person.name %>">
+  <a class="pull-left" href="/project_members/<%= project_member.id %>/edit"><img class="media-object avatar" src="<%= person.image %>" alt="<%= person.name %>"></a>
   <div class="media-body">
     <h4 class="media-heading"><%= person.name %></h4>
     <div><%= team.name %> @<%= person.location %></div>
+    <div>Start Date: <%= project_member.start_date %></div>
   </div>
 </div>

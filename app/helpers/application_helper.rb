@@ -11,7 +11,8 @@ module ApplicationHelper
       end
       if !person.nil?
         color = person.team.color
-        "<span class=\"person-tag team-#{person.team.id}\" data-project-member-id=\"#{id}\" data-toggle=\"popover\">#{person.name}</span>".html_safe
+        url = edit_project_member_path project_member
+        "<a href=\"#{url}\" class=\"person-tag team-#{person.team.id}\" data-project-member-id=\"#{id}\" data-toggle=\"popover\">#{person.name}</a>".html_safe
       end
     end
   end

@@ -11,6 +11,12 @@
   color: #333;
 }
 
+.table-board .person-tag {
+  width: 9em;
+  min-width: 9em;
+  text-align: center;
+}
+
 .table-board .people .btn {
   vertical-align: top;
   visibility: hidden;
