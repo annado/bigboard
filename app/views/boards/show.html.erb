@@ -17,7 +17,7 @@
           <th></th>
           <th class="date">Start Date</th>
           <th class="date">End Date</th>
-          <% @board.roles.each do |r| %>
+          <% @board.roles.reverse.each do |r| %>
           <th><%= r.name %></th>
           <% end %>
         </tr>
@@ -35,7 +35,7 @@
           <td class="date"><%= p.start_date.strftime("%m/%d/%y") unless p.start_date.nil? %></td>
           <td class="date"><%= p.end_date.strftime("%m/%d/%y") unless p.end_date.nil? %></td>
 
-          <% @board.roles.each do |r| %>
+          <% @board.roles.reverse.each do |r| %>
           <td class="people role-<%= r.name.parameterize %>" data-role-id="<%= r.id %>">
             <ul class="list-inline">
             <% project_members = p.project_members.where(role_id: r.id) %>
