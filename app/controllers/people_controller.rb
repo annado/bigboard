@@ -36,7 +36,7 @@ class PeopleController < ApplicationController
 
     respond_to do |format|
       if @person.save
-        format.html { redirect_to new_board_person_path(@board), notice: 'Person was successfully created.' }
+        format.html { redirect_to new_board_person_path(@board), notice: @person.name + ' was successfully added.' }
         format.json { render :show, status: :created, location: @person }
       else
         format.html { render :new }
@@ -50,7 +50,7 @@ class PeopleController < ApplicationController
   def update
     respond_to do |format|
       if @person.update(person_params)
-        format.html { redirect_to board_people_path(@board, @person), notice: 'Person was successfully updated.' }
+        format.html { redirect_to board_people_path(@board, @person), notice: @person.name + ' was successfully added.' }
         format.json { render :show, status: :ok, location: @person }
       else
         format.html { render :edit }
