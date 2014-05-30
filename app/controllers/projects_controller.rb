@@ -39,6 +39,7 @@ class ProjectsController < ApplicationController
   def update
     respond_to do |format|
       if @project.update(project_params)
+        update_start_date
         format.html { redirect_to @board, notice: @project.name + ' was successfully updated.' }
         format.json { render :show, status: :ok, location: @project }
       else
@@ -70,8 +71,18 @@ class ProjectsController < ApplicationController
       @show_boards_nav = !@board.nil? && !@board.new_record?
     end
 
+    def update_start_date
+      if @project.previous_changes.has_key? "start_date"
+        @project.project_members.each do |pm|
+          if pm.start_date.nil? || pm.start_date < @project.start_date
+            pm.update_attributes(:start_date => @project.start_date)
+          end
+        end
+      end
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_params
-      params.require(:project).permit(:name, :start_date, :end_date, :show_dates, :status, :location, :project_type, :initiative_id, :board_id)
+      params.require(:project).permit(:name, :start_date, :end_date, :completed, :status, :standing, :location, :project_type, :initiative_id, :board_id)
     end
 end

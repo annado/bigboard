@@ -33,7 +33,7 @@
           <% @board.roles.reverse.each do |r| %>
           <td class="people role-<%= r.name.parameterize %>" data-role-id="<%= r.id %>">
             <ul class="list-inline">
-            <% project_members = p.project_members.where(role_id: r.id) %>
+            <% project_members = p.project_members.where(role_id: r.id).order(:start_date) %>
             <% project_members.each do |pm| %>
             <li><%= person_tag pm %></li>
             <% end %>

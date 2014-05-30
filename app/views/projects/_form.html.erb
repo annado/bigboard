@@ -19,19 +19,20 @@
       <div class="field">
         <%= f.date_field :start_date %>
       </div>
-      <div class="field">
-        <%= f.date_field :end_date %>
+      <div class="col-md-offset-3">
+        <p class="help-block">Changing the start date will update all project member start dates (unless the project's start date is earlier)</p>
       </div>
+      <%= f.date_field :end_date %>
       <%= f.select :location, ['SF', 'UK', 'YN'] %>
       <%= f.select :project_type, ['', 'Product', 'Internal Projects'] %>
       <%= f.collection_select :initiative_id, @initiatives, :id, :name %>
-<!--       <div class="form-group">
-        <div class="col-md-5 col-md-offset-3">
-          <%#= f.check_box :show_dates %>
-          <p class="help-block">Show project member start dates</p>
+      <div class="form-group">
+        <div class="col-md-6 col-md-offset-3">
+          <%= f.check_box :standing %>
+          <p class="help-block">This is the project that never ends</p>
         </div>
       </div>
- -->      <div class="form-group">
+      <div class="form-group">
         <div class="col-md-offset-3 col-md-6">
           <%= f.submit %>
         </div>
@@ -71,6 +72,7 @@
       ?? <%= v.event %>
       <% end %>
       by <%= User.find_by_id(v.whodunnit).name %>
+      on <%= v.created_at.strftime("%m/%d/%y") %>
       </li>
     <% end %>
   <% end %>
