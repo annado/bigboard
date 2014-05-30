@@ -1,15 +1,16 @@
 class PeopleController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_board
   before_action :set_person, only: [:show, :edit, :update, :destroy]
 
   # GET /people
   # GET /people.json
   def index
-    @people = Person.where :network_id => current_user.network_id
+    @people = Person.where :board_id => @board.id
   end
 
   def autocomplete
-    render json: Person.search(params[:query], where: {network_id: current_user.network_id}, autocomplete: true, limit: 10)
+    render json: Person.search(params[:query], where: {board_id: @board.id}, autocomplete: true, limit: 10)
   end
 
   # GET /people/1
@@ -19,22 +20,23 @@ class PeopleController < ApplicationController
 
   # GET /people/new
   def new
-    @person = Person.new
+    @person = @board.people.build
   end
 
   # GET /people/1/edit
   def edit
+    @teams = Team.where :board_id => @board.id
   end
 
   # POST /people
   # POST /people.json
   def create
-    @person = Person.new(person_params)
+    @person = @board.people.build(person_params)
     @person.network_id = current_user.network_id
 
     respond_to do |format|
       if @person.save
-        format.html { redirect_to @person, notice: 'Person was successfully created.' }
+        format.html { redirect_to board_people_path(@board, @person), notice: 'Person was successfully created.' }
         format.json { render :show, status: :created, location: @person }
       else
         format.html { render :new }
@@ -48,7 +50,7 @@ class PeopleController < ApplicationController
   def update
     respond_to do |format|
       if @person.update(person_params)
-        format.html { redirect_to @person, notice: 'Person was successfully updated.' }
+        format.html { redirect_to board_people_path(@board, @person), notice: 'Person was successfully updated.' }
         format.json { render :show, status: :ok, location: @person }
       else
         format.html { render :edit }
@@ -73,8 +75,13 @@ class PeopleController < ApplicationController
       @person = Person.find(params[:id])
     end
 
+    def set_board
+      @board = Board.find(params[:board_id])
+      @show_boards_nav = !@board.nil? && !@board.new_record?
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def person_params
-      params.require(:person).permit(:uid, :name, :image, :team_id, :project_id, :role_id)
+      params.require(:person).permit(:uid, :name, :image, :team_id, :project_id, :role_id, :board_id)
     end
 end

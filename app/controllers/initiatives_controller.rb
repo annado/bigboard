@@ -76,14 +76,13 @@ class InitiativesController < ApplicationController
     end
 
     def set_select_fields
-      manager_id = Team.find_by name: 'Manager'
-      @managers = Person.where team_id: manager_id
+      people = Person.where board_id: @board.id
+      @managers = people
 
       analyst_team_id = Team.find_by name: 'Analytics'
-      @analysts = Person.where team_id: analyst_team_id || []
+      @analysts = people
 
-      product_team_id = Team.find_by name: 'PM'
-      @pms = Person.where team_id: product_team_id || []
+      @pms = people
 
       @boards = Board.where network_id: current_user.network_id
     end
