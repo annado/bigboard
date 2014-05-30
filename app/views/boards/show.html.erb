@@ -23,13 +23,13 @@
         </tr>
       </thead>
       <tbody>
-      <% @board.initiatives.each do |i| %>
+      <% @board.initiatives.order(:created_at).each do |i| %>
         <tr class="initiative">
           <th colspan="3"><%= link_to i.name, edit_board_initiative_path(@board, i) %></th>
           <td><%= person_tag i.manager %></td>
           <td colspan="2"><%= person_tag i.analyst %></td>
         </tr>
-        <% i.projects.order(start_date: :asc).each do |p| %>
+        <% i.projects.order(:created_at, start_date: :asc).each do |p| %>
         <tr data-project-id="<%= p.id %>">
           <td class="project"><%= link_to p.name, edit_board_project_path(@board, p) %></td>
           <td class="date"><%= p.start_date.strftime("%m/%d/%y") unless p.start_date.nil? %></td>
