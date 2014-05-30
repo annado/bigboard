@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140530043513) do
+ActiveRecord::Schema.define(version: 20140530200925) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -95,6 +95,7 @@ ActiveRecord::Schema.define(version: 20140530043513) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "board_id"
+    t.integer  "limit"
   end
 
   add_index "roles", ["board_id"], name: "index_roles_on_board_id", using: :btree
