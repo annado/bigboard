@@ -35,6 +35,7 @@ BigBoard.Views.ProjectMembers.New = Backbone.View.extend({
   },
 
   onTypeaheadSelect: function (e, o, name) {
+    this.$el.find('input').attr("disabled", "disabled");
     this.model.project_members.create({
       role_id: this.role_id,
       project_id: this.model.id,
