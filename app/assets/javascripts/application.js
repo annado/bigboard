@@ -11,10 +11,17 @@
 // about supported directives.
 //
 //= require jquery
-//= require underscore/underscore-min
+//= require underscore
 //= require typeahead.js/dist/typeahead.bundle
 //= require bootstrap/dist/js/bootstrap.min
 //= require turbolinks
+//= require backbone
+//= require bigboard
+//= require_tree ../templates
+//= require_tree ./models
+//= require_tree ./collections
+//= require_tree ./views
+//= require_tree ./routers
 //= require_tree .
 
 if (typeof BB == "undefined") {
