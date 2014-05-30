@@ -1,6 +1,7 @@
 class PeopleController < ApplicationController
   before_action :authenticate_user!
   before_action :set_board
+  before_action :set_teams, only: [:new, :edit, :create]
   before_action :set_person, only: [:show, :edit, :update, :destroy]
 
   # GET /people
@@ -25,7 +26,6 @@ class PeopleController < ApplicationController
 
   # GET /people/1/edit
   def edit
-    @teams = Team.where :board_id => @board.id
   end
 
   # POST /people
@@ -78,6 +78,10 @@ class PeopleController < ApplicationController
     def set_board
       @board = Board.find(params[:board_id])
       @show_boards_nav = !@board.nil? && !@board.new_record?
+    end
+
+    def set_teams
+      @teams = Team.where :board_id => @board.id
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
