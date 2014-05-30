@@ -16,7 +16,7 @@
     <% @teams.each do |team| %>
       <tr>
         <td><%= team.name %></td>
-        <td><span style="background-color: <%= team.color %>; padding: 3px 5px;"><%= team.color %></span></td>
+        <td><span class="person-tag" style="background-color: <%= team.color %>; padding: 3px 5px;"><%= team.color %></span></td>
         <td><%= link_to 'Edit', edit_board_team_path(@board, team) %></td>
         <td><%= link_to 'Destroy', board_team_url(@board, team), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
