@@ -6,6 +6,7 @@
       <th>Name</th>
       <th>Image</th>
       <th>Team</th>
+      <th>Location</th>
       <th colspan="2"></th>
     </tr>
   </thead>
@@ -13,12 +14,15 @@
   <tbody>
     <% @people.each do |person| %>
       <tr>
-        <td><%= person.name %></td>
+        <td><%= person_tag person %></td>
         <td><img src="<%= person.image %>" class="avatar" /></td>
         <td><%= person.team.name %></td>
+        <td><%= person.location %></td>
         <td><%= link_to 'Edit', edit_board_person_path(@board, person) %></td>
         <td><%= link_to 'Destroy', person, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
+
+<%= render partial: "teams/css", locals: {teams: @teams} %>
