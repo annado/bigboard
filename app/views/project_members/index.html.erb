@@ -1,0 +1,26 @@
+<h1>Listing Project Members for <%= @project.name %></h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Role</th>
+      <th>Start Date</th>
+      <th>End Date</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @project_members.each do |project_member| %>
+      <tr>
+        <td><%= project_member.person.name %></td>
+        <td><%= project_member.role.name %></td>
+        <td><%= project_member.start_date %></td>
+        <td><%= project_member.end_date %></td>
+        <td><%= link_to 'Edit', edit_project_member_path(project_member) %></td>
+        <td><%= link_to 'Destroy', project_member, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

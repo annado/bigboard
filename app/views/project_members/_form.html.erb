@@ -1,0 +1,25 @@
+<% args = @project_member.try(:new_record?) ? [@project_member.project, @project_member] : @project_member %>
+<%= bootstrap_form_for(args) do |f| %>
+  <% if @project_member.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@project_member.errors.count, "error") %> prohibited this project_member from being saved:</h2>
+
+      <ul>
+      <% @project_member.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.date_field :start_date %>
+  </div>
+  <div class="form-group">
+    <%= f.date_field :end_date %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
