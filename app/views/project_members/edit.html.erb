@@ -1,4 +1,9 @@
-<h1>Editing project_member</h1>
+<h1>Editing Project Member</h1>
+<ul class="list-unstyled">
+  <li><strong>Project</strong>: <%= @project_member.project.name %></li>
+  <li><strong>Role</strong>: <%= @project_member.role.name %></li>
+  <li><strong>Assigned</strong>: <%= @project_member.person.name %></li>
+</ul>
 
 <%= render 'form' %>
 
