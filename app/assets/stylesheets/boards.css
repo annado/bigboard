@@ -9,6 +9,11 @@
 
 .table-board .people .btn {
   vertical-align: top;
+  visibility: hidden;
+}
+
+.table-board .people:hover .btn {
+  visibility: visible;
 }
 
 .table-board .date {

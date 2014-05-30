@@ -7,7 +7,7 @@ class PeopleController < ApplicationController
   # GET /people
   # GET /people.json
   def index
-    @people = Person.where :board_id => @board.id
+    @people = Person.where(:board_id => @board.id).order(:name)
   end
 
   def autocomplete

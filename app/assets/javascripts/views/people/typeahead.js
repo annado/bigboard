@@ -117,8 +117,8 @@ BigBoard.Views.PeopleTypeahead = Backbone.View.extend({
       },
       queryTokenizer: Bloodhound.tokenizers.whitespace,
       limit: 10,
-      remote: {
-        url: '/boards/' + this.board_id + '/people/autocomplete.json?query=%QUERY',
+      prefetch: {
+        url: '/boards/' + this.board_id + '/people.json',
         filter: function (parsedResponse) {
           return parsedResponse;
         }
