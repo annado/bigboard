@@ -25,13 +25,13 @@
       <%= f.select :location, ['SF', 'UK', 'YN'] %>
       <%= f.select :project_type, ['', 'Product', 'Internal Projects'] %>
       <%= f.collection_select :initiative_id, @initiatives, :id, :name %>
-      <div class="form-group">
+<!--       <div class="form-group">
         <div class="col-md-5 col-md-offset-3">
-          <%= f.check_box :show_dates %>
+          <%#= f.check_box :show_dates %>
           <p class="help-block">Show project member start dates</p>
         </div>
       </div>
-      <div class="form-group">
+ -->      <div class="form-group">
         <div class="col-md-offset-3 col-md-6">
           <%= f.submit %>
         </div>
