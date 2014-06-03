@@ -1,4 +1,4 @@
-BigBoard.Models.ProjectMember = Backbone.Model.extend({
+App.Models.ProjectMember = Backbone.Model.extend({
 
   paramRoot: 'project_member',
 

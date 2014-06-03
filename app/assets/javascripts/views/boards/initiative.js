@@ -1,4 +1,4 @@
-BigBoard.Views.Initiative = Backbone.View.extend({
+App.Views.Initiative = Backbone.View.extend({
 
   events: {
   },
@@ -13,7 +13,7 @@ BigBoard.Views.Initiative = Backbone.View.extend({
 
   addOne: function (project) {
     var el = this.$el.find('tr[data-project-id=' + project.id + ']');
-    var view = new BigBoard.Views.Project({model : project, el: el});
+    var view = new App.Views.Project({model : project, el: el});
     view.render();
   }
 

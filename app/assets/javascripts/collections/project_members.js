@@ -1,6 +1,6 @@
-BigBoard.Collections.ProjectMembers = Backbone.Collection.extend({
+App.Collections.ProjectMembers = Backbone.Collection.extend({
 
-  model: BigBoard.Models.ProjectMember,
+  model: App.Models.ProjectMember,
 
   initialize: function (model, options) {
     this.project_id = options.project_id;

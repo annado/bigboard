@@ -1,6 +1,6 @@
-BigBoard.Collections.Initiatives = Backbone.Collection.extend({
+App.Collections.Initiatives = Backbone.Collection.extend({
 
-  model: BigBoard.Models.Initiative,
+  model: App.Models.Initiative,
 
   initialize: function (model, options) {
     this.board_id = options.board_id;

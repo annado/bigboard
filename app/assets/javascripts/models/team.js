@@ -1,4 +1,4 @@
-BigBoard.Models.Team = Backbone.Model.extend({
+App.Models.Team = Backbone.Model.extend({
 
   paramRoot: 'team',
 

@@ -1,4 +1,4 @@
-BigBoard.Models.Project = Backbone.Model.extend({
+App.Models.Project = Backbone.Model.extend({
 
   paramRoot: 'project',
 
@@ -7,7 +7,7 @@ BigBoard.Models.Project = Backbone.Model.extend({
   },
 
   initialize: function (options) {
-    this.project_members = new BigBoard.Collections.ProjectMembers(
+    this.project_members = new App.Collections.ProjectMembers(
       options.project_members, { project_id: this.id }
     );
   }

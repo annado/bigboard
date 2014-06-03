@@ -1,4 +1,4 @@
-BigBoard.Views.ProjectMember = Backbone.View.extend({
+App.Views.ProjectMember = Backbone.View.extend({
 
   popoverTemplate: JST['project_members/popover'],
   template: JST['project_members/show'],
@@ -17,7 +17,7 @@ BigBoard.Views.ProjectMember = Backbone.View.extend({
     this.delegateEvents();
 
     var person = this.model.attributes.person,
-      team = BigBoard.collections.teams.findWhere({
+      team = App.collections.teams.findWhere({
           id: person.team_id || ''
         });
 

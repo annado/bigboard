@@ -1,4 +1,4 @@
-BigBoard.Models.Board = Backbone.Model.extend({
+App.Models.Board = Backbone.Model.extend({
 
   paramRoot: 'board',
 
@@ -8,7 +8,7 @@ BigBoard.Models.Board = Backbone.Model.extend({
 
   initialize: function (board) {
     this.board = board;
-    this.initiatives = new BigBoard.Collections.Initiatives(
+    this.initiatives = new App.Collections.Initiatives(
       this.board.initiatives, 
       { 
         board_id: this.board.id

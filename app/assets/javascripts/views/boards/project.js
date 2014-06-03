@@ -1,4 +1,4 @@
-BigBoard.Views.Project = Backbone.View.extend({
+App.Views.Project = Backbone.View.extend({
 
   events: {
     "click .close": "clearPopovers",
@@ -12,7 +12,7 @@ BigBoard.Views.Project = Backbone.View.extend({
 
   addProjectMember: function (project_member) {
     var $list = this.$el.find('[data-role-id=' + project_member.attributes.role_id + '] ul');
-    var view = new BigBoard.Views.ProjectMember({ model : project_member });
+    var view = new App.Views.ProjectMember({ model : project_member });
     $list.append(view.render().$el);
   },
 
@@ -22,7 +22,7 @@ BigBoard.Views.Project = Backbone.View.extend({
 
   addOne: function (project_member) {
     var el = this.$el.find('[data-project-member-id=' + project_member.id + ']');
-    var view = new BigBoard.Views.ProjectMember({model : project_member, el : el});
+    var view = new App.Views.ProjectMember({model : project_member, el : el});
     view.render();
   },
 
@@ -33,7 +33,7 @@ BigBoard.Views.Project = Backbone.View.extend({
 
     this.clearPopovers();
 
-    var popover = new BigBoard.Views.ProjectMembers.New({ role_id: role_id, project_id: project_id, model: this.model });
+    var popover = new App.Views.ProjectMembers.New({ role_id: role_id, project_id: project_id, model: this.model });
     this.popover = popover;
 
     var clearPopovers = _.bind(this.clearPopovers, this);

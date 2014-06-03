@@ -1,6 +1,6 @@
-BigBoard.Collections.Projects = Backbone.Collection.extend({
+App.Collections.Projects = Backbone.Collection.extend({
 
-  model: BigBoard.Models.Project,
+  model: App.Models.Project,
 
   initialize: function (model, options) {
     this.board_id = options.board_id

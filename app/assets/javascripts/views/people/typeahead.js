@@ -1,4 +1,4 @@
-BigBoard.Views.PeopleTypeahead = Backbone.View.extend({
+App.Views.PeopleTypeahead = Backbone.View.extend({
 
   template: JST['people/typeahead'],
 

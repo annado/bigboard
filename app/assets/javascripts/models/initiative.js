@@ -1,4 +1,4 @@
-BigBoard.Models.Initiative = Backbone.Model.extend({
+App.Models.Initiative = Backbone.Model.extend({
 
   paramRoot: 'initiative',
 
@@ -7,7 +7,7 @@ BigBoard.Models.Initiative = Backbone.Model.extend({
   },
 
   initialize: function (options) {
-    this.projects = new BigBoard.Collections.Projects(
+    this.projects = new App.Collections.Projects(
       options.projects, { 
         initiative_id: this.id,
         board_id: this.board_id

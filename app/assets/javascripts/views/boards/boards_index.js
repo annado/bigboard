@@ -1,4 +1,4 @@
-BigBoard.Views.BoardsIndex = Backbone.View.extend({
+App.Views.BoardsIndex = Backbone.View.extend({
 
   template: JST['boards/index'],
 
@@ -20,7 +20,7 @@ BigBoard.Views.BoardsIndex = Backbone.View.extend({
   },
 
   addOne: function (initiative) {
-    var view = new BigBoard.Views.Initiative({model: initiative, el: this.el });
+    var view = new App.Views.Initiative({model: initiative, el: this.el });
     view.render();
   }
 

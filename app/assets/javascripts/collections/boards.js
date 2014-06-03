@@ -1,6 +1,6 @@
-BigBoard.Collections.Boards = Backbone.Collection.extend({
+App.Collections.Boards = Backbone.Collection.extend({
 
-  model: BigBoard.Models.Board,
+  model: App.Models.Board,
   url: '/boards'
 
 });

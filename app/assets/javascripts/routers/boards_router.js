@@ -1,11 +1,11 @@
-BigBoard.Routers.Boards = Backbone.Router.extend({
+App.Routers.Boards = Backbone.Router.extend({
   
   initialize: function (options) {
-    this.board = new BigBoard.Models.Board(options.board);
-    BigBoard.typeahead = new BigBoard.Views.PeopleTypeahead({
+    this.board = new App.Models.Board(options.board);
+    App.typeahead = new App.Views.PeopleTypeahead({
       board_id: options.board.id
     });
-    BigBoard.collections.teams = new BigBoard.Collections.Teams(options.teams, {
+    App.collections.teams = new App.Collections.Teams(options.teams, {
       board_id: options.board.id
     });
   },
@@ -15,7 +15,7 @@ BigBoard.Routers.Boards = Backbone.Router.extend({
   },
 
   show: function () {
-    this.view = new BigBoard.Views.BoardsIndex({model: this.board, id: '#board-table'});
+    this.view = new App.Views.BoardsIndex({model: this.board, id: '#board-table'});
     this.view.render()
   }
 

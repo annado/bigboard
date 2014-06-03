@@ -1,4 +1,4 @@
-window.BigBoard = {
+window.App = {
   Models: {},
   Collections: {},
   Views: {},
@@ -10,7 +10,7 @@ window.BigBoard = {
     Backbone.sync = (function(original) {
       return function(method, model, options) {
         options.beforeSend = function(xhr) {
-          xhr.setRequestHeader('X-CSRF-Token', BigBoard.csrfToken);
+          xhr.setRequestHeader('X-CSRF-Token', App.csrfToken);
         };
         original(method, model, options);
       };
@@ -19,5 +19,5 @@ window.BigBoard = {
 };
 
 $(document).ready(function(){
-  BigBoard.initialize();
+  App.initialize();
 });

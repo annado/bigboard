@@ -1,6 +1,6 @@
-BigBoard.Collections.Teams = Backbone.Collection.extend({
+App.Collections.Teams = Backbone.Collection.extend({
 
-  model: BigBoard.Models.Team,
+  model: App.Models.Team,
 
   initialize: function (model, options) {
   },

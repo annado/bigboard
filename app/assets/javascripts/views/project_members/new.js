@@ -1,6 +1,6 @@
-BigBoard.Views.ProjectMembers = BigBoard.Views.ProjectMembers || {};
+App.Views.ProjectMembers = App.Views.ProjectMembers || {};
 
-BigBoard.Views.ProjectMembers.New = Backbone.View.extend({
+App.Views.ProjectMembers.New = Backbone.View.extend({
 
   template: JST['project_members/new'],
 
@@ -56,7 +56,7 @@ BigBoard.Views.ProjectMembers.New = Backbone.View.extend({
 
   initTypeahead: function () {
     var $typeahead = this.$el.find('#bigboard-autocomplete .typeahead');
-    BigBoard.typeahead.addPeopleTypeahead($typeahead, $.proxy(this.onTypeaheadSelect, this));
+    App.typeahead.addPeopleTypeahead($typeahead, $.proxy(this.onTypeaheadSelect, this));
   }
 
 });
