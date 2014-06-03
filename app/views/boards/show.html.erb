@@ -18,10 +18,8 @@
       <% @board.initiatives.order(:created_at).each do |i| %>
         <tr class="initiative">
           <th colspan="3"><%= link_to i.name, edit_board_initiative_path(@board, i) %></th>
-          <td colspan="<%= @board.roles.size %>">
-            <%= person_tag i.manager %>
-            <%= person_tag i.owner %>
-            <%= person_tag i.analyst %>
+          <td colspan="<%= @board.roles.size %>" class="people">
+            <%= person_tag i.manager %><%= person_tag i.owner %><%= person_tag i.analyst %>
           </td>
         </tr>
         <% i.projects.order(:created_at, start_date: :asc).each do |p| %>
@@ -32,11 +30,8 @@
 
           <% @board.roles.reverse.each do |r| %>
           <td class="people role-<%= r.name.parameterize %>" data-role-id="<%= r.id %>">
-            <ul class="list-inline">
-            <% project_members = p.project_members.where(role_id: r.id).order(:start_date) %>
-            <% project_members.each do |pm| %>
-            <li><%= person_tag pm %></li>
-            <% end %>
+            <ul class="list-inline"><% project_members = p.project_members.where(role_id: r.id).order(:start_date) %>
+            <% project_members.each do |pm| %><li><%= person_tag pm %></li><% end %>
             </ul>
             <% unless !r.limit.nil? && project_members.size >= r.limit %>
             <button class="btn btn-default btn-xs add-person" data-project-id="<%= p.id %>" data-role-id="<%= r.id %>">+ Person</button>
