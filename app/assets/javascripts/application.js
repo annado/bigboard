@@ -16,7 +16,7 @@
 //= require bootstrap/dist/js/bootstrap.min
 //= require turbolinks
 //= require backbone
-//= require bigboard
+//= require app
 //= require_tree ../templates
 //= require_tree ./models
 //= require_tree ./collections
