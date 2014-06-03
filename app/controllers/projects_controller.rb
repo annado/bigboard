@@ -39,7 +39,7 @@ class ProjectsController < ApplicationController
   def update
     respond_to do |format|
       if @project.update(project_params)
-        update_start_date
+        update_dates
         format.html { redirect_to @board, notice: @project.name + ' was successfully updated.' }
         format.json { render :show, status: :ok, location: @project }
       else
@@ -71,11 +71,18 @@ class ProjectsController < ApplicationController
       @show_boards_nav = !@board.nil? && !@board.new_record?
     end
 
-    def update_start_date
+    def update_dates
       if @project.previous_changes.has_key? "start_date"
         @project.project_members.each do |pm|
           if pm.start_date.nil? || pm.start_date < @project.start_date
             pm.update_attributes(:start_date => @project.start_date)
+          end
+        end
+      end
+      if @project.previous_changes.has_key? "end_date"
+        @project.project_members.each do |pm|
+          if pm.end_date.nil? || pm.end_date == @project.previous_changes['end_date'][0]
+            pm.update_attributes(:end_date => @project.end_date)
           end
         end
       end
