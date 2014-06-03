@@ -76,7 +76,7 @@ class InitiativesController < ApplicationController
     end
 
     def set_select_fields
-      people = Person.where board_id: @board.id
+      people = Person.where(board_id: @board.id).order(:name)
       @managers = people
 
       analyst_team_id = Team.find_by name: 'Analytics'
