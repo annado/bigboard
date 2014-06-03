@@ -31,11 +31,12 @@ body {
 .person-tag {
   display: inline-block;
   font-size: 12px;
-  padding: 2px 5px;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  line-height: 1;
   max-width: 10em;
   overflow: hidden;
+  padding: 5px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .person-tag,

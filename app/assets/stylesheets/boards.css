@@ -50,8 +50,10 @@
 }
 
 .table-board .list-inline > li {
-  padding: 0;
+  line-height: 1;
   max-width: 10em;
+  padding: 0;
+  text-align: center;
 }
 
 .table-board .popover-content {

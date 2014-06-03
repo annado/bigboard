@@ -39,7 +39,9 @@
             <ul class="list-inline"><% project_members = p.project_members.where(role_id: r.id).order(:start_date) %>
             <% project_members.each do |pm| 
               unless !pm.end_date.nil? && pm.end_date < Date.today
-              %><li><%= person_tag pm %></li><% 
+              %><li><%= person_tag pm %><%
+                if p.standing? %><br /><%= pm.start_date %><%
+                end %></li><% 
             end
               end %>
             </ul>
