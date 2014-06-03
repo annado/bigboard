@@ -1,6 +1,12 @@
 <%= render partial: "teams/css", locals: {teams: @board.teams} %>
 <div class="row row-board">
-    <h2><%= @board.name %></h2>
+<div class="header">
+  <h2><%= @board.name %></h2>
+  <div class="board-actions pull-right">
+    <%= link_to '<span class="glyphicon glyphicon-plus"></span> Create New Project'.html_safe, new_board_project_path(@board), :class => 'btn btn-primary btn-xs' %>
+    <%= link_to '<span class="glyphicon glyphicon-pencil"></span> Edit Board'.html_safe, edit_board_path(@board), :class => 'btn btn-default btn-xs' %>
+  </div>
+</div>
 <div class="panel panel-default">
   <div class="table-responsive">
     <table id="board-table" class="table table-condensed table-board">
@@ -45,10 +51,6 @@
     </table>
     </div>
   </div>
-    <div>
-      <%= link_to '<span class="glyphicon glyphicon-plus"></span> Create New Project'.html_safe, new_board_project_path(@board), :class => 'btn btn-primary btn-xs' %>
-      <%= link_to '<span class="glyphicon glyphicon-pencil"></span> Edit Board'.html_safe, edit_board_path(@board), :class => 'btn btn-default btn-xs' %>
-    </div>
 
   <div id="add-project-member-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-sm">

@@ -58,3 +58,11 @@
 .table-board .popover-content {
   padding: 10px;
 }
+
+.row-board h2 {
+  margin-right: 250px;
+}
+
+.board-actions {
+  margin-top: -30px;
+}
