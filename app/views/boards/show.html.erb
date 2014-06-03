@@ -28,7 +28,7 @@
             <%= person_tag i.manager %><%= person_tag i.owner %><%= person_tag i.analyst %>
           </td>
         </tr>
-        <% i.projects.order(:created_at, start_date: :asc).each do |p| %>
+        <% i.projects.where.not(completed: true).order(:created_at, start_date: :asc).each do |p| %>
         <tr data-project-id="<%= p.id %>">
           <th class="project"><%= link_to p.name, edit_board_project_path(@board, p) %></th>
           <td class="date"><%= p.start_date.strftime("%d %b %y") unless p.start_date.nil? %></td>

@@ -1,7 +1,27 @@
-<h1>Editing initiative</h1>
-
+    <h1>Edit Initiative</h1>
+<div class="row">
+  <div class="col-md-4">
 <%= render 'form' %>
-
+  </div>
+  <div class="col-md-8">
+    <table class="table">
+      <tr>
+        <th>Project</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Completed?</th>
+      </tr>
+    <% @initiative.projects.each do |p| %>
+      <tr>
+        <td><%= link_to p.name, edit_board_project_path(@board, p) %></td>
+        <td><%= p.start_date %></td>
+        <td><%= p.end_date %></td>
+        <td><%= p.completed? ? 'Yes' : 'No' %></td>
+      </tr>
+    <% end %>
+    </table>
+  </div>
+</div>
 <p>
   <%= link_to 'Show', @initiative %> |
   <%= link_to 'Back', initiatives_path %>
