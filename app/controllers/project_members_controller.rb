@@ -1,6 +1,7 @@
 class ProjectMembersController < ApplicationController
   before_action :set_project, only: [:index, :new, :create]
   before_action :set_project_member, only: [:show, :edit, :update, :destroy]
+  before_action :set_board
 
   # GET /project_members
   # GET /project_members.json
@@ -32,7 +33,7 @@ class ProjectMembersController < ApplicationController
 
     respond_to do |format|
       if @project_member.save
-        format.html { redirect_to project_member_url(@project_member), notice: 'ProjectMember successfully created.' }
+        format.html { redirect_to board_url(@project_member.project.initiative.board), notice: @project_member.person.name + ' successfully added to ' + @project_member.project.name + '.' }
         format.json { render :show, status: :created, location: project_member_url(@project, @project_member) }
       else
         format.html { redirect_to :new }
@@ -46,7 +47,7 @@ class ProjectMembersController < ApplicationController
   def update
     respond_to do |format|
       if @project_member.update(project_member_params)
-        format.html { redirect_to project_member_url(@project_member), notice: 'ProjectMember was successfully updated.' }
+        format.html { redirect_to board_url(@project_member.project.initiative.board), notice: @project_member.person.name + ' on ' + @project_member.project.name + ' updated.' }
         format.json { render :show, status: :ok, location: project_member_url(@project_member) }
       else
         format.html { render :edit }
@@ -68,10 +69,16 @@ class ProjectMembersController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_project_member
       @project_member = ProjectMember.find(params[:id])
+      @board = @project_member.project.initiative.board
     end
 
     def set_project
       @project = Project.find(params[:project_id])
+    end
+
+    def set_board
+      @board = @project.nil? ? @project_member.project.initiative.board : @project.initiative.board
+      @show_boards_nav = !@board.nil? && !@board.new_record?
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -8,4 +8,4 @@
 <%= render 'form' %>
 
 <%= link_to 'Show', @project_member %> |
-<%= link_to 'Back', project_project_members_path(@project_member.project) %>
+<%= link_to 'Back', board_url(@project_member.project.initiative.board) %>
