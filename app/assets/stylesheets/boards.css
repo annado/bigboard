@@ -4,7 +4,11 @@
 }
 
 .table-board {
-  font-size: 12px;
+  font-size: 13px;
+}
+
+.table-board .project a {
+  font-weight: normal;
 }
 
 .table-board th a {
@@ -20,11 +24,6 @@
 
 .table-board td.people {
   padding: 0;
-}
-
-.table-board > tbody > tr > td,
-.table-board > tbody > tr > th {
-  padding: 3px;
 }
 
 .table-board .people .btn {
