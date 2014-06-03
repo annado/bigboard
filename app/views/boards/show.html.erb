@@ -37,7 +37,11 @@
           <% @board.roles.reverse.each do |r| %>
           <td class="people role-<%= r.name.parameterize %>" data-role-id="<%= r.id %>">
             <ul class="list-inline"><% project_members = p.project_members.where(role_id: r.id).order(:start_date) %>
-            <% project_members.each do |pm| %><li><%= person_tag pm %></li><% end %>
+            <% project_members.each do |pm| 
+              unless !pm.end_date.nil? && pm.end_date < Date.today
+              %><li><%= person_tag pm %></li><% 
+            end
+              end %>
             </ul>
             <% unless !r.limit.nil? && project_members.size >= r.limit %>
             <button class="btn btn-default btn-xs add-person" data-project-id="<%= p.id %>" data-role-id="<%= r.id %>">+ Person</button>
