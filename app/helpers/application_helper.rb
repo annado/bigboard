@@ -17,4 +17,8 @@ module ApplicationHelper
     end
   end
 
+  def short_date date
+    date.strftime("%d %b %y") unless date.nil?
+  end
+
 end

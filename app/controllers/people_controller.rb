@@ -22,6 +22,7 @@ class PeopleController < ApplicationController
   # GET /people/1
   # GET /people/1.json
   def show
+    @project_memberships = ProjectMember.where(:person_id => @person.id).order(:start_date)
   end
 
   # GET /people/new

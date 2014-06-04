@@ -20,5 +20,12 @@
   <%= @person.team.name %>
 </p>
 
+<p><strong>Projects:</strong></p>
+<ul>
+  <% @project_memberships.each do |pm| %>
+  <li><%= pm.project.name %> (<%= short_date pm.start_date %> to <%= short_date pm.end_date %>)</li>
+  <% end %>
+</ul>
+
 <%= link_to 'Edit', edit_person_path(@person) %> |
 <%= link_to 'Back', board_people_path(@board) %>
