@@ -51,7 +51,7 @@
     </div>
   </div>
 
-  <div class="container<%= "-fluid" if @show_boards_nav && params[:action] == "show" %>">
+  <div class="container<%= "-fluid" if @show_boards_nav && params[:controller] == 'boards'  && params[:action] == "show" %>">
     <div class="row alerts-row">
       <% if !notice.nil? %>
       <div class="alert alert-warning alert-dismissable">
