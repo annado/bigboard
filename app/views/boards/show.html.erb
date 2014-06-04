@@ -22,7 +22,7 @@
       </thead>
       <tbody>
       <% @board.initiatives.order(:created_at).each do |i| %>
-        <tr class="initiative">
+        <tr class="initiative active">
           <th colspan="3"><%= link_to i.name, edit_board_initiative_path(@board, i) %></th>
           <td colspan="<%= @board.roles.size %>" class="people">
             <%= person_tag i.manager %><%= person_tag i.owner %><%= person_tag i.analyst %>
