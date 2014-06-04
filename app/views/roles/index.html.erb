@@ -15,7 +15,7 @@
           <tr>
             <td><%= role.name %></td>
             <td><%= link_to 'Edit', edit_board_role_path(@board, role) %></td>
-            <td><%= button_to 'Delete', board_role_url(@board, role), method: :delete, :class => 'btn btn-danger btn-xs', data: { :confirm => 'Are you sure you want to delete?' } %></td>
+            <td><%= link_to 'Delete', board_role_url(@board, role), method: :delete, :class => 'btn btn-danger btn-xs', data: { :confirm => 'Are you sure you want to delete?' } %></td>
           </tr>
         <% end %>
       </tbody>

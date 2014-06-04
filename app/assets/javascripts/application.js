@@ -26,13 +26,15 @@
 
 $(document).ready(function(){
 
-  $actions = $('[data-model=project-member]');
+  $actions = $('[data-method=delete]');
   if ($actions.length) {
     $actions.on('click', function (e) {
       if (confirm("Are you sure you want to delete?")) { 
+        e.preventDefault();
+        
         var $target = $(e.target),
           id = $target.data('id'),
-          url = "/project_members/" + id + ".json";
+          url = $target.attr('href');
 
         $.ajax({
           type: "DELETE",

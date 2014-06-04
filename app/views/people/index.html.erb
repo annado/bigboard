@@ -21,7 +21,7 @@
         <td><%= person.team.name %></td>
         <td><%= person.location %></td>
         <td><%= link_to 'Edit', edit_board_person_path(@board, person) %></td>
-        <td><%= link_to 'Destroy', person, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Destroy', board_person_path(@board, person), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
