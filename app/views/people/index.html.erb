@@ -16,7 +16,7 @@
   <tbody>
     <% @people.each do |person| %>
       <tr>
-        <td><%= person_tag person %></td>
+        <td><%= link_to person.name, board_person_url(@board, person) %></td>
         <td><img src="<%= person.image %>" class="avatar" /></td>
         <td><%= person.team.name %></td>
         <td><%= person.location %></td>

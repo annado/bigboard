@@ -34,3 +34,14 @@
 <% end %>
 </div>
 </div>
+<% content_for :javascript do %>
+  <script type="text/javascript">
+  jQuery(function() {
+    // Blog is the app name
+    window.router = new App.Routers.People({
+      board: <%= @board.to_json.html_safe -%>
+    });
+    Backbone.history.start();
+  });
+</script>
+<% end %>

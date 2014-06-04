@@ -60,7 +60,7 @@ App.Views.PeopleTypeahead = Backbone.View.extend({
         displayKey: 'full_name',
         // `ttAdapter` wraps the suggestion engine in an adapter that
         // is compatible with the typeahead jQuery plugin
-        source: BB.sources.users.ttAdapter(),
+        source: this.sources.users.ttAdapter(),
         templates: {
           empty: [
             '<div class="empty-message">',
