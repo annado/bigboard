@@ -1,5 +1,11 @@
 <h1>New project</h1>
 
+<% if @initiatives.size < 1 %>
+  <div class="alert alert-danger fade in">
+    <strong>No Initiatives found.</strong> You must <%= link_to "create an Initiative", new_board_initiative_path(@board) %> before you can add projects. 
+  </div>
+<% else %>
 <%= render 'form' %>
+<% end %>
 
 <%= link_to 'Back', @board, :class => 'btn btn-default' %>
