@@ -4,7 +4,11 @@ window.App = {
   Views: {},
   Routers: {},
   collections: {},
-  initialize: function() {
+  initialize: function () {
+    this.setAuthenticityToken();
+  },
+
+  setAuthenticityToken: function () {
     this.csrfToken = $("meta[name='csrf-token']").attr('content');
 
     Backbone.sync = (function(original) {
@@ -18,6 +22,6 @@ window.App = {
   }
 };
 
-$(document).ready(function(){
+$(document).ready(function (){
   App.initialize();
 });
