@@ -1,4 +1,5 @@
 class Board < ActiveRecord::Base
+  has_paper_trail
   belongs_to :user
   belongs_to :network
   has_many :initiatives
