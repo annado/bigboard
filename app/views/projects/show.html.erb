@@ -1,3 +1,4 @@
+<% @title = "#{@project.name} Project" %>
 <p id="notice"><%= notice %></p>
 
 <p>
@@ -32,8 +33,8 @@
 
 <p>
   <strong>Initiative:</strong>
-  <%= @project.initiative_id %>
+  <%= @project.initiative.name %>
 </p>
 
-<%= link_to 'Edit', edit_project_path(@project) %> |
+<%= link_to 'Edit', edit_board_project_path(@board, @project) %> |
 <%= link_to 'Back', projects_path %>

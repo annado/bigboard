@@ -1,11 +1,11 @@
+<% @title = "#{@project_member.project.name} Project Member" %>
 <h1>Editing Project Member</h1>
 <ul class="list-unstyled">
   <li><strong>Project</strong>: <%= @project_member.project.name %></li>
   <li><strong>Role</strong>: <%= @project_member.role.name %></li>
-  <li><strong>Assigned</strong>: <%= @project_member.person.name %></li>
+  <li><strong>Assigned</strong>: <%= link_to @project_member.person.name, board_person_path(@board, @project_member.person) %></li>
 </ul>
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @project_member %> |
-<%= link_to 'Back', board_url(@project_member.project.initiative.board) %>
+<%= link_to 'Back', board_url(@board) %>

@@ -18,7 +18,7 @@ App.Views.ProjectMember = Backbone.View.extend({
 
     var person = this.model.attributes.person,
       team = App.collections.teams.findWhere({
-          id: person.team_id || ''
+          id: person && person.team_id || ''
         });
 
     if (!this.created) {

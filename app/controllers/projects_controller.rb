@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_board, only: [:create, :new, :edit, :update]
+  before_action :set_board, only: [:create, :show, :new, :edit, :update]
   before_action :set_project, only: [:show, :edit, :update, :destroy]
 
   # GET /projects/1

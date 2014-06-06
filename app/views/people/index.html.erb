@@ -1,3 +1,4 @@
+<% @title = "#{@board.name} People" %>
 <%= render partial: "teams/css", locals: {teams: @teams} %>
 
 <h1>People <span><%= link_to 'Add New', new_board_person_path(@board), :class => 'btn btn-primary btn-xs' %></h1>

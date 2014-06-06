@@ -1,3 +1,4 @@
+<% @title = "#{@person.name}" %>
 <p id="notice"><%= notice %></p>
 
 <p>
@@ -23,9 +24,9 @@
 <p><strong>Projects:</strong></p>
 <ul>
   <% @project_memberships.each do |pm| %>
-  <li><%= pm.project.name %> (<%= short_date pm.start_date %> to <%= short_date pm.end_date %>)</li>
+  <li><%= link_to pm.project.name, edit_board_project_path(@board, pm.project) %> (<%= short_date pm.start_date %> to <%= short_date pm.end_date %>)</li>
   <% end %>
 </ul>
 
-<%= link_to 'Edit', edit_person_path(@person) %> |
+<%= link_to 'Edit', edit_board_person_path(@board, @person) %> |
 <%= link_to 'Back', board_people_path(@board) %>
