@@ -17,10 +17,10 @@
 <% @versions.each do |v| %>
     <tr>
       <td><%= v.created_at.in_time_zone.to_formatted_s(:long) %></td>
-      <td><span title="<%= v.object %>"><%= v.reify.name unless !v.reify.respond_to?(:name) %> <%= v.item_type %></span></td>
+      <td><span title="<%= v.object %>"><%= v.reify.name if v.reify.respond_to?(:name) %> <%= v.item_type %></span></td>
       <% if v.changeset.empty? %>
       <td><%= v.event %></td>
-      <td><%= v.reify.name if v.event == "destroy" && !v.reify.name.nil? %></td>
+      <td><%= v.reify.name if v.event == "destroy" && v.reify.respond_to?(:name) %></td>
       <td></td>
       <% else %>
       <td><%= Board.human_attribute_name(v.changeset.first[0]) %> <%= v.event %></td>
