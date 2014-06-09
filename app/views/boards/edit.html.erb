@@ -1,8 +1,34 @@
 <% @title = "Editing #{@board.name}" %>
 
-  <h1>Editing board</h1>
+<h1>Editing board</h1>
 
-  <%= render 'form' %>
+<%= render 'form' %>
 
-  <%= link_to 'Back', @board %>
-  
+<table class="table">
+  <thead>
+    <tr>
+      <th>Initiative</th>
+      <th>Start Date</th>
+      <th>End Date</th>
+      <th>Manager</th>
+      <th>Owner</th>
+      <th>Analyst</th>
+      <th>Completed?</th>
+    </tr>
+  </thead>
+  <tbody>
+<% @board.initiatives.each do |i| %>
+    <tr>
+      <td><%= link_to i.name, board_initiative_path(@board, i) %></td>
+      <td><%= i.start_date %></td>
+      <td><%= i.end_date %></td>
+      <td><%= i.manager.name unless i.manager.nil? %></td>
+      <td><%= i.owner.name unless i.owner.nil? %></td>
+      <td><%= i.analyst.name unless i.analyst.nil? %></td>
+      <td><%= i.completed? ? 'Yes' : 'No' %></td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Back', @board %>
