@@ -17,17 +17,17 @@
 
   <p>
     <strong>Manager:</strong>
-    <%= @initiative.manager_id %>
+    <%= @initiative.manager.name unless @initiative.manager.nil? %>
   </p>
 
   <p>
     <strong>Analyst:</strong>
-    <%= @initiative.analyst_id %>
+    <%= @initiative.analyst.name unless @initiative.analyst.nil? %>
   </p>
 
   <p>
     <strong>Owner:</strong>
-    <%= @initiative.owner_id %>
+    <%= @initiative.owner.name unless @initiative.owner.nil? %>
   </p>
 
   <p>
