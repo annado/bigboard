@@ -27,6 +27,7 @@
           <li class="<%= 'active' if params[:controller] == 'teams' %>"><a href="<%= board_teams_path(@board) %>">Teams</a></li>
           <li class="<%= 'active' if params[:controller] == 'roles' %>"><a href="<%= board_roles_path(@board) %>">Roles</a></li>
           <li class="<%= 'active' if params[:controller] == 'people' %>"><a href="<%= board_people_path(@board) %>">People</a></li>
+          <li class="<%= 'active' if params[:action] == 'changelog'  %>"><a href="<%= board_changelog_path(@board) %>">Changelog</a></li>
           <% end %>
 
           <% end %>

@@ -10,6 +10,7 @@ Rails.application.routes.draw do
         get :autocomplete
       end
     end
+    get 'changelog'
   end
 
   resources :initiatives do
@@ -20,12 +21,6 @@ Rails.application.routes.draw do
     resources :project_members, shallow: true
   end
   
-  resources :people do
-    collection do
-      get :autocomplete
-    end
-  end
-
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
   get 'home/index'

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140609044913) do
+ActiveRecord::Schema.define(version: 20140609213019) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -146,8 +146,10 @@ ActiveRecord::Schema.define(version: 20140609044913) do
     t.text     "object"
     t.datetime "created_at"
     t.text     "object_changes"
+    t.integer  "board_id"
   end
 
+  add_index "versions", ["board_id"], name: "index_versions_on_board_id", using: :btree
   add_index "versions", ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id", using: :btree
 
 end

@@ -1,5 +1,4 @@
 class Initiative < ActiveRecord::Base
-  has_paper_trail
   belongs_to :manager, class_name: "Person"
   belongs_to :analyst, class_name: "Person"
   belongs_to :owner, class_name: "Person"
@@ -7,4 +6,7 @@ class Initiative < ActiveRecord::Base
   belongs_to :board
 
   validates :name, presence: { message: "Please specify a name"}
+  validates :board_id, presence: true
+
+  has_paper_trail :meta => { :board_id  => :board_id }
 end

@@ -1,0 +1,33 @@
+<% @title = "#{@board.name} Changelog" %>
+
+<h1><%= @title %></h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Change</th>
+      <th>Old Value</th>
+      <th>New Value</th>
+      <th>By</th>
+    </tr>
+  </thead>
+  <tbody>
+<% @versions.each do |v| %>
+    <tr>
+      <td><%= v.created_at.in_time_zone.to_formatted_s(:long) %></td>
+      <% if v.changeset.empty? %>
+      <td><%= v.item_type %> <%= v.event %></td>
+      <td><%= v.reify.name if v.event == "destroy" && !v.reify.name.nil? %></td>
+      <td></td>
+      <% else %>
+      <td><%= Board.human_attribute_name(v.changeset.first[0]) %> changed</td>
+      <td><%= v.changeset.first[1][0] %></td>
+      <td><%= v.changeset.first[1][1] %></td>
+      <% end %>
+      <td><%= User.find_by_id(v.whodunnit).name %></td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+

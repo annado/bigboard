@@ -1,6 +1,6 @@
 class BoardsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_board, only: [:show, :edit, :update, :destroy]
+  before_action :set_board, only: [:show, :edit, :changelog, :update, :destroy]
 
   # GET /boards
   # GET /boards.json
@@ -20,6 +20,11 @@ class BoardsController < ApplicationController
 
   # GET /boards/1/edit
   def edit
+  end
+
+  # GET /boards/1/changelog
+  def changelog
+    @versions = PaperTrail::Version.where(:board_id => @board.id).order(created_at: :desc)
   end
 
   # POST /boards
@@ -67,7 +72,7 @@ class BoardsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_board
-      board = Board.find(params[:id])
+      board = Board.find(params[:id] || params[:board_id])
       if board.network_id == current_user.network_id
         @board = board
       end
