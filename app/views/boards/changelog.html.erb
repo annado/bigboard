@@ -6,6 +6,7 @@
   <thead>
     <tr>
       <th>Date</th>
+      <th>Item</th>
       <th>Change</th>
       <th class="value">Old Value</th>
       <th class="value">New Value</th>
@@ -16,12 +17,13 @@
 <% @versions.each do |v| %>
     <tr>
       <td><%= v.created_at.in_time_zone.to_formatted_s(:long) %></td>
+      <td><span title="<%= v.object %>"><%= v.reify.name unless v.reify.name.nil? %> <%= v.item_type %></span></td>
       <% if v.changeset.empty? %>
-      <td><%= v.item_type %> <%= v.event %></td>
+      <td><%= v.event %></td>
       <td><%= v.reify.name if v.event == "destroy" && !v.reify.name.nil? %></td>
       <td></td>
       <% else %>
-      <td><%= v.item_type %> <%= v.event %> (<%= Board.human_attribute_name(v.changeset.first[0]) %> changed)</td>
+      <td><%= Board.human_attribute_name(v.changeset.first[0]) %> <%= v.event %></td>
       <td><%= v.changeset.first[1][0] %></td>
       <td><%= v.changeset.first[1][1] %></td>
       <% end %>
