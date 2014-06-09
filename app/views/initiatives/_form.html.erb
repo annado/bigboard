@@ -19,6 +19,10 @@
   <%= f.collection_select :analyst_id, @analysts, :id, :name, { :include_blank => true } %>
   <%= f.collection_select :owner_id, @pms, :id, :name, { :include_blank => true } %>
 
+  <div class="form-group">
+      <%= f.check_box :completed %>
+  </div>
+
   <div class="actions form-group">
     <%= f.submit %>
   </div>
