@@ -21,7 +21,7 @@
       <td><%= v.reify.name if v.event == "destroy" && !v.reify.name.nil? %></td>
       <td></td>
       <% else %>
-      <td><%= Board.human_attribute_name(v.changeset.first[0]) %> changed</td>
+      <td><%= v.item_type %> <%= v.event %> (<%= Board.human_attribute_name(v.changeset.first[0]) %> changed)</td>
       <td><%= v.changeset.first[1][0] %></td>
       <td><%= v.changeset.first[1][1] %></td>
       <% end %>
