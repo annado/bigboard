@@ -62,3 +62,9 @@ footer {
 .form-inline .control-label {
   margin-right: 5px;
 }
+
+.changelog-table td {
+  max-width: 20em;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
