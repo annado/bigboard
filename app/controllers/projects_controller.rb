@@ -21,7 +21,11 @@ class ProjectsController < ApplicationController
   # POST /projects.json
   def create
     initiative = Initiative.find_by_id(project_params[:initiative_id])
-    @project = initiative.projects.build(project_params)
+    if initiative.nil?
+      @project = Project.new(project_params)
+    else
+      @project = initiative.projects.build(project_params)
+    end
 
     respond_to do |format|
       if @project.save
