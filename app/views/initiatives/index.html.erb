@@ -1,31 +1,4 @@
 <% @title = "Initiatives for #{@board.name}" %>
 <h1>Initiatives <span><%= link_to 'Create New', new_board_initiative_path(@board), :class => 'btn btn-primary btn-xs' %></h1>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Start date</th>
-      <th>End date</th>
-      <th>Manager</th>
-      <th>Analyst</th>
-      <th>Owner</th>
-      <th colspan="2"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @initiatives.each do |initiative| %>
-      <tr>
-        <td><%= initiative.name %></td>
-        <td><%= initiative.start_date %></td>
-        <td><%= initiative.end_date %></td>
-        <td><%= initiative.manager ? initiative.manager.name : '' %></td>
-        <td><%= initiative.analyst ? initiative.analyst.name : '' %></td>
-        <td><%= initiative.owner ? initiative.owner.name : '' %></td>
-        <td><%= link_to 'Edit', edit_board_initiative_path(@board, initiative) %></td>
-        <td><%= link_to 'Destroy', board_initiative_url(@board, initiative), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<%= render partial: "initiatives/table", locals: {initiatives: @initiatives} %>

@@ -58,3 +58,7 @@ footer {
   min-height: 50px;
   margin: 20px;
 }
+
+.form-inline .control-label {
+  margin-right: 5px;
+}
