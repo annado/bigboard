@@ -21,4 +21,9 @@ module ApplicationHelper
     date.strftime("%d %b %y") unless date.nil?
   end
 
+  def num_weeks start_date, end_date
+    end_date = end_date.nil? ? Date.today : end_date
+    ((end_date - start_date).to_f / 7.0).round(1) unless start_date.nil?
+  end
+
 end

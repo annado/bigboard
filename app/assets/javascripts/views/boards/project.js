@@ -10,6 +10,11 @@ App.Views.Project = Backbone.View.extend({
     this.model.project_members.on("add", this.addProjectMember, this);
   },
 
+  render: function () {
+    this.$el.find('[data-toggle="tooltip"]').tooltip();
+    return self;
+  },
+
   addProjectMember: function (project_member) {
     var $list = this.$el.find('[data-role-id=' + project_member.attributes.role_id + '] ul');
     var view = new App.Views.ProjectMember({ model : project_member });
