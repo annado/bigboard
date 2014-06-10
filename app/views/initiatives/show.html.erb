@@ -31,7 +31,12 @@
   </p>
 
   <p>
-    <%= link_to 'Edit', edit_initiative_path(@initiative) %> |
-    <%= link_to 'Back', initiatives_path %>
+    <strong>Security:</strong>
+    <%= @initiative.security.name unless @initiative.security.nil? %>
+  </p>
+
+  <p>
+    <%= link_to 'Edit', edit_board_initiative_path(@board, @initiative) %> |
+    <%= link_to 'Back', board_initiatives_path(@board) %>
   </p>
 </div>

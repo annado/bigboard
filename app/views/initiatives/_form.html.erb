@@ -1,4 +1,4 @@
-<%= bootstrap_form_for([@board, @initiative]) do |f| %>
+<%= bootstrap_form_for([@board, @initiative], :layout => :horizontal, label_col: "col-md-1", control_col: "col-md-4") do |f| %>
   <% if @initiative.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@initiative.errors.count, "error") %> prohibited this initiative from being saved:</h2>
@@ -12,18 +12,19 @@
   <% end %>
 
   <%= f.text_field :name %>
-  <%= f.collection_select :board_id, @boards, :id, :name, { :include_blank => true } %>
   <%= f.date_field :start_date %>
   <%= f.date_field :end_date %>
-  <%= f.collection_select :manager_id, @managers, :id, :name, { :include_blank => true } %>
-  <%= f.collection_select :analyst_id, @analysts, :id, :name, { :include_blank => true } %>
-  <%= f.collection_select :owner_id, @pms, :id, :name, { :include_blank => true } %>
+  <%= f.collection_select :manager_id, @people, :id, :name, { :include_blank => true } %>
+  <%= f.collection_select :analyst_id, @people, :id, :name, { :include_blank => true } %>
+  <%= f.collection_select :owner_id, @people, :id, :name, { :include_blank => true } %>
+  <%= f.collection_select :security_id, @people, :id, :name, { :include_blank => true } %>
 
   <div class="form-group">
       <%= f.check_box :completed %>
   </div>
 
   <div class="actions form-group">
-    <%= f.submit %>
+    <%= f.hidden_field :board_id, :value => @board.id %>
+    <%= f.primary %> <%= link_to 'Cancel', board_path(@board), :class => 'btn btn-default' %>
   </div>
 <% end %>

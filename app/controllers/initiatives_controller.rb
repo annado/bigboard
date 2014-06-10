@@ -76,15 +76,7 @@ class InitiativesController < ApplicationController
     end
 
     def set_select_fields
-      people = Person.where(board_id: @board.id).order(:name)
-      @managers = people
-
-      analyst_team_id = Team.find_by name: 'Analytics'
-      @analysts = people
-
-      @pms = people
-
-      @boards = Board.where network_id: current_user.network_id
+      @people = Person.where(board_id: @board.id).order(:name)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
@@ -92,6 +84,6 @@ class InitiativesController < ApplicationController
       if (params[:ended]) 
         params[:end_date] = today
       end
-      params.require(:initiative).permit(:name, :start_date, :end_date, :manager_id, :analyst_id, :owner_id, :board_id, :completed)
+      params.require(:initiative).permit(:name, :start_date, :end_date, :manager_id, :analyst_id, :owner_id, :security_id, :board_id, :completed)
     end
 end
