@@ -14,7 +14,6 @@
 //= require underscore
 //= require typeahead.js/dist/typeahead.bundle
 //= require bootstrap/dist/js/bootstrap.min
-//= require turbolinks
 //= require backbone
 //= require app
 //= require_tree ../templates
