@@ -24,7 +24,10 @@ module ApplicationHelper
 
   def num_weeks start_date, end_date
     end_date = end_date.nil? ? Date.today : end_date
-    ((end_date - start_date).to_f / 7.0).round(1) unless start_date.nil?
+    start_date.nil? ? 0 : ((end_date - start_date).to_f / 7.0).round(1)
   end
 
+  def nearing_deadline deadline
+    num_weeks(deadline, nil) > -1
+  end
 end

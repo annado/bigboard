@@ -19,8 +19,21 @@ describe ApplicationHelper do
 
     it "returns empty if no dates are specified" do
       # helper.page_title.should be_true
-      helper.num_weeks(nil, nil).should eql(nil)
+      helper.num_weeks(nil, nil).should eql(0)
+    end
+  end
+
+  describe "nearing_deadline" do
+    it "if deadline was 2 days ago" do
+      helper.nearing_deadline(Date.today - 6).should be_true
     end
 
+    it "if deadline was 45 days ago" do
+      helper.nearing_deadline(Date.today - 45).should be_true
+    end
+
+    it "if deadline is in 5 days" do
+      helper.nearing_deadline(Date.today + 5).should be_true
+    end
   end
 end
