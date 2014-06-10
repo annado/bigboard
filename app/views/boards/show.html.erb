@@ -69,14 +69,14 @@
   </div>
 
   <% @board.people.each do |p| %>
-  <% if p.team.single_project? && p.project_members.size != 1 %>
+  <% if p.team.single_project? && p.active_project_count != 1 %>
   <div class="alert alert-warning"><%= link_to p.name, board_person_url(@board, p) %>
-    <% if p.project_members.size == 0 %>
+    <% if p.active_project_count == 0 %>
     is unassigned
-    <% elsif p.project_members.size > 1 %>
-    is assigned to multiple projects 
-    <% p.project_members.each do |pm| %>
-    - <%= link_to pm.project.name, edit_board_project_path(@board, pm.project) %>
+    <% elsif p.active_project_count > 1 %>
+    is assigned to <%= p.active_project_count %> projects 
+    <% p.active_projects.each do |p| %>
+    - <%= link_to p.name, edit_board_project_path(@board, p) %>
     <% end %>
   <% end %>
   </div>

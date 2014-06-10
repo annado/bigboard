@@ -10,4 +10,13 @@ class Person < ActiveRecord::Base
   validates_uniqueness_of :uid, scope: [:board_id], presence: { message: "Unique UID is required"}
 
   searchkick autocomplete: ['name']
+
+  def active_projects
+    self.projects.where(:completed => false)
+  end
+
+  def active_project_count
+    self.active_projects.size
+  end
+
 end
