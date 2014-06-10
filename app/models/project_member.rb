@@ -7,6 +7,6 @@ class ProjectMember < ActiveRecord::Base
   belongs_to :role
 
   def board_identifier
-    self.person.board_id
+    self.project.board_identifier
   end
 end

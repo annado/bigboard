@@ -12,8 +12,10 @@
 //
 //= require jquery
 //= require underscore
+//= require modernizr/modernizr
 //= require typeahead.js/dist/typeahead.bundle
 //= require bootstrap/dist/js/bootstrap.min
+//= require bootstrap-datepicker/js/bootstrap-datepicker
 //= require backbone
 //= require app
 //= require_tree ../templates
@@ -47,6 +49,12 @@ $(document).ready(function(){
           dataType: 'json'
         });
       }
+    });
+  }
+
+  if (!Modernizr.touch && !Modernizr.inputtypes.date) {
+    $('input[type=date]').datepicker({
+        format: 'yyyy-mm-dd'
     });
   }
 
