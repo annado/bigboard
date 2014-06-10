@@ -32,7 +32,13 @@
         <% i.ongoing_projects.each do |p| %>
         <tr data-project-id="<%= p.id %>">
           <th class="project"><%= link_to p.name, edit_board_project_path(@board, p) %></th>
-          <td class="date"><span data-toggle="tooltip" data-placement="bottom" title="<%= num_weeks(p.start_date, p.end_date) %> weeks"><%= p.start_date.strftime("%d %b %y") unless p.start_date.nil? %></span></td>
+          <td class="date">
+            <% if i.standing? %>
+
+            <% else %>
+            <span data-toggle="tooltip" data-placement="bottom" title="<%= num_weeks(p.start_date, p.end_date) %> weeks"><%= p.start_date.strftime("%d %b %y") unless p.start_date.nil? %></span>
+            <% end %>
+          </td>
           <td class="date"><%= p.end_date.strftime("%d %b %y") unless p.end_date.nil? %></td>
 
           <% @board.roles.reverse.each do |r| %>
@@ -41,7 +47,7 @@
             <% project_members.each do |pm| 
               unless !pm.end_date.nil? && pm.end_date < Date.today
               %><li><%= person_tag pm %><%
-                if p.standing? %><br /><%= pm.start_date %><%
+                if i.standing? %><br /><%= pm.start_date %><%
                 end %></li><% 
             end
               end %>
@@ -80,6 +86,7 @@
     </div>
   </div>
   </div>
+
 <% content_for :javascript do %>
   <script type="text/javascript">
   jQuery(function() {

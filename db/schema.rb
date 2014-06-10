@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140610012041) do
+ActiveRecord::Schema.define(version: 20140610024305) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 20140610012041) do
     t.integer  "board_id"
     t.boolean  "completed",   default: false, null: false
     t.integer  "security_id"
+    t.boolean  "standing"
   end
 
   add_index "initiatives", ["board_id"], name: "index_initiatives_on_board_id", using: :btree
@@ -88,7 +89,6 @@ ActiveRecord::Schema.define(version: 20140610012041) do
     t.date     "end_date"
     t.date     "ship_date"
     t.boolean  "completed",     default: false, null: false
-    t.boolean  "standing"
   end
 
   add_index "projects", ["board_id"], name: "index_projects_on_board_id", using: :btree

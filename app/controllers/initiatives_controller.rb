@@ -84,6 +84,6 @@ class InitiativesController < ApplicationController
       if (params[:ended]) 
         params[:end_date] = today
       end
-      params.require(:initiative).permit(:name, :start_date, :end_date, :manager_id, :analyst_id, :owner_id, :security_id, :board_id, :completed)
+      params.require(:initiative).permit(:name, :start_date, :end_date, :manager_id, :analyst_id, :owner_id, :security_id, :board_id, :completed, :standing)
     end
 end

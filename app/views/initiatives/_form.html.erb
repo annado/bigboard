@@ -20,7 +20,15 @@
   <%= f.collection_select :security_id, @people, :id, :name, { :include_blank => true } %>
 
   <div class="form-group">
+    <div class="col-md-5 col-md-offset-1">
+      <%= f.check_box :standing %>
+      <p class="help-block">This is the Initiative that never ends</p>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-md-5 col-md-offset-1">
       <%= f.check_box :completed %>
+    </div>
   </div>
 
   <div class="actions form-group">
