@@ -64,7 +64,7 @@ footer {
 }
 
 .changelog-table td {
-  max-width: 20em;
+  max-width: 18em;
   text-overflow: ellipsis;
   overflow: hidden;
 }

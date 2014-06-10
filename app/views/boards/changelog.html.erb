@@ -1,6 +1,6 @@
 <% @title = "#{@board.name} Changelog" %>
 
-<h1><%= @title %></h1>
+<h1>Changelog</h1>
 
 <table class="table changelog-table">
   <thead>
@@ -17,7 +17,7 @@
 <% @versions.each do |v| %>
     <tr>
       <td><%= v.created_at.in_time_zone.to_formatted_s(:long) %></td>
-      <td><span title="<%= v.object %>"><%= v.reify.name if v.reify.respond_to?(:name) %> <%= v.item_type %></span></td>
+      <td><span title="<%= v.object %>"><%= v.item_type %>: <%= v.reify.name if v.reify.respond_to?(:name) %></span></td>
       <% if v.changeset.empty? %>
       <td><%= v.event %></td>
       <td><%= v.reify.name if v.event == "destroy" && v.reify.respond_to?(:name) %></td>
