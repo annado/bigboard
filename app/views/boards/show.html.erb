@@ -55,7 +55,7 @@
               end %>
             </ul>
             <% unless !r.limit.nil? && project_members.size >= r.limit %>
-            <button class="btn btn-default btn-xs add-person" data-project-id="<%= p.id %>" data-role-id="<%= r.id %>">+ Person</button>
+            <button class="btn btn-default btn-xs add-person" data-project-id="<%= p.id %>" data-role-id="<%= r.id %>">+ <%= r.name %></button>
             <% end %>
           </td>
           <% end %>
