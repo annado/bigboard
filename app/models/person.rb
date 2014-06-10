@@ -12,11 +12,10 @@ class Person < ActiveRecord::Base
   searchkick autocomplete: ['name']
 
   def active_projects
-    self.projects.where(:completed => false)
+    self.projects.where("projects.completed = ? AND projects.start_date < ?", false, Date.today)
   end
 
   def active_project_count
     self.active_projects.size
   end
-
 end
