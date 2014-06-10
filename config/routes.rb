@@ -20,6 +20,9 @@ Rails.application.routes.draw do
   resources :projects do
     resources :project_members, shallow: true
   end
+
+  resources :people do
+  end
   
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
