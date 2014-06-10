@@ -1,5 +1,6 @@
 <% @title = @board.name %>
 <%= render partial: "teams/css", locals: {teams: @board.teams} %>
+
 <div class="row row-board">
 <div class="header">
   <h2><%= @board.name %></h2>
@@ -68,7 +69,7 @@
   </div>
 
   <% @board.people.each do |p| %>
-  <% if p.team.single_project? %>
+  <% if p.team.single_project? && p.project_members.size != 1 %>
   <div class="alert alert-warning"><%= link_to p.name, board_person_url(@board, p) %>
     <% if p.project_members.size == 0 %>
     is unassigned
