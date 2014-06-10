@@ -9,6 +9,7 @@
     <tr>
       <th>Name</th>
       <th>Color</th>
+      <th>Single Project?</th>
       <th colspan="2"></th>
     </tr>
   </thead>
@@ -18,6 +19,7 @@
       <tr>
         <td><%= team.name %></td>
         <td><span class="person-tag" style="background-color: <%= team.color %>; padding: 3px 5px;"><%= team.color %></span></td>
+        <td><%= team.single_project? ? 'Yes' : 'No' %></td>
         <td><%= link_to 'Edit', edit_board_team_path(@board, team) %></td>
         <td><%= link_to 'Destroy', board_team_url(@board, team), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
