@@ -44,7 +44,7 @@ class TeamsController < ApplicationController
   def update
     respond_to do |format|
       if @team.update(team_params)
-        format.html { redirect_to board_teams_url(@board, @team), notice: 'Team was successfully updated.' }
+        format.html { redirect_to board_teams_url(@board), notice: 'Team was successfully updated.' }
         format.json { render :show, status: :ok, location: @team }
       else
         format.html { render :edit }
@@ -76,6 +76,6 @@ class TeamsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def team_params
-      params.require(:team).permit(:name, :color, :board_id)
+      params.require(:team).permit(:name, :color, :board_id, :single_project)
     end
 end

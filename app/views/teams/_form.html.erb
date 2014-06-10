@@ -13,13 +13,14 @@
       </div>
     <% end %>
 
-    <div class="field">
-      <%= f.text_field :name %>
+    <%= f.text_field :name %>
+    <%= f.color_field :color %>
+    <div class="form-group">
+      <%= f.check_box :single_project %>
+      <p class="help-block col-sm-offset-1">Members of this team should only be assigned to one project at a time.</p>
     </div>
-    <div class="field">
-      <%= f.color_field :color %>
-    </div>
-    <div class="actions">
+
+    <div class="form-group actions">
       <%= f.submit %>
     </div>
   <% end %>

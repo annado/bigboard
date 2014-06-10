@@ -67,6 +67,21 @@
     </div>
   </div>
 
+  <% @board.people.each do |p| %>
+  <% if p.team.single_project? %>
+  <div class="alert alert-warning"><%= link_to p.name, board_person_url(@board, p) %>
+    <% if p.project_members.size == 0 %>
+    is unassigned
+    <% elsif p.project_members.size > 1 %>
+    is assigned to multiple projects 
+    <% p.project_members.each do |pm| %>
+    - <%= link_to pm.project.name, edit_board_project_path(@board, pm.project) %>
+    <% end %>
+  <% end %>
+  </div>
+  <% end %>
+  <% end %>
+
   <div id="add-project-member-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
