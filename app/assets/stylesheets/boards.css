@@ -1,6 +1,13 @@
-
 .row-board {
   margin: 0 10px;
+}
+
+.row-board .panel {
+  overflow-x: scroll;
+}
+
+.row-board .table-responsive {
+  min-width: 1400px;
 }
 
 .table-board {
