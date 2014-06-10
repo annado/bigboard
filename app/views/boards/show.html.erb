@@ -83,7 +83,6 @@
 <% content_for :javascript do %>
   <script type="text/javascript">
   jQuery(function() {
-    // Blog is the app name
     window.router = new App.Routers.Boards({
       board: <%= @board.to_json(:include => { 
         :initiatives => {
