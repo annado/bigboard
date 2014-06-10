@@ -10,4 +10,8 @@ class Initiative < ActiveRecord::Base
   validates :board_id, presence: true
 
   has_paper_trail :meta => { :board_id  => :board_id }
+
+  def ongoing_projects
+    self.projects.where.not(completed: true).order(:created_at, start_date: :asc)
+  end
 end

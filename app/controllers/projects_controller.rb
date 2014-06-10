@@ -71,7 +71,7 @@ class ProjectsController < ApplicationController
 
     def set_board
       @board = Board.find(params[:board_id])
-      @initiatives = Initiative.where(:board_id => @board.id)
+      @initiatives = @board.ongoing_initiatives
       @show_boards_nav = !@board.nil? && !@board.new_record?
     end
 

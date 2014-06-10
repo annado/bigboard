@@ -22,14 +22,14 @@
         </tr>
       </thead>
       <tbody>
-      <% @board.initiatives.where.not(completed: true).order(:created_at).each do |i| %>
+      <% @board.ongoing_initiatives.each do |i| %>
         <tr class="initiative active">
           <th colspan="3"><%= link_to i.name, edit_board_initiative_path(@board, i) %></th>
           <td colspan="<%= @board.roles.size %>" class="people">
             <%= person_tag i.manager %><%= person_tag i.owner %><%= person_tag i.analyst %><%= person_tag i.security %>
           </td>
         </tr>
-        <% i.projects.where.not(completed: true).order(:created_at, start_date: :asc).each do |p| %>
+        <% i.ongoing_projects.each do |p| %>
         <tr data-project-id="<%= p.id %>">
           <th class="project"><%= link_to p.name, edit_board_project_path(@board, p) %></th>
           <td class="date"><span data-toggle="tooltip" data-placement="bottom" title="<%= num_weeks(p.start_date, p.end_date) %> weeks"><%= p.start_date.strftime("%d %b %y") unless p.start_date.nil? %></span></td>

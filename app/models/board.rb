@@ -10,4 +10,8 @@ class Board < ActiveRecord::Base
 
   validates :network_id, presence: { message: "Is user logged in?"}
   validates :name, presence: { message: "Please specify a name"}
+
+  def ongoing_initiatives
+      self.initiatives.where(completed: false).order(:created_at)
+  end
 end
