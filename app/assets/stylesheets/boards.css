@@ -47,6 +47,10 @@
   min-width: 6em;
 }
 
+.table-board .date [data-toggle=tooltip] {
+  cursor: pointer;
+}
+
 .table-board .project {
   min-width: 10em;
 }
