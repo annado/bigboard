@@ -18,6 +18,10 @@
   font-weight: normal;
 }
 
+.table-board th.project sup {
+  color: #666;
+}
+
 .table-board th a {
   color: #333;
 }
