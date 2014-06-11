@@ -31,7 +31,7 @@ class InitiativesController < ApplicationController
 
     respond_to do |format|
       if @initiative.save
-        format.html { redirect_to edit_board_initiative_path(@board, @initiative), notice: 'Initiative was successfully created.' }
+        format.html { redirect_to board_url(@board), notice: @initiative.name + ' Initiative was successfully created.' }
         format.json { render :show, status: :created, location: @initiative }
       else
         format.html { render :new }
@@ -45,7 +45,7 @@ class InitiativesController < ApplicationController
   def update
     respond_to do |format|
       if @initiative.update(initiative_params)
-        format.html { redirect_to board_initiative_url(@board, @initiative), notice: 'Initiative was successfully updated.' }
+        format.html { redirect_to board_url(@board), notice: @initiative.name + ' Initiative was successfully updated.' }
         format.json { render :show, status: :ok, location: @initiative }
       else
         format.html { render :edit }
