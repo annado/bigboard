@@ -18,13 +18,13 @@
     <tr>
       <td>Product</td>
 <% @teams.each do |t| %>
-      <td><%= @product[t].size %></td>
+      <td><%= t.people.size == 0 ? 0 : (100.0 * @product[t].size.to_f/t.people.size).round(1)%>%</td>
 <% end %>
     </tr>
     <tr>
       <td>Internal</td>
 <% @teams.each do |t| %>
-      <td><%= @internal[t].size %></td>
+      <td><%= t.people.size == 0 ? 0 : (100.0 * @internal[t].size.to_f/t.people.size).round(1)%>%</td>
 <% end %>
     </tr>
     <tr>
