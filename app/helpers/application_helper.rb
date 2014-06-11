@@ -27,6 +27,10 @@ module ApplicationHelper
     start_date.nil? ? 0 : ((end_date - start_date).to_f / 7.0).round(1)
   end
 
+  def project_length project
+    num_weeks project.start_date, project.end_date
+  end
+
   def nearing_deadline deadline
     num_weeks(deadline, nil) > -1
   end
