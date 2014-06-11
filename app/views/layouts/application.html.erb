@@ -23,11 +23,19 @@
           <% if user_signed_in? %>
 
           <% if @show_boards_nav %>
-          <li class="<%= 'active' if params[:controller] == 'initiatives' %>"><a href="<%= board_initiatives_path(@board) %>">Initiatives</a></li>
-          <li class="<%= 'active' if params[:controller] == 'teams' %>"><a href="<%= board_teams_path(@board) %>">Teams</a></li>
-          <li class="<%= 'active' if params[:controller] == 'roles' %>"><a href="<%= board_roles_path(@board) %>">Roles</a></li>
-          <li class="<%= 'active' if params[:controller] == 'people' %>"><a href="<%= board_people_path(@board) %>">People</a></li>
+          <li class="<%= 'active' if params[:action] == 'allocation'  %>"><a href="<%= board_allocation_path(@board) %>">Allocation</a></li>
           <li class="<%= 'active' if params[:action] == 'changelog'  %>"><a href="<%= board_changelog_path(@board) %>">Changelog</a></li>
+
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Settings <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li class="<%= 'active' if params[:controller] == 'initiatives' %>"><a href="<%= board_initiatives_path(@board) %>">Initiatives</a></li>
+              <li class="<%= 'active' if params[:controller] == 'teams' %>"><a href="<%= board_teams_path(@board) %>">Teams</a></li>
+              <li class="<%= 'active' if params[:controller] == 'roles' %>"><a href="<%= board_roles_path(@board) %>">Roles</a></li>
+              <li class="<%= 'active' if params[:controller] == 'people' %>"><a href="<%= board_people_path(@board) %>">People</a></li>
+            </ul>
+          </li>
+
           <% end %>
 
           <% end %>

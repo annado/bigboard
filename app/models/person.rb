@@ -18,4 +18,8 @@ class Person < ActiveRecord::Base
   def active_project_count
     self.active_projects.size
   end
+
+  def allocated_to type
+    self.active_projects.first.project_type == type unless self.active_project_count == 0
+  end
 end

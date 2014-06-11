@@ -1,4 +1,5 @@
 <% @title = "#{@team.name}" %>
+<h1>Team</h1>
 <p>
   <strong>Name:</strong>
   <%= @team.name %>
@@ -8,6 +9,13 @@
   <strong>Color:</strong>
   <%= @team.color %>
 </p>
+
+<h3>Team Members</h3>
+<ul>
+<% @team.people.each do |p| %>
+  <li><%= link_to p.name, board_person_path(@board, p) %></li>
+<% end %>
+</ul>
 
 <%= link_to 'Edit', edit_board_team_path(@board, @team) %> |
 <%= link_to 'Back', board_teams_path(@board) %>

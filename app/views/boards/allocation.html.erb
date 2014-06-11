@@ -1,0 +1,38 @@
+<h1>Project Allocation</h1>
+
+<%= render partial: "validations" %>
+
+<%
+%>
+
+<table class="table table-grid">
+  <thead>
+    <tr>
+      <th>Type</th>
+<% @teams.each do |t| %>
+      <th><%= link_to t.name, board_team_path(@board, t) %></th>
+<% end %>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Product</td>
+<% @teams.each do |t| %>
+      <td><%= @product[t].size %></td>
+<% end %>
+    </tr>
+    <tr>
+      <td>Internal</td>
+<% @teams.each do |t| %>
+      <td><%= @internal[t].size %></td>
+<% end %>
+    </tr>
+    <tr>
+      <th>Total</th>
+<% @teams.each do |t| %>
+      <td><%= t.people.size %></td>
+<% end %>
+    </tr>
+  </tbody>
+</table>
+

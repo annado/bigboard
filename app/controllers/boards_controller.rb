@@ -1,6 +1,6 @@
 class BoardsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_board, only: [:show, :edit, :changelog, :update, :destroy]
+  before_action :set_board, only: [:show, :edit, :changelog, :allocation, :update, :destroy]
 
   # GET /boards
   # GET /boards.json
@@ -20,11 +20,6 @@ class BoardsController < ApplicationController
 
   # GET /boards/1/edit
   def edit
-  end
-
-  # GET /boards/1/changelog
-  def changelog
-    @versions = PaperTrail::Version.where(:board_id => @board.id).order(created_at: :desc)
   end
 
   # POST /boards
@@ -67,6 +62,30 @@ class BoardsController < ApplicationController
       format.html { redirect_to boards_url }
       format.json { head :no_content }
     end
+  end
+
+  # GET /boards/1/allocation
+  def allocation
+    @teams = @board.teams.where(:single_project => true)
+    @product = {}
+    @internal = {}
+    @teams.each do |t|
+      @product[t] = []
+      @internal[t] = []
+      t.people.each do |p|
+      if p.allocated_to('Product')
+        @product[t].push(p)
+      elsif p.allocated_to('Internal Projects')
+        @internal[t].push(p)
+      end
+    end
+  end
+
+  end
+
+  # GET /boards/1/changelog
+  def changelog
+    @versions = PaperTrail::Version.where(:board_id => @board.id).order(created_at: :desc)
   end
 
   private
