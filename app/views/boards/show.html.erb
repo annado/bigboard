@@ -68,42 +68,8 @@
     </div>
   </div>
 
-  <% @board.people.each do |p| %>
-  <% if p.team.single_project? && p.active_project_count != 1 %>
-  <div class="alert alert-warning"><%= link_to p.name, board_person_url(@board, p) %>
-    <% if p.active_project_count == 0 %>
-    is unassigned
-    <% elsif p.active_project_count > 1 %>
-    is assigned to <%= p.active_project_count %> projects 
-    <% p.active_projects.each do |p| %>
-    - <%= link_to p.name, edit_board_project_path(@board, p) %>
-    <% end %>
-  <% end %>
-  </div>
-  <% end %>
-  <% end %>
-
-  <div id="add-project-member-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog modal-sm">
-    <div class="modal-content">
-      <div class="modal-header">
-        Add Project Member
-      </div>
-      <div class="modal-body">
-        <%= bootstrap_form_for([Project, ProjectMember.new]) do |f| %>
-        <div class="form-group" id="bigboard-autocomplete">
-          <%= f.text_field :person_id, :class => "typeahead", :placeholder => "" %>
-        </div>
-        <div class="form-group">
-          <%= f.hidden_field :role_id %>
-          <%= f.hidden_field :project_id %>
-          <%= f.submit "Add" %>
-        <% end %>
-        </div>
-      </div>
-    </div>
-  </div>
-  </div>
+<%= render partial: "validations" %>
+<%= render partial: "project_members/modal" %>
 
 <% content_for :javascript do %>
   <script type="text/javascript">

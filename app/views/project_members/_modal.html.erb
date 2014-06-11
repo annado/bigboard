@@ -1,0 +1,21 @@
+<div id="add-project-member-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        Add Project Member
+      </div>
+      <div class="modal-body">
+        <%= bootstrap_form_for([Project, ProjectMember.new]) do |f| %>
+        <div class="form-group" id="bigboard-autocomplete">
+          <%= f.text_field :person_id, :class => "typeahead", :placeholder => "" %>
+        </div>
+        <div class="form-group">
+          <%= f.hidden_field :role_id %>
+          <%= f.hidden_field :project_id %>
+          <%= f.submit "Add" %>
+        <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
