@@ -12,6 +12,6 @@ class Initiative < ActiveRecord::Base
   has_paper_trail :meta => { :board_id  => :board_id }
 
   def ongoing_projects
-    self.projects.where.not(completed: true).order(:created_at, start_date: :asc)
+    self.projects.where.not(completed: true).order(:start_date, created_at: :asc)
   end
 end
