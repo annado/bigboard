@@ -1,10 +1,5 @@
 <h1>Project Allocation</h1>
 
-<%= render partial: "validations" %>
-
-<%
-%>
-
 <table class="table table-grid">
   <thead>
     <tr>
@@ -53,3 +48,13 @@
   </tbody>
 </table>
 
+<div class="alert alert-warning">
+Not assigned to an Internal or Product project:
+<ul>
+<% @allocations[:unassigned].each do |p| %>
+  <li><%= link_to p.name, board_person_path(@board, p) %></li>
+<% end %>
+</ul>
+</div>
+
+<%= render partial: "validations" %>
