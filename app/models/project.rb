@@ -7,7 +7,6 @@ class Project < ActiveRecord::Base
 
   validates :name, presence: { message: "Please specify a name"}
   validates :initiative_id, presence: { message: "Initiative required"}
-  validates :project_type, presence: { message: "Project type required"}
 
   def board_identifier
     self.initiative.board.id
