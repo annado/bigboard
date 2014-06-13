@@ -28,13 +28,13 @@
 <% @teams.each do |t| %>
       <td><%= display_percentage @allocations[:internal][:projects][t].size, t.people.size %></td>
 <% end %>
-      <td><%= percentage @allocations[:internal][:internal][:total], @allocations[:total] %>% (<%= @allocations[:internal][:total] %>)</td>
+      <td><%= display_percentage @allocations[:internal][:projects][:total], @allocations[:total] %></td>
     </tr>
       <td>Support</td>
 <% @teams.each do |t| %>
       <td><%= display_percentage @allocations[:internal][:support][t].size, t.people.size %></td>
 <% end %>
-      <td><%= percentage @allocations[:internal][:support][:total], @allocations[:total] %>% (<%= @allocations[:internal][:total] %>)</td>
+      <td><%= display_percentage @allocations[:internal][:support][:total], @allocations[:total] %></td>
     </tr>
     <tr>
       <th>Total</th>
