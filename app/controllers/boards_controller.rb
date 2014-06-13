@@ -66,7 +66,7 @@ class BoardsController < ApplicationController
 
   # GET /boards/1/allocation
   def allocation
-    @teams = @board.teams.where(:single_project => true)
+    @teams = @board.teams.where(:single_project => true).order(:name)
     @allocations = {
       :total => 0,
       :product => {
