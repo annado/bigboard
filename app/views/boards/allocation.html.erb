@@ -12,26 +12,43 @@
 <% @teams.each do |t| %>
       <th><%= link_to t.name, board_team_path(@board, t) %></th>
 <% end %>
+      <th>Total</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>Product</td>
 <% @teams.each do |t| %>
-      <td><%= t.people.size == 0 ? 0 : (100.0 * @product[t].size.to_f/t.people.size).round(1)%>%</td>
+      <td><%= display_percentage @allocations[:product][:people][t].size, t.people.size %></td>
 <% end %>
+      <td><%= display_percentage @allocations[:product][:total], @allocations[:total] %></td>
     </tr>
     <tr>
-      <td>Internal</td>
+      <td>Internal Projects</td>
 <% @teams.each do |t| %>
-      <td><%= t.people.size == 0 ? 0 : (100.0 * @internal[t].size.to_f/t.people.size).round(1)%>%</td>
+      <td><%= display_percentage @allocations[:internal][:projects][t].size, t.people.size %></td>
 <% end %>
+      <td><%= percentage @allocations[:internal][:total], @allocations[:total] %>% (<%= @allocations[:internal][:total] %>)</td>
+    </tr>
+      <td>Support</td>
+<% @teams.each do |t| %>
+      <td><%= display_percentage @allocations[:internal][:support][t].size, t.people.size %></td>
+<% end %>
+      <td><%= percentage @allocations[:internal][:total], @allocations[:total] %>% (<%= @allocations[:internal][:total] %>)</td>
     </tr>
     <tr>
       <th>Total</th>
 <% @teams.each do |t| %>
       <td><%= t.people.size %></td>
 <% end %>
+      <td><%= @allocations[:total] %></td>
+    </tr>
+    <tr>
+      <td>Internal (Total)</td>
+<% @teams.each do |t| %>
+      <td><%= display_percentage @allocations[:internal][:people][t].size, t.people.size %></td>
+<% end %>
+      <td><%= display_percentage @allocations[:internal][:total], @allocations[:total] %></td>
     </tr>
   </tbody>
 </table>

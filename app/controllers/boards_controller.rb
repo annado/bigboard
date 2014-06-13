@@ -67,20 +67,40 @@ class BoardsController < ApplicationController
   # GET /boards/1/allocation
   def allocation
     @teams = @board.teams.where(:single_project => true)
-    @product = {}
-    @internal = {}
+    @allocations = {
+      :total => 0,
+      :product => {
+        :total => 0,
+        :people => {}
+      },
+      :internal => {
+        :total => 0,
+        :people => {},
+        :support => {},
+        :projects => {}
+      }
+    }
     @teams.each do |t|
-      @product[t] = []
-      @internal[t] = []
+      @allocations[:product][:people][t] = []
+      @allocations[:internal][:people][t] = []
+      @allocations[:internal][:projects][t] = []
+      @allocations[:internal][:support][t] = []
       t.people.each do |p|
-      if p.allocated_to('Product')
-        @product[t].push(p)
-      elsif p.allocated_to('Internal Projects')
-        @internal[t].push(p)
+        @allocations[:total] += 1
+        if p.allocated_to('Product')
+          @allocations[:product][:total] += 1
+          @allocations[:product][:people][t].push(p)
+        elsif p.allocated_to('Internal Projects')
+          @allocations[:internal][:total] += 1
+          @allocations[:internal][:people][t].push(p)
+          if p.allocated_to_internal_initiative
+            @allocations[:internal][:projects][t].push(p)
+          else
+            @allocations[:internal][:support][t].push(p)
+          end
+        end
       end
     end
-  end
-
   end
 
   # GET /boards/1/changelog

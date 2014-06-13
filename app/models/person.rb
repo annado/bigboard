@@ -22,4 +22,9 @@ class Person < ActiveRecord::Base
   def allocated_to type
     self.active_projects.first.project_type == type unless self.active_project_count == 0
   end
+
+  def allocated_to_internal_initiative
+    self.active_projects.first.initiative.name == 'Internal Projects' unless self.active_project_count == 0
+  end
+
 end
