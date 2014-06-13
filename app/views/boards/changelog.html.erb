@@ -17,13 +17,16 @@
 <% @versions.each do |v| %>
     <tr>
       <td><%= v.created_at.in_time_zone.to_formatted_s(:long) %></td>
-      <td><span title="<%= v.object %>"><%= v.item_type %>: <%= v.reify.name if v.reify.respond_to?(:name) %></span></td>
-      <% if v.changeset.empty? %>
+      <td><span title="<%= v.object %>"><%= v.item_type %>: 
+      <%= version_object_link(@board, v) unless v.event == "destroy" %>
+      <%= v.reify.name if v.reify.respond_to?(:name) if v.event == "destroy" %>
+      </span></td>
+      <% if v.changeset.empty? || v.event == 'create' || v.event == 'destroy' %>
       <td><%= v.event %></td>
-      <td><%= v.reify.name if v.event == "destroy" && v.reify.respond_to?(:name) %></td>
+      <td></td>
       <td></td>
       <% else %>
-      <td><%= Board.human_attribute_name(v.changeset.first[0]) %> <%= v.event %></td>
+      <td><%= v.event %> <%= Board.human_attribute_name(v.changeset.first[0]) %></td>
       <td><%= v.changeset.first[1][0] %></td>
       <td><%= v.changeset.first[1][1] %></td>
       <% end %>
