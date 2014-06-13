@@ -76,8 +76,12 @@ class BoardsController < ApplicationController
       :internal => {
         :total => 0,
         :people => {},
-        :support => {},
-        :projects => {}
+        :support => {
+          :total => 0
+        },
+        :projects => {
+          :total => 0
+        }
       }
     }
     @teams.each do |t|
@@ -95,8 +99,10 @@ class BoardsController < ApplicationController
           @allocations[:internal][:people][t].push(p)
           if p.allocated_to_internal_initiative
             @allocations[:internal][:projects][t].push(p)
+            @allocations[:internal][:projects][:total] += 1
           else
             @allocations[:internal][:support][t].push(p)
+            @allocations[:internal][:support][:total] += 1
           end
         end
       end
