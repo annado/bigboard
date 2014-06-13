@@ -11,11 +11,11 @@
 </p>
 
 <h3>Team Members</h3>
-<ul>
+<ol>
 <% @team.people.each do |p| %>
   <li><%= link_to p.name, board_person_path(@board, p) %> - <%= link_to p.active_projects.first.name, board_project_path(@board, p.active_projects.first) unless p.active_project_count == 0 %></li>
 <% end %>
-</ul>
+</ol>
 
 <%= link_to 'Edit', edit_board_team_path(@board, @team) %> |
 <%= link_to 'Back', board_teams_path(@board) %>
