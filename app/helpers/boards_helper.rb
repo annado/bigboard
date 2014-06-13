@@ -9,6 +9,15 @@ module BoardsHelper
     den == 0 ? 0 : 100.0*(num.to_f/den).round(1)
   end
 
+  def active_project person
+    if person.active_project_count == 0
+      "unassigned"
+    else
+      project = person.active_projects.first
+      link_to project.name, board_project_path(project.initiative.board, project) unless project.nil?
+    end
+  end
+
   def version_object_link board, version
     link = ''
     name = ''

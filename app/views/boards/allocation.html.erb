@@ -52,7 +52,7 @@
 Not assigned to an Internal or Product project:
 <ul>
 <% @allocations[:unassigned].each do |p| %>
-  <li><%= link_to p.name, board_person_path(@board, p) %></li>
+  <li><%= link_to p.name, board_person_path(@board, p) %> (<%= active_project p %>)</li>
 <% end %>
 </ul>
 </div>
