@@ -49,7 +49,7 @@
 </table>
 
 <div class="alert alert-warning">
-Not assigned to an Internal or Product project:
+Not assigned to a project of type Internal or Product:
 <ul>
 <% @allocations[:unassigned].each do |p| %>
   <li><%= link_to p.name, board_person_path(@board, p) %> (<%= active_project p %>)</li>
