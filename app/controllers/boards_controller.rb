@@ -83,13 +83,16 @@ class BoardsController < ApplicationController
           :total => 0
         }
       },
-      :unassigned => []
+      :unassigned => {
+        :total => 0
+      }
     }
     @teams.each do |t|
       @allocations[:product][:people][t] = []
       @allocations[:internal][:people][t] = []
       @allocations[:internal][:projects][t] = []
       @allocations[:internal][:support][t] = []
+      @allocations[:unassigned][t] = []
       t.people.each do |p|
         @allocations[:total] += 1
         if p.allocated_to('Product')
@@ -106,7 +109,8 @@ class BoardsController < ApplicationController
             @allocations[:internal][:support][:total] += 1
           end
         else
-          @allocations[:unassigned].push(p)
+          @allocations[:unassigned][:total] += 1
+          @allocations[:unassigned][t].push(p)
         end
       end
     end
