@@ -11,4 +11,8 @@ class Project < ActiveRecord::Base
   def board_identifier
     self.initiative.board.id
   end
+
+  def active_project_members_for_role role_id
+    self.project_members.where("role_id = ? AND (end_date >= ? OR end_date IS NULL)", role_id, Date.today).order(:start_date)
+  end
 end
