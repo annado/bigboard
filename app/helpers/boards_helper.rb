@@ -1,8 +1,12 @@
 module BoardsHelper
 
   def display_percentage num, den
-    per = percentage num, den
-    "#{per}% (#{num})"
+    if num == 0
+      "0"
+    else
+      per = percentage num, den
+      "#{per}% (#{num})"
+    end
   end
 
   def percentage num, den
