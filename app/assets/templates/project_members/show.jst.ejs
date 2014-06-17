@@ -1,1 +1,1 @@
-<span class="person-tag team-<%= person.team_id %>" data-project-member-id="<%= id %>" data-toggle="popover"><%= person.name %></span>
+<a href="/project_members/<%= id %>/edit" class="person-tag team-<%= person.team_id %>" data-project-member-id="<%= id %>" data-toggle="popover"><%= person.name %> <sup><%= person.location %></sup></a>
