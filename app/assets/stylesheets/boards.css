@@ -75,6 +75,10 @@
   padding: 10px;
 }
 
+.table-board .list-inline > li .popover-content {
+  line-height: 1.3;
+}
+
 .row-board h2 {
   margin-right: 250px;
 }
