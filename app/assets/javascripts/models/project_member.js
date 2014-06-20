@@ -8,6 +8,11 @@ App.Models.ProjectMember = Backbone.Model.extend({
     person_id: null,
     end_date: null,
     start_date: null
+  },
+
+  url: function () {
+    return '/project_members/' + this.attributes.id;
   }
+
   
 });

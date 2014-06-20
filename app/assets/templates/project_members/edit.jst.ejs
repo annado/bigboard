@@ -1,12 +1,12 @@
 <div class="media">
-  <a class="pull-left" href="/projects/<%= project_member.project_id %>/project_members/<%= project_member.id %>/edit"><img class="media-object avatar" alt="<%= person.name %>" src="<%= person.image %>"></a>
+  <a class="pull-left" href="/project_members/<%= project_member.id %>/edit"><img class="media-object avatar" alt="<%= person.name %>" src="<%= person.image %>"></a>
   <div class="media-body">
     <h4 class="media-heading"><%= person.name %> <small><%= person.location %></small></h4>
     <p><%= team.name %> Team</p>
   </div>
 </div>
 
-<form action="/projects/<%= project_member.project_id %>/project_members/<%= project_member.id %>/edit" method="POST" accept-charset="UTF-8" class="edit_project_member">
+<form action="/project_members/<%= project_member.id %>/edit" method="POST" accept-charset="UTF-8" class="edit_project_member">
   <div class="form-group">
     <label class="control-label" for="project_member_start_date">Start date</label>
     <input class="form-control" id="project_member_start_date" name="project_member[start_date]" type="date" value="<%= project_member.start_date %>">

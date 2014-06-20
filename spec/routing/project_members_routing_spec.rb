@@ -8,11 +8,11 @@ describe ProjectMembersController do
     end
 
     it "routes to #show" do
-      get("/projects/1/project_members/1").should route_to("project_members#show", :id => "1", :project_id => "1")
+      get("project_members/1").should route_to("project_members#show", :id => "1")
     end
 
     it "routes to #edit" do
-      get("/projects/1/project_members/1/edit").should route_to("project_members#edit", :id => "1", :project_id => "1")
+      get("/project_members/1/edit").should route_to("project_members#edit", :id => "1")
     end
 
     it "routes to #create" do
@@ -20,11 +20,11 @@ describe ProjectMembersController do
     end
 
     it "routes to #update" do
-      put("/projects/1//project_members/1").should route_to("project_members#update", :id => "1", :project_id => "1")
+      put("/project_members/1").should route_to("project_members#update", :id => "1")
     end
 
     it "routes to #destroy" do
-      delete("/projects/1/project_members/1").should route_to("project_members#destroy", :id => "1", :project_id => "1")
+      delete("/project_members/1").should route_to("project_members#destroy", :id => "1")
     end
 
   end
