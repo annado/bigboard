@@ -37,13 +37,13 @@
   padding: 0;
 }
 
-.table-board .people .btn {
+.table-board .people .add-person {
   margin: 1px;
   vertical-align: top;
   visibility: hidden;
 }
 
-.table-board .people:hover .btn {
+.table-board .people:hover .add-person {
   visibility: visible;
 }
 

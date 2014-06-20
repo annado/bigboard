@@ -5,6 +5,8 @@ App.Views.ProjectMember = Backbone.View.extend({
   tagName: 'li',
 
   events: {
+    'click': 'showEditModal',
+    'close': 'clearPopovers'
   },
 
   initialize: function (o) {
@@ -16,10 +18,7 @@ App.Views.ProjectMember = Backbone.View.extend({
   render: function () {
     this.delegateEvents();
 
-    var person = this.model.attributes.person,
-      team = App.collections.teams.findWhere({
-          id: person && person.team_id || ''
-        });
+    var person = this.model.attributes.person || '';
 
     if (!this.created) {
       $(this.el).html(this.template({
@@ -27,19 +26,33 @@ App.Views.ProjectMember = Backbone.View.extend({
         id: this.model.attributes.id
       }));
     }
-    
+
+    this.popover = new App.Views.ProjectMembers.Edit({ model : this.model });
+    this.popover.render();
+    this.popover.$el.on('close', _.bind(this.clearPopovers, this));
+
     this.$el.popover({ 
       placement: 'bottom', 
-      trigger: 'hover', 
+      trigger: 'click', 
       html: true,
+      title: function () {
+        $title = 'Edit Project Member';
+        return $title;
+      },
       content: _.bind(function () {
-        return this.popoverTemplate({
-          project_member: this.model.attributes,
-          person: person,
-          team: team.attributes
-        });
+        return this.popover.$el;
       }, this)
     });
+
     return this;
+  },
+
+  showEditModal: function (e) {
+    e.preventDefault();
+  },
+
+  clearPopovers: function () {
+    this.$el.popover('hide');
   }
+
 });
