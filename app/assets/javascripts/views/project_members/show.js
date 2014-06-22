@@ -23,7 +23,8 @@ App.Views.ProjectMember = Backbone.View.extend({
     if (!this.created) {
       $(this.el).html(this.template({
         person: person,
-        id: this.model.attributes.id
+        id: this.model.attributes.id,
+        project_id: this.model.attributes.project_id
       }));
     }
 
