@@ -124,14 +124,9 @@ class BoardsController < ApplicationController
   # GET /boards/1/completed
   def completed
     @projects = [] # list of completed projects from non-standing initiatives, i.e. REAL projects
-    @projects_no_end_date = [] #same as above, but end date wasn't filled in, maybe on accident. we can remove this once we're sure people don't make that easy mistake
     @board.initiatives.where(:standing => false).each do |i|
-      i.projects.where(:completed => true).each do |p|
-        if p.end_date.nil?
-          @projects_no_end_date.push(p)
-        else
-          @projects.push(p)
-        end
+      i.projects.where(:completed => true).where.not(:end_date => nil).each do |p|
+        @projects.push(p)
     end
     end
   end

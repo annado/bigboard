@@ -22,22 +22,4 @@
 </table>
 
 
-<br/><br/><br/><br/><br/><br/><br/><br/>
-
-
-<h2>Missed end date?</h2>
-<table class="table table-grid">
-<thead>
-  <tr>
-      <th>Project Name</th>
-  </tr>     
-<% @projects_no_end_date.each do |p| %>
-  <tr>
-    <td><%= link_to p.name, edit_board_project_path(@board, p) %></td>
-<% end %>
-  </tr>
-</thead>
-</table>
-
-
 
