@@ -9,7 +9,7 @@ module ApplicationHelper
       else
         person = project_member.person;
         id = project_member.id;
-        url = edit_project_member_path project_member
+        url = edit_project_project_member_path project_member.project, project_member
       end
       if !person.nil?
         color = person.team.color
