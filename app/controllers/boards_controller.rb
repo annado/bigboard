@@ -1,6 +1,6 @@
 class BoardsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_board, only: [:show, :edit, :changelog, :allocation, :update, :destroy]
+  before_action :set_board, only: [:show, :edit, :changelog, :allocation, :completed, :update, :destroy]
 
   # GET /boards
   # GET /boards.json
@@ -119,6 +119,21 @@ class BoardsController < ApplicationController
   # GET /boards/1/changelog
   def changelog
     @versions = PaperTrail::Version.where(:board_id => @board.id).order(created_at: :desc)
+  end
+
+  # GET /boards/1/completed
+  def completed
+    @projects = [] # list of completed projects from non-standing initiatives, i.e. REAL projects
+    @projects_no_end_date = [] #same as above, but end date wasn't filled in, maybe on accident. we can remove this once we're sure people don't make that easy mistake
+    @board.initiatives.where(:standing => false).each do |i|
+      i.projects.where(:completed => true).each do |p|
+        if p.end_date.nil?
+          @projects_no_end_date.push(p)
+        else
+          @projects.push(p)
+        end
+    end
+    end
   end
 
   private

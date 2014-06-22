@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     end
     get 'changelog'
     get 'allocation'
+    get 'completed'
   end
 
   resources :initiatives do

@@ -1,0 +1,43 @@
+<h1>Completed Projects</h1>
+
+<table class="table table-grid">
+<thead>
+  <tr>
+      <th>Initiative Name</th>
+      <th>Project Name</th>
+      <th>Dates</th>
+      <th>Project Length</th>
+      <th>Retro?</th>
+  </tr>      
+<% @projects.each do |p| %>
+  <tr>
+    <td><%= p.initiative.name %></td>
+    <td><%= link_to p.name, edit_board_project_path(@board, p) %></td>
+    <td><%= short_date(p.start_date) %> → <%= short_date(p.end_date) %></td>
+    <td><%= project_length(p) %> weeks</td>
+    <td> n/a </td>
+<% end %>
+  </tr>
+</thead>
+</table>
+
+
+<br/><br/><br/><br/><br/><br/><br/><br/>
+
+
+<h2>Missed end date?</h2>
+<table class="table table-grid">
+<thead>
+  <tr>
+      <th>Project Name</th>
+  </tr>     
+<% @projects_no_end_date.each do |p| %>
+  <tr>
+    <td><%= link_to p.name, edit_board_project_path(@board, p) %></td>
+<% end %>
+  </tr>
+</thead>
+</table>
+
+
+

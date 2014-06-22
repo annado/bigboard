@@ -32,6 +32,10 @@ module ApplicationHelper
     num_weeks project.start_date, project.end_date
   end
 
+  def project_member_length project_member
+    num_weeks project_member.start_date, project_member.end_date
+  end
+
   def nearing_deadline deadline
     num_weeks(deadline, nil) > -1
   end
