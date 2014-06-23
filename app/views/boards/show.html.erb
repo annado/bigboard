@@ -52,7 +52,7 @@
               <% week_indicator = "!" %>
               <% week_count.floor.times do week_indicator << "!" end %>
               <li class="date"><%= person_tag pm %>
-                <div title="<%= week_count %> weeks" class="<%= "text-danger" if project_member_length(pm) >= 10 %><%= "text-warning" if project_member_length(pm).between?(5,10) %>"><%= "#{pm.start_date.strftime("%d %b")} ~ #{week_indicator}" if i.standing? %></div>
+                <div title="<%= week_count %> weeks" class="<%= "text-danger" if project_member_length(pm) >= 10 %><%= "text-warning" if project_member_length(pm).between?(5,10) %>"><%= "#{pm.start_date.strftime("%d %b")} ~ #{week_indicator}" if i.standing? && pm.start_date %></div>
             <% end %>
             </ul>
             <% unless !r.limit.nil? && project_members.size >= r.limit %>
