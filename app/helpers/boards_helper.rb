@@ -32,7 +32,7 @@ module BoardsHelper
     elsif version.item_type == 'ProjectMember'
       item = ProjectMember.find_by_id version.item_id
       name = item.nil? || item.person.nil? ? '': item.person.name
-      link = link_to name, project_member_path(item) unless item.nil?
+      link = link_to name, project_project_member_path(item.project, item) unless item.nil?
     elsif version.item_type == 'Initiative'
       item = Initiative.find_by_id version.item_id
       name = item.nil? ? '' : item.name

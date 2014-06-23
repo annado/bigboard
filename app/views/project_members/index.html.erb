@@ -19,8 +19,8 @@
         <td><%= project_member.role.name %></td>
         <td><%= project_member.start_date %></td>
         <td><%= project_member.end_date %></td>
-        <td><%= link_to 'Edit', edit_project_member_path(project_member) %></td>
-        <td><%= link_to 'Destroy', project_member, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Edit', edit_project_project_member_path(@project, project_member) %></td>
+        <td><%= link_to 'Destroy', project_project_member_path(@project, project_member), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

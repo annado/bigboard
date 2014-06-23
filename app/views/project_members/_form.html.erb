@@ -1,4 +1,4 @@
-<% args = @project_member.try(:new_record?) ? [@project_member.project, @project_member] : @project_member %>
+<% args = @project_member.try(:new_record?) ? [@project, @project_member] : [@project, @project_member] %>
 <%= bootstrap_form_for(args) do |f| %>
   <% if @project_member.errors.any? %>
     <div id="error_explanation">

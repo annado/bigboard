@@ -1,6 +1,6 @@
 class ProjectMembersController < ApplicationController
-  before_action :set_project, only: [:index, :new, :create]
   before_action :set_project_member, only: [:show, :edit, :update, :destroy]
+  before_action :set_project
   before_action :set_board
 
   # GET /project_members
@@ -34,7 +34,7 @@ class ProjectMembersController < ApplicationController
     respond_to do |format|
       if @project_member.save
         format.html { redirect_to board_url(@project_member.project.initiative.board), notice: @project_member.person.name + ' successfully added to ' + @project_member.project.name + '.' }
-        format.json { render :show, status: :created, location: project_member_url(@project, @project_member) }
+        format.json { render :show, status: :created, location: project_project_member_url(@project, @project_member) }
       else
         format.html { redirect_to :new }
         format.json { render json: @project_member.errors, status: :unprocessable_entity }
@@ -48,7 +48,7 @@ class ProjectMembersController < ApplicationController
     respond_to do |format|
       if @project_member.update(project_member_params)
         format.html { redirect_to board_url(@project_member.project.initiative.board), notice: @project_member.person.name + ' on ' + @project_member.project.name + ' updated.' }
-        format.json { render :show, status: :ok, location: project_member_url(@project_member) }
+        format.json { render :show, status: :ok, location: project_project_member_url(@project, @project_member) }
       else
         format.html { render :edit }
         format.json { render json: @project_member.errors, status: :unprocessable_entity }

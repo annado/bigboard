@@ -46,7 +46,7 @@
   <% @project.project_members.order(role_id: :asc).each do |pm| %>
     <li>
       <%= person_tag pm %> (<%= pm.role.name %>) 
-      <%= link_to 'Delete', pm, method: :delete, :class => 'btn btn-danger btn-xs', data: { :confirm => 'Are you sure you want to delete?' } %>
+      <%= link_to 'Delete', project_project_member_path(@project, pm), method: :delete, :class => 'btn btn-danger btn-xs', data: { :confirm => 'Are you sure you want to delete?' } %>
     </li>
   <% end %>
   </ul>
