@@ -1,5 +1,5 @@
-<% @title = "#{@team.name}" %>
-<h1>Team</h1>
+<% @title = "#{@team.name} Team" %>
+<h1><%= "#{@team.name} Team" %></h1>
 <p>
   <strong>Name:</strong>
   <%= @team.name %>
@@ -7,7 +7,12 @@
 
 <p>
   <strong>Color:</strong>
-  <%= @team.color %>
+  <span class="person-tag" style="background-color: <%= @team.color %>; padding: 3px 5px;"><%= @team.color %></span>
+</p>
+
+<p>
+  <strong>Single Project?:</strong>
+  <%= @team.single_project? ? "Yes" : "No" %>
 </p>
 
 <h3>Team Members</h3>
@@ -16,6 +21,9 @@
   <li><%= link_to p.name, board_person_path(@board, p) %><sup><%= p.location unless p.location == 'SF' %></sup> - <%= link_to p.active_projects.first.name, board_project_path(@board, p.active_projects.first) unless p.active_project_count == 0 %></li>
 <% end %>
 </ol>
+<% if @team.people.size == 0 %>
+<p><em>No team members.</em></p>
+<% end %>
 
 <%= link_to 'Edit', edit_board_team_path(@board, @team) %> |
 <%= link_to 'Back', board_teams_path(@board) %>

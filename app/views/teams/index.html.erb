@@ -17,7 +17,7 @@
   <tbody>
     <% @teams.each do |team| %>
       <tr>
-        <td><%= team.name %></td>
+        <td><%= link_to team.name, board_team_url(@board, team) %></td>
         <td><span class="person-tag" style="background-color: <%= team.color %>; padding: 3px 5px;"><%= team.color %></span></td>
         <td><%= team.single_project? ? 'Yes' : 'No' %></td>
         <td><%= link_to 'Edit', edit_board_team_path(@board, team) %></td>
