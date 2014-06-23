@@ -36,6 +36,23 @@ class ProjectsController < ApplicationController
         format.json { render json: @project.errors, status: :unprocessable_entity }
       end
     end
+
+    yamr = Yammer::Client.new(:access_token  => current_user.access_token)
+    permalinks_to_alert = []
+    if @project.project_type != "" #if project_type is Internal Projects or Product
+      people_to_alert = Person.where(:new_project_alert => [@project.project_type, "All"]).where.not(:permalink => nil)
+      people_to_alert.each do |p|
+        permalinks_to_alert.push("@"+p.permalink)
+      end
+    end
+
+    #currently posts to test group until pull request
+    logger.debug "wtf"
+    logger.debug permalinks_to_alert
+    yamr.create_message("A new project called '" + @project.name + "' in the " + @project.initiative.name + " initiative has been added to the bigboard. This means \
+     it will be staffed and kicked off soon. Go check it out! " + board_url(@board) + " \n\n Courtesy \
+     mentions: " + permalinks_to_alert.join(", "), :group_id => 3716357)
+
   end
 
   # PATCH/PUT /projects/1

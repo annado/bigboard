@@ -10,6 +10,7 @@
       <th>Image</th>
       <th>Team</th>
       <th>Location</th>
+      <th>Alert?</th>
       <th colspan="2"></th>
     </tr>
   </thead>
@@ -21,6 +22,7 @@
         <td><img src="<%= person.image %>" class="avatar" /></td>
         <td><%= person.team.name %></td>
         <td><%= person.location %></td>
+        <td><%= person.new_project_alert%> <%="(" + person.permalink + ")" if person.permalink? %></td>
         <td><%= link_to 'Edit', edit_board_person_path(@board, person) %></td>
         <td><%= link_to 'Destroy', board_person_path(@board, person), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>

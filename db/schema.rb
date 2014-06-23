@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140623033126) do
+ActiveRecord::Schema.define(version: 20140623052504) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,6 +60,8 @@ ActiveRecord::Schema.define(version: 20140623033126) do
     t.string   "location"
     t.integer  "network_id"
     t.integer  "board_id"
+    t.string   "new_project_alert"
+    t.string   "permalink"
   end
 
   add_index "people", ["board_id"], name: "index_people_on_board_id", using: :btree
