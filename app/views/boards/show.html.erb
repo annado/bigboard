@@ -48,7 +48,10 @@
           <td class="people role-<%= r.name.parameterize %>" data-role-id="<%= r.id %>">
             <ul class="list-inline"><% project_members = p.active_project_members_for_role r.id %>
             <% project_members.each do |pm| %>
-              <li class="date<%= " text-danger" if project_member_length(pm) >= 10 %><%= " text-warning" if project_member_length(pm).between?(5,10) %>"><%= person_tag pm %><%= "<br />".html_safe+"#{pm.start_date.strftime("%d %b")} ~ #{num_weeks(pm.start_date, pm.end_date)}w" if i.standing? %>
+              <% week_count = num_weeks(pm.start_date, pm.end_date).floor %>
+              <% week_indicator = "!" %>
+              <% week_count.times do week_indicator << "!" end %>
+              <li class="date<%= " text-danger" if project_member_length(pm) >= 10 %><%= " text-warning" if project_member_length(pm).between?(5,10) %>"><%= person_tag pm %><%= "<br />".html_safe+"#{pm.start_date.strftime("%d %b")} ~ #{week_indicator}" if i.standing? %>
             <% end %>
             </ul>
             <% unless !r.limit.nil? && project_members.size >= r.limit %>
