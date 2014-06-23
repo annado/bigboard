@@ -121,7 +121,8 @@ App.Views.PeopleTypeahead = Backbone.View.extend({
         url: '/boards/' + this.board_id + '/people.json',
         filter: function (parsedResponse) {
           return parsedResponse;
-        }
+        },
+        ttl: 3600
       }
     });
   }
