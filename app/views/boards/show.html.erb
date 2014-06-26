@@ -49,10 +49,8 @@
             <ul class="list-inline"><% project_members = p.active_project_members_for_role r.id %>
             <% project_members.each do |pm| %>
               <% week_count = num_weeks(pm.start_date, pm.end_date) %>
-              <% week_indicator = "!" %>
-              <% week_count.floor.times do week_indicator << "!" end %>
               <li class="date"><%= person_tag pm %>
-                <div title="<%= week_count %> weeks" class="<%= "text-danger" if project_member_length(pm) >= 10 %><%= "text-warning" if project_member_length(pm).between?(5,10) %>"><%= "#{pm.start_date.strftime("%d %b")} ~ #{week_indicator}" if i.standing? && pm.start_date %></div>
+                <div title="<%= week_count %> weeks" class="<%= "text-danger" if project_member_length(pm) >= 10 %><%= "text-warning" if project_member_length(pm).between?(5,10) %>"><%= "#{pm.start_date.strftime("%d %b")} (#{week_count.ceil}w)" if i.standing? && pm.start_date %></div>
             <% end %>
             </ul>
             <% unless !r.limit.nil? && project_members.size >= r.limit %>
