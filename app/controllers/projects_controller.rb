@@ -27,6 +27,10 @@ class ProjectsController < ApplicationController
       @project = initiative.projects.build(project_params)
     end
 
+    if @project.start_date
+      post_new_project_to_yammer
+    end
+
     respond_to do |format|
       if @project.save
         format.html { redirect_to @board, notice: @project.name + ' was successfully created.' }
@@ -76,6 +80,8 @@ class ProjectsController < ApplicationController
     end
 
     def update_dates
+      #if project updates start or end date AND anyone on the
+      #project doesn't have a start or end date, then give them that project date
       if @project.previous_changes.has_key? "start_date"
         @project.project_members.each do |pm|
           if pm.start_date.nil? || pm.start_date < @project.start_date
@@ -83,12 +89,33 @@ class ProjectsController < ApplicationController
           end
         end
       end
+      if @project.previous_changes.has_key?("start_date") && @project.previous_changes["start_date"][0].nil?
+        post_new_project_to_yammer
+      end
       if @project.previous_changes.has_key? "end_date"
         @project.project_members.each do |pm|
           if pm.end_date.nil? || pm.end_date == @project.previous_changes['end_date'][0]
             pm.update_attributes(:end_date => @project.end_date)
           end
         end
+      end
+    end
+
+    def post_new_project_to_yammer
+      #only post to yammer if it's a Project or Internal Project
+      if @project.project_type != '' && @board.id
+        #if project gets a start date and start date was previously nil, then post to yammer about a new project
+        yamr = Yammer::Client.new(:access_token  => current_user.access_token)
+        permalinks_to_alert = []
+        people_to_alert = Person.where(:new_project_alert => [@project.project_type, "All"]).where.not(:permalink => nil)
+        people_to_alert.each do |p|
+          permalinks_to_alert.push("@"+p.permalink)
+        end
+
+        yamr.create_message("A new project called '" + @project.name + "' in the " + @project.initiative.name + " initiative has been \
+          added to the bigboard with start date of " + @project.start_date.strftime("%B %d, %Y") + ". This means \
+          it will be staffed and kicked off soon. Go check it out! " + board_url(@board) + " \n\n Courtesy \
+          mentions: " + permalinks_to_alert.join(", "), :group_id => @board.group_id_for_yammer_post)
       end
     end
 

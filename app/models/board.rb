@@ -1,3 +1,5 @@
+require 'yammer'
+
 class Board < ActiveRecord::Base
   has_paper_trail :meta => { :board_id  => :id }
 

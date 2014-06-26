@@ -28,6 +28,12 @@
   <div class="form-group">
     <%= f.collection_select :team_id, @teams, :id, :name %>
   </div>
+    <div class="field">
+    <%= f.select :new_project_alert, ['', 'Product', 'Internal Projects', 'All'] %>
+  </div>
+    <div class="field">
+    <%= f.text_field :permalink, :label => 'Permalink (required for alerting only)' %>
+  </div>
   <div class="form-group actions">
     <%= f.submit %>
   </div>

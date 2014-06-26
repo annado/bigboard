@@ -143,6 +143,6 @@ class BoardsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def board_params
-      params.require(:board).permit(:network_id, :name)
+      params.require(:board).permit(:network_id, :name, :group_id_for_yammer_post)
     end
 end

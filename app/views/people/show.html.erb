@@ -21,6 +21,16 @@
   <%= @person.team.name %>
 </p>
 
+<p>
+  <strong>New Project Alert:</strong>
+  <%= @person.new_project_alert %>
+</p>
+
+<p>
+  <strong>Permalink:</strong>
+  <%= @person.permalink %>
+</p>
+
 <p><strong>Projects:</strong></p>
 <ul>
   <% @project_memberships.each do |pm| %>
