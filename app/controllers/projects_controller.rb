@@ -94,6 +94,6 @@ class ProjectsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_params
-      params.require(:project).permit(:name, :start_date, :end_date, :completed, :status, :location, :project_type, :initiative_id, :board_id)
+      params.require(:project).permit(:name, :start_date, :end_date, :completed, :retro, :status, :location, :project_type, :initiative_id, :board_id)
     end
 end

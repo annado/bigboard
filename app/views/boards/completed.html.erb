@@ -15,7 +15,7 @@
     <td><%= link_to p.name, edit_board_project_path(@board, p) %></td>
     <td><%= short_date(p.start_date) %> → <%= short_date(p.end_date) %></td>
     <td><%= project_length(p) %> weeks</td>
-    <td> n/a </td>
+    <td><%= p.retro? %></td>
 <% end %>
   </tr>
 </thead>
