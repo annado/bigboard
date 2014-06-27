@@ -1,10 +1,20 @@
 <% @board.people.each do |p| %>
-  <% if p.team.single_project? && p.active_project_count != 1 %>
+  <% if p.team.single_project? && (p.active_project_count != 1 && !p.on_standing_initiative) %>
   <div class="alert alert-warning"><%= link_to p.name, board_person_url(@board, p) %>
     <% if p.active_project_count == 0 %>
-    is unassigned or on a project that hasn't started yet
+      <!-- person is not on the board at all -->
+      <% if p.projects.count == 0 %>
+        is unassigned
+      <% else %>
+      <% p.projects.each do |proj| %>
+        <!-- person is on the board on a project with no/future start date -->
+        <% if (!proj.start_date || proj.start_date > Date.today) %>
+          is only on project "<%= link_to proj.name, edit_board_project_path(@board, proj) %>" which hasn't started yet.
+        <% end %>
+      <% end %>
+    <% end %>
     <% elsif p.active_project_count > 1 %>
-    is assigned to <%= p.active_project_count %> projects 
+    is assigned to <%= p.active_project_count %> projects
     <% p.active_projects.each do |p| %>
     - <%= link_to p.name, edit_board_project_path(@board, p) %>
     <% end %>
