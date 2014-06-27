@@ -2,7 +2,7 @@
   <% if p.team.single_project? && p.active_project_count != 1 %>
   <div class="alert alert-warning"><%= link_to p.name, board_person_url(@board, p) %>
     <% if p.active_project_count == 0 %>
-    is unassigned
+    is unassigned or on a project that hasn't started yet
     <% elsif p.active_project_count > 1 %>
     is assigned to <%= p.active_project_count %> projects 
     <% p.active_projects.each do |p| %>
