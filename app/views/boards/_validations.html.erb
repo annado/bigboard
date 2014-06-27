@@ -1,5 +1,5 @@
 <% @board.people.each do |p| %>
-  <% if p.team.single_project? && p.active_project_count != 1 && !p.on_standing_initiative && !p.initiative_owner %>
+  <% if p.team.single_project? && p.active_project_count != 1 && !p.on_standing_initiative? && !p.initiative_owner? %>
   <div class="alert alert-warning"><%= link_to p.name, board_person_url(@board, p) %>
     <% if p.active_project_count == 0 %>
       <!-- person is not on the board at all -->
