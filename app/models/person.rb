@@ -26,6 +26,13 @@ class Person < ActiveRecord::Base
     self.active_projects.first.initiative.name == 'Internal Projects' unless self.active_project_count == 0
   end
 
+  def initiative_owner
+    self.board.initiatives.each do |i|
+      return true if i.owner == self
+    end
+    return false
+  end
+
   def on_standing_initiative
     self.projects.each do |proj|
       if proj.initiative.standing
