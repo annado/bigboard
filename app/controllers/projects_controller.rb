@@ -113,8 +113,7 @@ class ProjectsController < ApplicationController
         end
 
         yamr.create_message("A new project called '" + @project.name + "' in the " + @project.initiative.name + " initiative has been \
-          added to the bigboard with start date of " + @project.start_date.strftime("%B %d, %Y") + ". This means \
-          it will be staffed and kicked off soon. Go check it out! " + board_url(@board) + " \n\n Courtesy \
+          added to the bigboard with a kickoff date of " + @project.start_date.strftime("%B %d, %Y") + ". Go check it out! " + board_url(@board) + " \n\n Courtesy \
           mentions: " + permalinks_to_alert.join(", "), :group_id => @board.group_id_for_yammer_post)
       end
     end
