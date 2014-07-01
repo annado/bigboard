@@ -21,7 +21,7 @@ class Board < ActiveRecord::Base
     @people_ending_soon = []
     self.people.each do |p|
       if (p.project_members.count == 1 && p.project_members[0].end_date)
-        if p.freeing_up_soon?
+        if p.freeing_up_soon? && p.team.single_project?
           @people_ending_soon << [p.name, p.project_members[0].end_date]
         end
       end
