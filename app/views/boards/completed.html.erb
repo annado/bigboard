@@ -9,7 +9,7 @@
       <th>Project Length</th>
       <th>Retro?</th>
   </tr>      
-<% @projects.each do |p| %>
+<% @projects.sort{|a,b| b.end_date <=> a.end_date}.each do |p| %>
   <tr>
     <td><%= p.initiative.name %></td>
     <td><%= link_to p.name, edit_board_project_path(@board, p) %></td>
