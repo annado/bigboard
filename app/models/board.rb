@@ -16,4 +16,17 @@ class Board < ActiveRecord::Base
   def ongoing_initiatives
       self.initiatives.where(completed: false).order(:created_at)
   end
+
+  def people_ending_soon
+    @people_ending_soon = []
+    self.people.each do |p|
+      if (p.project_members.count == 1 && p.project_members[0].end_date)
+        if p.freeing_up_soon?
+          @people_ending_soon << [p.name, p.project_members[0].end_date]
+        end
+      end
+    end
+    @people_ending_soon
+  end
+
 end

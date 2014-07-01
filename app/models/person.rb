@@ -1,4 +1,5 @@
 class Person < ActiveRecord::Base
+  include ApplicationHelper
   has_paper_trail :meta => { :board_id  => :board_id }
   belongs_to :team
   belongs_to :board
@@ -35,6 +36,12 @@ class Person < ActiveRecord::Base
   def on_standing_initiative?
     self.projects.any? do |proj|
       proj.initiative.standing
+    end
+  end
+
+  def freeing_up_soon?
+    if (self.project_members.count == 1 && self.project_members[0].end_date)
+      nearing_deadline(self.project_members[0].end_date)
     end
   end
 

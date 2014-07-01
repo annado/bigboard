@@ -22,3 +22,10 @@
   </div>
   <% end %>
 <% end %>
+<% if @board.people_ending_soon != [] %>
+<div class="alert alert-warning"> <b>People ending soon</b><br/>
+  <% @board.people_ending_soon.each do |pes| %>
+  - <%= pes[0] %> ending on <%= pes[1] %><br/>
+  <% end %>
+<% end %>
+</div>
