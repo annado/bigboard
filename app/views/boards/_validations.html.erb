@@ -25,7 +25,8 @@
 <% if @board.people_ending_soon != [] %>
 <div class="alert alert-warning"> <b>People ending soon</b><br/>
   <% @board.people_ending_soon.each do |pes| %>
-  - <%= pes[0] %> ending on <%= pes[1] %><br/>
+  - <%= pes["person_name"] %> ending on <%= pes["project_end_date"] %> (<%= pes["project_name"] %>)<br/>
+
   <% end %>
 <% end %>
 </div>
