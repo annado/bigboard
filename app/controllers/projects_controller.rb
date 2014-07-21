@@ -107,7 +107,7 @@ class ProjectsController < ApplicationController
         #if project gets a start date and start date was previously nil, then post to yammer about a new project
         yamr = Yammer::Client.new(:access_token  => current_user.access_token)
         permalinks_to_alert = []
-        people_to_alert = Person.where(:new_project_alert => [@project.project_type, "All"]).where.not(:permalink => nil)
+        people_to_alert = Person.where(:new_project_alert => [@project.project_type, "All"], :board => @board).where.not(:permalink => nil)
         people_to_alert.each do |p|
           permalinks_to_alert.push("@"+p.permalink)
         end
