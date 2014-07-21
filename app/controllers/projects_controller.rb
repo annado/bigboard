@@ -102,8 +102,8 @@ class ProjectsController < ApplicationController
     end
 
     def post_new_project_to_yammer
-      #only post to yammer if it's a Project or Internal Project
-      if @project.project_type != '' && @board.id && !@project.initiative.standing?
+      #only post to yammer if it's a Product or Internal Project
+      if ["Product", "Internal Projects"].include?(@project.project_type) && @board.id && !@project.initiative.standing?
         #if project gets a start date and start date was previously nil, then post to yammer about a new project
         yamr = Yammer::Client.new(:access_token  => current_user.access_token)
         permalinks_to_alert = []
