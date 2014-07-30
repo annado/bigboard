@@ -10,7 +10,7 @@ class PeopleController < ApplicationController
     @teams = Team.where(:board_id => @board.id)
 
     respond_to do |format|
-      format.html { @people = Person.where(:board_id => @board.id).order(:team_id, :location, :name) }
+      format.html { @people = Person.where(:board_id => @board.id).order(:team_id, :location_id, :name) }
       format.json { @people = Person.where(:board_id => @board.id).order(:name) }
     end
   end

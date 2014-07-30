@@ -1,7 +1,7 @@
 <% @title = "#{@board.name} People" %>
 <%= render partial: "teams/css", locals: {teams: @teams} %>
 
-<h1>People <span><%= link_to 'Add New', new_board_person_path(@board), :class => 'btn btn-primary btn-xs' %></h1>
+<h1>People <span><%= link_to 'Add New', new_board_person_path(@board), :class => 'btn btn-primary btn-xs' %></span></h1>
 
 <table class="table table-striped">
   <thead>
@@ -21,7 +21,7 @@
         <td><%= link_to person.name, board_person_url(@board, person) %></td>
         <td><img src="<%= person.image %>" class="avatar" /></td>
         <td><%= person.team.name %></td>
-        <td><%= person.location %></td>
+        <td><%= person.location.name unless person.location.nil? %></td>
         <td><%= person.new_project_alert%> <%="(" + person.permalink + ")" if person.permalink? %></td>
         <td><%= link_to 'Edit', edit_board_person_path(@board, person) %></td>
         <td><%= link_to 'Destroy', board_person_path(@board, person), method: :delete, data: { confirm: 'Are you sure?' } %></td>
