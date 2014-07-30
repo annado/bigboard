@@ -9,6 +9,7 @@ class Board < ActiveRecord::Base
   has_many :teams, :dependent => :destroy
   has_many :roles, :dependent => :destroy
   has_many :people, :dependent => :destroy
+  has_many :locations, :dependent => :destroy
 
   validates :network_id, presence: { message: "Is user logged in?"}
   validates :name, presence: { message: "Please specify a name"}

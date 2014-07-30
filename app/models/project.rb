@@ -2,6 +2,7 @@ class Project < ActiveRecord::Base
   has_paper_trail :meta => { :board_id  => :board_identifier }
   
   belongs_to :initiative
+  belongs_to :location
   has_many :project_members, :dependent => :destroy
   has_many :members, :through => :project_members, :source => :person
 

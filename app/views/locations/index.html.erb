@@ -1,0 +1,23 @@
+<h1>Listing locations</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th colspan="1"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @locations.each do |location| %>
+      <tr>
+        <td><%= link_to location.name, edit_board_location_path(@board, location) %></td>
+        <td><%= link_to 'Destroy', board_location_url(@board, location), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Location', new_board_location_path(@board) %>

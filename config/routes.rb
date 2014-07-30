@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     resources :teams
     resources :roles
     resources :projects
+    resources :locations
     resources :people do
       collection do
         get :autocomplete

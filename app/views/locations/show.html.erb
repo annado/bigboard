@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @location.name %>
+</p>
+
+<p>
+  <strong>Board:</strong>
+  <%= @location.board.name %>
+</p>
+
+<%= link_to 'Edit', edit_board_location_path(@board, @location) %> |
+<%= link_to 'Back', board_locations_path(@board) %>

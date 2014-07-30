@@ -13,7 +13,7 @@ module ApplicationHelper
       end
       if !person.nil?
         color = person.team.color
-        location = "<sup>#{person.location}</sup>" unless person.location == 'SF'
+        location = "<sup>#{person.location.name}</sup>" unless person.location.nil?
         "<a href=\"#{url}\" class=\"person-tag team-#{person.team.id}\" data-project-member-id=\"#{id}\" data-toggle=\"popover\">#{person.name} #{location}</a>".html_safe
       end
     end

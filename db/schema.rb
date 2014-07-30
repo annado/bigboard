@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140623234203) do
+ActiveRecord::Schema.define(version: 20140729225458) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,8 @@ ActiveRecord::Schema.define(version: 20140623234203) do
     t.datetime "updated_at"
     t.integer  "user_id"
     t.integer  "group_id_for_yammer_post"
+    t.boolean  "show_people_location",     default: false
+    t.boolean  "show_project_location",    default: false
   end
 
   create_table "initiatives", force: true do |t|
@@ -42,6 +44,15 @@ ActiveRecord::Schema.define(version: 20140623234203) do
 
   add_index "initiatives", ["board_id"], name: "index_initiatives_on_board_id", using: :btree
 
+  create_table "locations", force: true do |t|
+    t.string   "name",       null: false
+    t.integer  "board_id",   null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "locations", ["board_id"], name: "index_locations_on_board_id", using: :btree
+
   create_table "networks", force: true do |t|
     t.integer  "nid"
     t.string   "name"
@@ -58,11 +69,12 @@ ActiveRecord::Schema.define(version: 20140623234203) do
     t.integer  "team_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "location"
+    t.string   "location_old"
     t.integer  "network_id"
     t.integer  "board_id"
     t.string   "new_project_alert"
     t.string   "permalink"
+    t.integer  "location_id"
   end
 
   add_index "people", ["board_id"], name: "index_people_on_board_id", using: :btree
@@ -82,7 +94,7 @@ ActiveRecord::Schema.define(version: 20140623234203) do
   create_table "projects", force: true do |t|
     t.string   "name"
     t.string   "status"
-    t.string   "location"
+    t.string   "location_old"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "initiative_id"
@@ -93,6 +105,7 @@ ActiveRecord::Schema.define(version: 20140623234203) do
     t.date     "ship_date"
     t.boolean  "completed",     default: false, null: false
     t.boolean  "retro"
+    t.integer  "location_id"
   end
 
   add_index "projects", ["board_id"], name: "index_projects_on_board_id", using: :btree

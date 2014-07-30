@@ -23,7 +23,7 @@
         <p class="help-block">Changing the start date will update all project member start dates (unless the project's start date is earlier)</p>
       </div>
       <%= f.date_field :end_date %>
-      <%= f.select :location, ['SF', 'UK', 'YN'] %>
+      <%= f.collection_select :location_id, @board.locations, :id, :name, :include_blank => true %>
       <%= f.select :project_type, ['', 'Product', 'Internal Projects', 'Support/Other'] %>
       <%= f.collection_select :initiative_id, @initiatives, :id, :name %>
       <div class="form-group">
