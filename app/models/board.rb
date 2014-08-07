@@ -1,4 +1,5 @@
 require 'yammer'
+include ApplicationHelper
 
 class Board < ActiveRecord::Base
   has_paper_trail :meta => { :board_id  => :id }
@@ -33,5 +34,30 @@ class Board < ActiveRecord::Base
     end
     @people_ending_soon
   end
+
+  def long_projects(location_name)
+    @projects = []
+    self.initiatives.each do |i|
+      if !i.standing
+        @completed_projects = i.projects.where(:completed => false).order(:start_date)
+        @completed_projects.each do |p|
+          if project_length(p) >= 5 && p.location.name == location_name
+            @projects << p
+          end
+        end
+      end
+    end 
+    return @projects
+  end
+
+  def has_long_projects
+    self.locations.each do |l|
+      if long_projects(l.name) != []
+        return true
+      end
+    end
+    return false
+  end
+
 
 end
