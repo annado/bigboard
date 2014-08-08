@@ -38,7 +38,7 @@ class Board < ActiveRecord::Base
 
   def long_projects(location_name)
     self.projects.where(:completed => false).where.not(:location_id => nil).order(:start_date).select { |cp|
-      !cp.initiative.standing? && project_length(cp) >= 5 && cp.location.name == location_name
+      !cp.initiative.standing? && num_weeks(cp.start_date, Date.today) >= 5 && cp.location.name == location_name
     }
   end
 
