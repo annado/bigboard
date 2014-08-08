@@ -11,6 +11,7 @@ class Board < ActiveRecord::Base
   has_many :roles, :dependent => :destroy
   has_many :people, :dependent => :destroy
   has_many :locations, :dependent => :destroy
+  has_many :projects, :through => :initiatives
 
   validates :network_id, presence: { message: "Is user logged in?"}
   validates :name, presence: { message: "Please specify a name"}
@@ -36,18 +37,9 @@ class Board < ActiveRecord::Base
   end
 
   def long_projects(location_name)
-    @projects = []
-    self.initiatives.each do |i|
-      if !i.standing
-        @completed_projects = i.projects.where(:completed => false).order(:start_date)
-        @completed_projects.each do |p|
-          if project_length(p) >= 5 && p.location.name == location_name
-            @projects << p
-          end
-        end
-      end
-    end 
-    return @projects
+    self.projects.where(:completed => false).where.not(:location_id => nil).order(:start_date).select { |cp|
+      !cp.initiative.standing? && project_length(cp) >= 5 && cp.location.name == location_name
+    }
   end
 
   def has_long_projects
