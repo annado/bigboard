@@ -28,11 +28,14 @@
   <div class="form-group">
     <%= f.collection_select :team_id, @teams, :id, :name %>
   </div>
-    <div class="field">
-    <%= f.select :new_project_alert, ['', 'Product', 'Internal Projects', 'All'] %>
-  </div>
-    <div class="field">
-    <%= f.text_field :permalink, :label => 'Permalink (required for alerting only)' %>
+  <div class="alert alert-warning"><h4>NEW PROJECT ALERTING (fill in both fields)</h4>
+      <div class="field">
+      <%= f.select :new_project_alert, ['', 'Product', 'Internal Projects', 'All'], :label => 'Type of project you want to be alerted about' %>
+    </div>
+      <div class="field">
+      <%= f.text_field :permalink, :label => 'Your Yammer permalink' %>
+      <i> Hover on your name in the left nav in Yammer. Your permalink is at the end of the url.</i>
+    </div>
   </div>
   <div class="form-group actions">
     <%= f.submit %>
