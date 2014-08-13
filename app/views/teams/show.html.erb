@@ -18,7 +18,7 @@
 <h3>Team Members</h3>
 <ol>
 <% @team.people.order(:name).each do |p| %>
-  <li><%= link_to p.name, board_person_path(@board, p) %><sup><%= p.location unless p.location == 'SF' %></sup> - <%= link_to p.active_projects.first.name, board_project_path(@board, p.active_projects.first) unless p.active_project_count == 0 %></li>
+  <li><%= link_to p.name, board_person_path(@board, p) %><sup><%= p.location.name unless p.location.nil? || p.location.name == "SF" %></sup> - <%= link_to p.active_projects.first.name, board_project_path(@board, p.active_projects.first) unless p.active_project_count == 0 %></li>
 <% end %>
 </ol>
 <% if @team.people.size == 0 %>
