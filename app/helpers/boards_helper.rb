@@ -10,7 +10,7 @@ module BoardsHelper
   end
 
   def percentage num, den
-    den == 0 ? 0 : 100.0*(num.to_f/den).round(1)
+    den == 0 ? 0 : (100*num.to_f/den.to_f).round(0)
   end
 
   def active_project person
