@@ -28,7 +28,7 @@
   <div class="form-group">
     <%= f.collection_select :team_id, @teams, :id, :name %>
   </div>
-  <div class="alert alert-warning"><h4>NEW PROJECT ALERTING (fill in both fields)</h4>
+  <div class="alert alert-info"><h4>NEW PROJECT ALERTING (fill in both fields)</h4>
       <div class="field">
       <%= f.select :new_project_alert, ['', 'Product', 'Internal Projects', 'All'], :label => 'Type of project you want to be alerted about' %>
     </div>

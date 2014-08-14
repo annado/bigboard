@@ -14,7 +14,16 @@
   <strong>Single Project?:</strong>
   <%= @team.single_project? ? "Yes" : "No" %>
 </p>
-
+<% if @team.product_allocation %>
+<p>
+  <strong>Desired allocations:</strong>
+  <ul>
+    <li>Product: <%= @team.product_allocation %>%</li>
+    <li>Internal Projects: <%= @team.internal_projects_allocation %>%</li>
+    <li>Support: <%= @team.support_allocation %>%</li>
+  </ul>
+</p>
+<% end %>
 <h3>Team Members</h3>
 <ol>
 <% @team.people.order(:name).each do |p| %>

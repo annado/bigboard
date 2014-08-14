@@ -56,6 +56,50 @@
   </tbody>
 </table>
 
+<h2>Difference between desired and actual allocation</h2>
+
+<table class="table table-grid">
+  <thead>
+    <tr>
+      <th>Type</th>
+<% @teams.each do |t| %>
+      <th><%= link_to t.name, board_team_path(@board, t) %></th>
+<% end %>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Product</td>
+<% @teams.each do |t| %>
+      <% @difference = actual_minus_desired_allocation(t, @allocations, "Product") %>
+      <td class="<%= "text-success" if @difference.to_i > 0 %><%= " text-danger" if @difference.to_i < 0 %>"><b><%= @difference %></b></td>
+<% end %>
+    </tr>
+    <tr>
+      <td>Internal Projects</td>
+<% @teams.each do |t| %>
+      <% @difference = actual_minus_desired_allocation(t, @allocations, "Internal Projects") %>
+      <td class="<%= "text-success" if @difference.to_i > 0 %><%= " text-danger" if @difference.to_i < 0 %>"><b><%= @difference %></b></td>
+<% end %>
+    </tr>
+    <tr>
+      <td>Support</td>
+<% @teams.each do |t| %>
+      <% @difference = actual_minus_desired_allocation(t, @allocations, "Support") %>
+      <td class="<%= "text-success" if @difference.to_i > 0 %><%= " text-danger" if @difference.to_i < 0 %>"><b><%= @difference %></b></td>
+<% end %>
+    </tr>
+    <tr>
+      <td>Unallocated</td>
+<% @teams.each do |t| %>
+      <% @difference = actual_minus_desired_allocation(t, @allocations, "Unallocated") %>
+      <td class="<%= "text-success" if @difference.to_i > 0 %><%= " text-danger" if @difference.to_i < 0 %>"><b><%= @difference %></b></td>
+<% end %>
+    </tr>
+  </tbody>
+</table>
+
+
 <div class="alert alert-warning">
 <strong>Unallocated</strong> (not assigned to a project of type Internal or Product):
 <ul>

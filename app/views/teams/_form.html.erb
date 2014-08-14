@@ -15,14 +15,33 @@
 
     <%= f.text_field :name %>
     <%= f.color_field :color %>
+    <div class="alert alert-info"><h4>Desired % of devs in each project type</h4>
+      <%= f.text_field :product_allocation, :class => 'percent-field', :label => 'Product' %>
+      <%= f.text_field :internal_projects_allocation, :class => 'percent-field', :label => 'Internal Projects' %>
+      <%= f.text_field :support_allocation, :class => 'percent-field', :label => 'Support' %>
+      <%= f.text_field :unallocated_allocation, :class => 'percent-field', :label => 'Unallocated' %>
+      <p class="text-danger" id="percent-warning" style="display:none">Total needs to add to 100</p>
+    </div>
     <div class="form-group">
       <%= f.check_box :single_project %>
       <p class="help-block col-sm-offset-1">Members of this team should only be assigned to one project at a time.</p>
     </div>
-
-    <div class="form-group actions">
+ 
+    <div class="form-group actions" id="submit">
       <%= f.submit %>
     </div>
   <% end %>
 </div>
 </div>
+
+<% content_for :javascript do %>
+  <script type="text/javascript">
+  $("#submit").click(function(){
+    if (parseInt($("#team_product_allocation").val())+ parseInt($("#team_internal_projects_allocation").val())+parseInt($("#team_support_allocation").val())+parseInt($("#team_unallocated_allocation").val()) != 100) {
+      $("#percent-warning").hide();
+      $("#percent-warning").show(10);
+      event.preventDefault();
+    }
+  })
+</script>
+<% end %>

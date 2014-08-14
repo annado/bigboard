@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140729225458) do
+ActiveRecord::Schema.define(version: 20140813231818) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -128,6 +128,10 @@ ActiveRecord::Schema.define(version: 20140729225458) do
     t.datetime "updated_at"
     t.integer  "board_id"
     t.boolean  "single_project"
+    t.integer  "product_allocation"
+    t.integer  "internal_projects_allocation"
+    t.integer  "support_allocation"
+    t.integer  "unallocated_allocation"
   end
 
   add_index "teams", ["board_id"], name: "index_teams_on_board_id", using: :btree
