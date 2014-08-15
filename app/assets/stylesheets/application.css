@@ -28,13 +28,14 @@ body {
   margin: 20px 0;
 }
 
+
 .person-tag {
   display: inline-block;
   font-size: 12px;
   line-height: 1;
   max-width: 10em;
   overflow: hidden;
-  padding: 5px;
+  padding: 2px 1px;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -43,6 +44,18 @@ body {
 .person-tag:hover {
   color: #FFF;
   text-decoration: none;
+}
+
+.name-tag {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: 7.5em;
+  display: inline-block;
+  padding: 1px 0px;
+}
+
+.person-tag sup {
+  top: -0.8em;
 }
 
 .project-changelog-list .person-tag,
