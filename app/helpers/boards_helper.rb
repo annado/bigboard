@@ -24,12 +24,13 @@ module BoardsHelper
 
   def actual_minus_desired_allocation(team, allocations, project_type)
     if team.product_allocation
-      delta = allocations[:product][:people][team].size - (team.people.count.to_f*team.product_allocation.to_f/100) if project_type=="Product"
-      delta = allocations[:internal][:people][team].size - (team.people.count.to_f*team.internal_projects_allocation.to_f/100) if project_type=="Internal Projects"
-      delta = allocations[:internal][:support][team].size - (team.people.count.to_f*team.support_allocation.to_f/100) if project_type=="Support"
-      delta = allocations[:unassigned][team].size - (team.people.count.to_f*team.unallocated_allocation.to_f/100) if project_type=="Unallocated"
+      delta = allocations[:product][:people][team].size - (team.people.count*team.product_allocation.to_f/100) if project_type=="Product"
+      delta = allocations[:internal][:people][team].size - (team.people.count*team.internal_projects_allocation.to_f/100) if project_type=="Internal Projects"
+      delta = allocations[:internal][:support][team].size - (team.people.count*team.support_allocation.to_f/100) if project_type=="Support"
+      delta = allocations[:unassigned][team].size - (team.people.count*team.unallocated_allocation.to_f/100) if project_type=="Unallocated"
     end
     if delta.to_i > 0
+      delta = delta.round(2)
       delta = "+"+delta.to_s
     end
     return delta
