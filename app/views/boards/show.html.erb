@@ -37,11 +37,11 @@
             <% if i.standing? %>
 
             <% else %>
-            <span data-toggle="tooltip" data-placement="bottom" title="<%= num_weeks(p.start_date, p.end_date) %> weeks"><%= p.start_date.strftime("%d %b %y") unless p.start_date.nil? %></span>
+            <span data-toggle="tooltip" data-placement="bottom" title="<%= num_weeks(p.start_date, p.end_date) %> weeks"><%= p.start_date.strftime("%d %b") unless p.start_date.nil? %></span>
             <% end %>
           </td>
           <td class="date<%= " text-danger" if nearing_deadline p.end_date %>">
-            <%= p.end_date.strftime("%d %b %y") unless p.end_date.nil? %>
+            <%= p.end_date.strftime("%d %b") unless p.end_date.nil? %>
           </td>
 
           <% @board.roles.reverse.each do |r| %>
