@@ -48,7 +48,7 @@
 }
 
 .table-board .date {
-  min-width: 6em;
+  min-width: 5em;
 }
 
 .table-board .date [data-toggle=tooltip] {
