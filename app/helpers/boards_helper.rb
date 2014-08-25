@@ -66,4 +66,15 @@ module BoardsHelper
     link
   end
 
+  def tl_projects
+    #this only works for yammer bigboard
+    tlProjects = []
+    ProjectMember.where(:role_id => 4).order(:created_at).each do |pr| 
+      if (!pr.project.completed and !pr.project.initiative.standing and pr.person.location_old == "SF")
+        tlProjects << pr.person.name + ": " +  pr.project.name 
+      end
+    end
+    return tlProjects
+  end
+
 end

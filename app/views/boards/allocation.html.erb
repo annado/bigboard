@@ -112,3 +112,12 @@
 </div>
 
 <%= render partial: "validations" %>
+
+<% if @board.id == 2 %>
+  <div class="alert alert-warning">
+    <strong>TL's and projects</strong>
+    <% tl_projects.each do |p| %>
+      <br />-- <%= p %>
+    <% end %>
+  </div>
+<% end %>
