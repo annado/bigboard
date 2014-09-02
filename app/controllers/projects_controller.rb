@@ -80,8 +80,7 @@ class ProjectsController < ApplicationController
     end
 
     def update_dates
-      #if project updates start or end date AND anyone on the
-      #project doesn't have a start or end date, then give them that project date
+      #if project doesn't have a start, then give the people that project start date
       if @project.previous_changes.has_key? "start_date"
         @project.project_members.each do |pm|
           if pm.start_date.nil? || pm.start_date < @project.start_date
@@ -89,14 +88,14 @@ class ProjectsController < ApplicationController
           end
         end
       end
+      #if project has a start date now but previously did not, then post to yammer about a new project starting
       if @project.previous_changes.has_key?("start_date") && @project.previous_changes["start_date"][0].nil?
         post_new_project_to_yammer
       end
+      #if project end date changes, then change the end dates for the people
       if @project.previous_changes.has_key? "end_date"
         @project.project_members.each do |pm|
-          if pm.end_date.nil? || pm.end_date == @project.previous_changes['end_date'][0]
-            pm.update_attributes(:end_date => @project.end_date)
-          end
+          pm.update_attributes(:end_date => @project.end_date)
         end
       end
     end
