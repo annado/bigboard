@@ -8,8 +8,8 @@
       <% else %>
       <% p.projects.each do |proj| %>
         <!-- person is on the board on a project with no/future start date -->
-        <% if (!proj.start_date || proj.start_date > Date.today) %>
-          is only on project "<%= link_to proj.name, edit_board_project_path(@board, proj) %>" which hasn't started yet.
+        <% if (!proj.start_date || proj.start_date > Date.today + 5) %>
+          is only on project "<%= link_to proj.name, edit_board_project_path(@board, proj) %>" which isn't starting soon.
         <% end %>
       <% end %>
     <% end %>
