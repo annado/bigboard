@@ -21,7 +21,8 @@ class User < ActiveRecord::Base
       access_token: auth.credentials.token,
       name: auth.info.name,
       image: auth.info.image,
-      network: network
+      network: network,
+      email: auth.info.email
     })
     user
   end
