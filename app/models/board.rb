@@ -42,9 +42,24 @@ class Board < ActiveRecord::Base
     }
   end
 
+  def recent_projects(location_name)
+    self.projects.where(:completed => false).where.not(:location_id => nil).order(:start_date).select { |cp|
+      !cp.initiative.standing? && cp.start_date && num_weeks(cp.start_date, Date.today) <= 3 && cp.location.name == location_name
+    }
+  end
+
   def has_long_projects
     self.locations.each do |l|
       if long_projects(l.name) != []
+        return true
+      end
+    end
+    return false
+  end
+
+    def has_recent_projects
+    self.locations.each do |l|
+      if recent_projects(l.name) != []
         return true
       end
     end
