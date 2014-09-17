@@ -16,6 +16,8 @@ App.Routers.People = Backbone.Router.extend({
       App.typeahead.addYammerTypeahead($typeahead, $.proxy(function (e, o, name) {
         if (name == "users") {
           $('#person_uid').val(o.id);
+          $('#person_email').val(o.email);
+          $('#person_permalink').val(o.name);
           $('#person_image').val(o.photo);
         }
         $typeahead.typeahead('close');
