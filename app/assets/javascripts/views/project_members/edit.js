@@ -23,7 +23,8 @@ App.Views.ProjectMembers.Edit = Backbone.View.extend({
       $(this.el).html(this.template({ 
         person: person,
         project_member: this.model.attributes,
-        team: team.attributes
+        team: team.attributes,
+        location: person.location && person.location.name
       }));
 
       this.$startdate = this.$el.find('#project_member_start_date');
