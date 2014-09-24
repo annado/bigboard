@@ -20,7 +20,6 @@ class User < ActiveRecord::Base
     end
     user.update({
       access_token: auth.credentials.token,
-      #name: auth.info.name,
       image: auth.info.image,
       network: network,
       email: auth.info.email,
