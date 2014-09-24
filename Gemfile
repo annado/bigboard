@@ -42,6 +42,7 @@ gem 'devise', "~> 3.2.2"
 gem 'omniauth', '~> 1.0'
 gem 'omniauth-yammer'
 gem 'yam'
+gem 'fastercsv','~> 1.5'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
