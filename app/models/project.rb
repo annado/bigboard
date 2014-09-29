@@ -1,5 +1,5 @@
 class Project < ActiveRecord::Base
-  has_paper_trail :meta => { :board_id  => :board_identifier }
+  has_paper_trail :meta => { :board_id  => :board_identifier }, :ignore => [:notes, :updated_at]
   
   belongs_to :initiative
   belongs_to :location
