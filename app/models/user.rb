@@ -16,14 +16,12 @@ class User < ActiveRecord::Base
       user.email = auth.info.email
       user.password = Devise.friendly_token[0,20]
       user.network = network
-      user.permalink = auth.info.name
     end
     user.update({
       access_token: auth.credentials.token,
       image: auth.info.image,
       network: network,
-      email: auth.info.email,
-      permalink: auth.info.name
+      email: auth.info.email
     })
     user
   end
