@@ -1,4 +1,5 @@
 class BoardsController < ApplicationController
+  before_action :authenticate_user_from_token!
   before_action :authenticate_user!
   before_action :set_board, only: [:show, :edit, :changelog, :allocation, :completed, :update, :destroy]
 
@@ -6,6 +7,11 @@ class BoardsController < ApplicationController
   # GET /boards.json
   def index
     @boards = Board.where network_id: current_user.network_id
+
+    respond_to do |format|
+      format.html { @board = Board.where network_id: current_user.network_id }
+      format.json { @board = Board.where network_id: current_user.network_id }
+    end
   end
 
   # GET /boards/1
@@ -144,5 +150,16 @@ class BoardsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def board_params
       params.require(:board).permit(:network_id, :name, :group_id_for_yammer_post)
+    end
+
+    def authenticate_user_from_token!
+      user_email = params[:user_email].presence
+      user       = user_email && User.find_by_email(user_email)
+
+      # Notice how we use Devise.secure_compare to compare the token
+      # in the database with the token given in the params, mitigating
+      # timing attacks.
+      if user && Devise.secure_compare(user.encrypted_password, params[:token])
+        sign_in user, store: false
     end
 end
