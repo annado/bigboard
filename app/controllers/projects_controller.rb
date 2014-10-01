@@ -27,12 +27,11 @@ class ProjectsController < ApplicationController
       @project = initiative.projects.build(project_params)
     end
 
-    if @project.start_date
-      post_new_project_to_yammer
-    end
-
     respond_to do |format|
       if @project.save
+        if @project.start_date
+          post_new_project_to_yammer
+        end
         format.html { redirect_to @board, notice: @project.name + ' was successfully created.' }
         format.json { render :show, status: :created, location: @project }
       else
@@ -110,7 +109,7 @@ class ProjectsController < ApplicationController
         end
 
         yamr.create_message("A new project called '" + @project.name + "' in the " + @project.initiative.name + " initiative has been \
-          added to the bigboard with a kickoff date of " + @project.start_date.strftime("%B %d, %Y") + ". Go check it out! " + board_url(@board) + " \n\n Courtesy \
+          added to the bigboard with a kickoff date of " + @project.start_date.strftime("%B %d, %Y") + ". Go check it out! " + edit_board_project_url(@board, @project) + " \n\n Courtesy \
           mentions: " + permalinks_to_alert.join(", "), :group_id => @board.group_id_for_yammer_post)
       end
     end

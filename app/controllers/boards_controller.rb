@@ -161,5 +161,6 @@ class BoardsController < ApplicationController
       # timing attacks.
       if user && Devise.secure_compare(user.encrypted_password, params[:token])
         sign_in user, store: false
+      end
     end
 end
