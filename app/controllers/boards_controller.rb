@@ -6,11 +6,11 @@ class BoardsController < ApplicationController
   # GET /boards
   # GET /boards.json
   def index
-    @boards = Board.where network_id: current_user.network_id
 
     respond_to do |format|
-      format.html { @board = Board.where network_id: current_user.network_id }
-      format.json { @board = Board.where network_id: current_user.network_id }
+      format.html { @boards = Board.where network_id: current_user.network_id }
+      format.json { @boards = Board.where network_id: current_user.network_id }
+      
     end
   end
 
