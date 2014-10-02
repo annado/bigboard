@@ -69,15 +69,13 @@
   <% end %>
   <% @project.project_members.each do |pm| %>
     <% pm.versions.each do |v| %>
+    <% if v.event == 'create' %>
       <li class="project-changelog-list">
-      <% if v.event == 'create' %>
         <%= person_tag pm %> added
-      <% else %>
-      ?? <%= v.event %>
-      <% end %>
-      by <%= User.find_by_id(v.whodunnit).name unless User.find_by_id(v.whodunnit).nil? %>
+        by <%= User.find_by_id(v.whodunnit).name unless User.find_by_id(v.whodunnit).nil? %>
       on <%= v.created_at.strftime("%m/%d/%y") %>
       </li>
+      <% end %>
     <% end %>
   <% end %>
   </ul>
