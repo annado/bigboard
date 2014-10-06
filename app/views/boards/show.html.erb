@@ -46,7 +46,7 @@
 
           <% @board.roles.reverse.each do |r| %>
           <td class="people role-<%= r.name.parameterize %>" data-role-id="<%= r.id %>">
-            <ul class="list-inline"><% project_members = p.active_project_members_for_role r.id %>
+            <ul class="list-inline"><% project_members = p.project_members_for_role r.id %>
             <% project_members.each do |pm| %>
               <% week_count = num_weeks(pm.start_date, pm.end_date) %>
               <li class="date"><%= person_tag pm %>
