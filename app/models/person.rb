@@ -13,7 +13,9 @@ class Person < ActiveRecord::Base
   searchkick autocomplete: ['name']
 
   def active_projects
-    self.projects.where("projects.completed = ? AND projects.start_date <= ?", false, Date.today)
+    self.projects.where("projects.completed = ? AND projects.start_date <= ?", false, Date.today).select { |p|
+      !p.vacation?
+    }
   end
 
   def active_project_count
@@ -43,6 +45,17 @@ class Person < ActiveRecord::Base
   def freeing_up_soon?
     if (self.project_members.count == 1 && self.project_members[0].end_date)
       nearing_deadline(self.project_members[0].end_date)
+    end
+  end
+
+  def on_vacation?
+    if self.projects.any? { |proj| proj.vacation? == true }
+      self.projects.detect { |proj| proj.vacation? == true }.project_members.where(:person_id => self.id).each { |pm| 
+        if pm.start_date && pm.start_date <= Date.today && (pm.end_date.nil? || pm.end_date >= Date.today)
+          return true
+        end
+      }
+      return false
     end
   end
 

@@ -16,4 +16,8 @@ class Project < ActiveRecord::Base
   def active_project_members_for_role role_id
     self.project_members.where("role_id = ? AND (end_date >= ? OR end_date IS NULL)", role_id, Date.today).order(:start_date)
   end
+
+  def vacation?
+    self.name == "Vacation"
+  end
 end
