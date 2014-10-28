@@ -24,7 +24,7 @@
       </div>
       <%= f.date_field :end_date %>
       <%= f.collection_select :location_id, @board.locations, :id, :name, :include_blank => true %>
-      <%= f.select :project_type, ['', 'Product', 'Internal Projects', 'Support/Other'] %>
+      <%= f.select :project_type, ['', 'Product', 'Internal Projects', 'Support/Other', 'Engineering Systems', 'Product Innovation', 'Market Adoption', 'Quality and Repairs'] %>
       <%= f.collection_select :initiative_id, @initiatives, :id, :name %>
       <div class="form-group">
         <div class="col-md-6 col-md-offset-3">
