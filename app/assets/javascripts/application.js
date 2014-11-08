@@ -30,7 +30,7 @@ $(document).ready(function(){
   $actions = $('[data-method=delete]');
   if ($actions.length) {
     $actions.on('click', function (e) {
-      if (confirm("Are you sure you want to delete?")) { 
+      if (confirm("Are you sure you want to delete? History will be lost forever!")) {
         e.preventDefault();
         
         var $target = $(e.target),
