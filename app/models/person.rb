@@ -23,15 +23,15 @@ class Person < ActiveRecord::Base
   end
 
   def on_product_project?
-    ["Product", "Product Innovation", "Market Adoption"].include?(self.active_projects.first.project_type) unless self.active_project_count == 0
+    project_types("Product").include?(self.active_projects.first.project_type) unless self.active_project_count == 0
   end
 
   def on_support?
-    ["Support/Other"].include?(self.active_projects.first.project_type) unless self.active_project_count == 0
+    project_types("Support").include?(self.active_projects.first.project_type) unless self.active_project_count == 0
   end
 
   def on_internal_project?
-    ["Internal Projects", "Engineering Systems", "Quality and Repairs"].include?(self.active_projects.first.project_type) unless self.active_project_count == 0
+    project_types("Internal").include?(self.active_projects.first.project_type) unless self.active_project_count == 0
   end
 
   def initiative_owner?

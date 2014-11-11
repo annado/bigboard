@@ -12,30 +12,31 @@
   </thead>
   <tbody>
     <tr>
-      <td>Product</td>
+      <td title="<%= project_types("Product") %>">Product</td>
 <% @teams.each do |t| %>
-      <td><%= display_percentage @allocations[:product][:people][t].size, t.people.size %></td>
+      <td title="<%= @allocations[:product][:people][t].collect {|x| x.name} %>"><%= display_percentage @allocations[:product][:people][t].size, t.people.size %>
+      </td>
 <% end %>
       <td><%= display_percentage @allocations[:product][:total], @allocations[:total] %></td>
     </tr>
     <tr>
-      <td>Internal Projects</td>
+      <td title="<%= project_types("Internal") %>">Internal Projects</td>
 <% @teams.each do |t| %>
-      <td><%= display_percentage @allocations[:internal][:people][t].size, t.people.size %></td>
+      <td title="<%= @allocations[:internal][:people][t].collect {|x| x.name} %>"><%= display_percentage @allocations[:internal][:people][t].size, t.people.size %></td>
 <% end %>
       <td><%= display_percentage @allocations[:internal][:total], @allocations[:total] %></td>
     </tr>
     <tr>
-      <td>Support</td>
+      <td title="<%= project_types("Support") %>">Support</td>
 <% @teams.each do |t| %>
-      <td><%= display_percentage @allocations[:support][:people][t].size, t.people.size %></td>
+      <td title="<%= @allocations[:support][:people][t].collect {|x| x.name} %>"><%= display_percentage @allocations[:support][:people][t].size, t.people.size %></td>
 <% end %>
       <td><%= display_percentage @allocations[:support][:total], @allocations[:total] %></td>
     </tr>
     <tr>
-      <td>Unallocated</td>
+      <td title="<%= project_types("Unallocated") %>">Unallocated</td>
 <% @teams.each do |t| %>
-      <td><%= display_percentage @allocations[:unassigned][:people][t].size, t.people.size %></td>
+      <td title="<%= @allocations[:unassigned][:people][t].collect {|x| x.name} %>"><%= display_percentage @allocations[:unassigned][:people][t].size, t.people.size %></td>
 <% end %>
       <td><%= display_percentage @allocations[:unassigned][:total], @allocations[:total] %></td>
     </tr>

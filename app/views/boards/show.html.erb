@@ -71,6 +71,7 @@
 
 <% content_for :javascript do %>
   <script type="text/javascript">
+
   jQuery(function() {
     window.router = new App.Routers.Boards({
       board: <%= @board.to_json(:include => { 
