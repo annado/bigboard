@@ -22,12 +22,16 @@ class Person < ActiveRecord::Base
     self.active_projects.size
   end
 
-  def allocated_to type
-    self.active_projects.first.project_type == type unless self.active_project_count == 0
+  def on_product_project?
+    ["Product", "Product Innovation", "Market Adoption"].include?(self.active_projects.first.project_type) unless self.active_project_count == 0
   end
 
-  def allocated_to_internal_initiative
-    self.active_projects.first.initiative.name == 'Internal Projects' unless self.active_project_count == 0
+  def on_support?
+    ["Support/Other"].include?(self.active_projects.first.project_type) unless self.active_project_count == 0
+  end
+
+  def on_internal_project?
+    ["Internal Projects", "Engineering Systems", "Quality and Repairs"].include?(self.active_projects.first.project_type) unless self.active_project_count == 0
   end
 
   def initiative_owner?

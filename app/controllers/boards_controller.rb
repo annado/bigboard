@@ -81,42 +81,36 @@ class BoardsController < ApplicationController
       },
       :internal => {
         :total => 0,
-        :people => {},
-        :support => {
-          :total => 0
-        },
-        :projects => {
-          :total => 0
-        }
+        :people => {}
+      },
+      :support => {
+        :total => 0,
+        :people => {}
       },
       :unassigned => {
-        :total => 0
+        :total => 0,
+        :people => {}
       }
     }
     @teams.each do |t|
       @allocations[:product][:people][t] = []
       @allocations[:internal][:people][t] = []
-      @allocations[:internal][:projects][t] = []
-      @allocations[:internal][:support][t] = []
-      @allocations[:unassigned][t] = []
+      @allocations[:support][:people][t] = []
+      @allocations[:unassigned][:people][t] = []
       t.people.each do |p|
         @allocations[:total] += 1
-        if p.allocated_to('Product')
+        if p.on_product_project?
           @allocations[:product][:total] += 1
           @allocations[:product][:people][t].push(p)
-        elsif p.allocated_to('Internal Projects')
+        elsif p.on_internal_project?
           @allocations[:internal][:total] += 1
           @allocations[:internal][:people][t].push(p)
-          if p.allocated_to_internal_initiative
-            @allocations[:internal][:projects][t].push(p)
-            @allocations[:internal][:projects][:total] += 1
-          else
-            @allocations[:internal][:support][t].push(p)
-            @allocations[:internal][:support][:total] += 1
-          end
+        elsif p.on_support?
+          @allocations[:support][:total] += 1
+          @allocations[:support][:people][t].push(p)
         else
           @allocations[:unassigned][:total] += 1
-          @allocations[:unassigned][t].push(p)
+          @allocations[:unassigned][:people][t].push(p)
         end
       end
     end
