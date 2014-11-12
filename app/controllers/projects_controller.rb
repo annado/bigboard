@@ -115,13 +115,14 @@ class ProjectsController < ApplicationController
     end
 
     def post_reminder_post_to_yammer
-      return if @project.experiment_key && @project.tech_spec
+      return if @project.start_date + 14 == Date.today
+      return if @project.experiment_key? && @project.tech_spec?
       #only post to yammer if it's a Product or Internal Project
       if ["Product", "Internal Projects"].include?(@project.project_type) && @board.id && !@project.initiative.standing?
         #if project gets a start date and start date was previously nil, then post to yammer about a new project
         yamr = Yammer::Client.new(:access_token  => current_user.access_token)
         yamr.create_message(@project.name " in the " + @project.initiative.name + " initiative is missing \
-          either the tech spec of experiment key . Go fill it out! " + edit_board_project_url(@board, @project), :group_id => project_group_id)
+          either the tech spec or experiment key . Go fill it out! " + edit_board_project_url(@board, @project), :group_id => project_group_id)
       end
     end
 
@@ -134,5 +135,4 @@ class ProjectsController < ApplicationController
       params.require(:project).permit(:name, :start_date, :end_date, :completed, :retro, :status, :location, :location_id, :project_type, :initiative_id, :board_id, :notes, :tech_spec, :product_spec, :retrospective, :yammer_group, :experiment_key, :project_description)
     end
 
-    def
 end
