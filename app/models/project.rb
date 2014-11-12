@@ -1,12 +1,15 @@
 class Project < ActiveRecord::Base
   has_paper_trail :meta => { :board_id  => :board_identifier }, :ignore => [:notes, :updated_at]
-  
+
   belongs_to :initiative
   belongs_to :location
   has_many :project_members, :dependent => :destroy
   has_many :members, :through => :project_members, :source => :person
 
   validates :name, presence: { message: "Please specify a name"}
+  validates :project_description, presence: { message: "Please specify a project description"}
+  validates :product_spec, presence: { message: "Please specify a product spec"}
+  validates :yammer_group, presence: { message: "Please specify a yammer group"}
   validates :initiative_id, presence: { message: "Initiative required"}
 
   def board_identifier
