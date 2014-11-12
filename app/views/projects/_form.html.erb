@@ -16,6 +16,9 @@
       <div class="field">
         <%= f.text_field :name %>
       </div>
+      <div>
+        <%= f.collection_select :initiative_id, @initiatives, :id, :name %>
+      </div>
       <div class="field">
         <%= f.text_area :project_description, :rows => 5 %>
       </div>

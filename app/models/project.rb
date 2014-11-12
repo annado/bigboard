@@ -10,6 +10,7 @@ class Project < ActiveRecord::Base
   validates :project_description, presence: { message: "Please specify a project description"}
   validates :product_spec, presence: { message: "Please specify a product spec"}
   validates :yammer_group, presence: { message: "Please specify a yammer group"}
+  validates :location, presence: { message: "Please specify a location"}
   validates :initiative_id, presence: { message: "Initiative required"}
 
   def board_identifier
