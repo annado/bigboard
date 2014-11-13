@@ -26,6 +26,7 @@ gem 'backbone-on-rails'
 
 gem 'searchkick'
 gem 'chartkick', '~> 1.3.2'
+gem 'amatch'
 
 # heroku
 gem 'rails_12factor', group: :production
