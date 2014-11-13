@@ -135,4 +135,9 @@ class ProjectsController < ApplicationController
     def project_params
       params.require(:project).permit(:name, :start_date, :end_date, :completed, :retro, :status, :location, :location_id, :project_type, :initiative_id, :board_id, :notes, :tech_spec, :product_spec, :retrospective, :yammer_group, :experiment_key, :project_description)
     end
+
+    def send_reminders
+      puts "***************"
+      puts "aodakasjfhksdjfhskjh"
+    end
 end

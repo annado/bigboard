@@ -178,9 +178,7 @@ class BoardsController < ApplicationController
   def todo
     @todo_projects = [] # list of completed projects from non-standing initiatives, i.e. REAL projects
     @board.initiatives.where(:standing => false).each do |i|
-      # Person.where('name=? OR lastname=?', 'John', 'Smith')
-      i.projects.where('experiment_key=? OR tech_spec=?', "", "").each do |p|
-      # i.projects.where(:experiment_key => "").each do |p|
+      i.projects.where('experiment_key=? OR tech_spec=? OR experiment_key=? OR tech_spec=?', "", "", nil, nil).each do |p|
         @todo_projects.push(p)
     end
     end
