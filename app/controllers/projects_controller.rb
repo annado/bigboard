@@ -124,6 +124,7 @@ class ProjectsController < ApplicationController
         yamr.create_message(@project.name " in the " + @project.initiative.name + " initiative is missing \
           either the tech spec or experiment key . Go fill it out! " + edit_board_project_url(@board, @project), :group_id => project_group_id)
       end
+
     end
 
     def project_group_id

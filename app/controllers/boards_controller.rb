@@ -1,7 +1,7 @@
 class BoardsController < ApplicationController
   before_action :authenticate_user_from_token!
   before_action :authenticate_user!
-  before_action :set_board, only: [:show, :edit, :changelog, :allocation, :completed, :update, :destroy]
+  before_action :set_board, only: [:show, :edit, :changelog, :allocation, :completed, :update, :destroy, :todo]
 
   # GET /boards
   # GET /boards.json
@@ -10,7 +10,7 @@ class BoardsController < ApplicationController
     respond_to do |format|
       format.html { @boards = Board.where network_id: current_user.network_id }
       format.json { @boards = Board.where network_id: current_user.network_id }
-      
+
     end
   end
 
@@ -170,6 +170,18 @@ class BoardsController < ApplicationController
     @board.initiatives.where(:standing => false).each do |i|
       i.projects.where(:completed => true).where.not(:end_date => nil).each do |p|
         @projects.push(p)
+    end
+    end
+  end
+
+  # GET /boards/1/todo
+  def todo
+    @todo_projects = [] # list of completed projects from non-standing initiatives, i.e. REAL projects
+    @board.initiatives.where(:standing => false).each do |i|
+      # Person.where('name=? OR lastname=?', 'John', 'Smith')
+      i.projects.where('experiment_key=? OR tech_spec=?', "", "").each do |p|
+      # i.projects.where(:experiment_key => "").each do |p|
+        @todo_projects.push(p)
     end
     end
   end

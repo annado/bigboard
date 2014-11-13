@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     get 'changelog'
     get 'allocation'
     get 'completed'
+    get 'todo'
   end
 
   resources :initiatives do
@@ -29,7 +30,7 @@ Rails.application.routes.draw do
 
   resources :people do
   end
-  
+
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
   get 'home/index'

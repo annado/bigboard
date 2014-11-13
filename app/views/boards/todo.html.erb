@@ -1,0 +1,25 @@
+<h1>Todo </h1>
+<h2>The following projects are missing information, would you like to help and complete the information?</h2>
+
+<table class="table table-grid">
+<thead>
+  <tr>
+      <th>Initiative Name</th>
+      <th>Project Name</th>
+      <th>Missing Fields</th>>
+  </tr>
+	<% @todo_projects.each do |p| %>
+  <tr>
+    <td><%= p.initiative.name %></td>
+    <td><%= link_to p.name, edit_board_project_path(@board, p) %></td>
+    <td><% if p.experiment_key == "" %>
+    		<h6> Missing Experiment Key </h6>
+    		<% end %>
+    		<% if p.tech_spec == "" %>
+    		<h6> Missing Tech Spec </h6>
+    		<% end %>
+    </td>
+<% end %>
+  </tr>
+</thead>
+</table>
