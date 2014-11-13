@@ -36,6 +36,10 @@ class Board < ActiveRecord::Base
     @people_ending_soon
   end
 
+  def search(experiment_key)
+    self.projects.where(:experiment_key => experiment_key)
+  end
+
   def long_projects(location_name)
     self.projects.where(:completed => false).where.not(:location_id => nil).order(:start_date).select { |cp|
       !cp.initiative.standing? && num_weeks(cp.start_date, Date.today) >= 5 && cp.location.name == location_name

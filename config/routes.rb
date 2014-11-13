@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  get 'search/index'
+  match '/search', to: 'search#search', via: :get
+
   resources :boards do
     resources :initiatives
     resources :teams
