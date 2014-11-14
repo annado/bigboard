@@ -10,20 +10,34 @@ class SearchController < ApplicationController
     if @query.to_s == @query
       #check for exact match
       @good_matches = {}
-      exact_match = Project.find_by_experiment_key(@query)
-      if !exact_match.nil?
-        @good_matches = {exact_match => 1}
-      else
+      exact_match_by_key = Project.find_by_experiment_key(@query)
+      exact_match_by_name = Project.find_by_name(@query)
+      if !exact_match_by_key.nil?
+        @good_matches = {exact_match_by_key => 1}
+      end
+
+      if !exact_match_by_name.nil?
+        @good_matches = {exact_match_by_name => 1}
+      end
+
+      if @good_matches.count == 0
         # store project keys
-        Project.where.not(:experiment_key => "").each do |p| 
-          # find "good matches"
-          key = p.experiment_key
-          amatch = Jaro.new(@query)
-          if amatch.match(key) > 0.5
-            @good_matches[p] = amatch.match(key)
+        Project.all.each do |p|
+          if p.initiative && p.board_identifier == 2 && !p.initiative.standing?
+            # find "good matches"
+            project_key = p.experiment_key
+            project_name = p.name
+
+            amatch = LongestSubstring.new(@query)
+            score = project_key ? [amatch.match(project_key), amatch.match(project_name)].max : amatch.match(project_name)
+
+            if score > 2
+              @good_matches[p] = score
+            end
           end
         end
       end
+
       handle_response(@good_matches, @good_matches.count)
     end
   end

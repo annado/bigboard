@@ -1,12 +1,12 @@
 <h1>Search projects</h1>
 <%= form_tag(search_path, :method => "get", id: "search-form") do %>
-  <%= text_field_tag :query, params[:search], placeholder: "Search projects by experiment_key", size: 35 %>
+  <%= text_field_tag :query, params[:search], placeholder: "Search projects by name or experiment_key", size: 45 %>
   <%= submit_tag "Search", :name => nil %>
 <% end %>
 <br/><br/><br/>
 <div>
-<% @good_matches.sort_by { |proj, score| -score }.each do |proj, score| %>
+<% @good_matches.sort_by { |proj, score| -score }.first(10).each do |proj, score| %>
 	<%= link_to proj.name, edit_board_project_path(proj.initiative.board, proj) %>
-	[Match score: <%= score.round(3) %>] <br/>
+	<%= proj.project_description ? ": "+proj.project_description : "" %><br/>
 <% end %>
 </div>
