@@ -1,6 +1,6 @@
  <script type="text/javascript">
   function hideStanding() {
-    standing = document.getElementById('project_initiative_id').options[document.getElementById('project_initiative_id').selectedIndex].getAttribute('data-standing')
+    standing = $("#project_initiative_id").find(":selected").attr("data-standing")
 
       elements = $(".not-standing-field")
 
