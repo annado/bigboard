@@ -12,10 +12,10 @@
   <tr>
     <td><%= p.initiative.name %></td>
     <td><%= link_to p.name, edit_board_project_path(@board, p) %></td>
-    <td><% if p.experiment_key == "" %>
+    <td><% if p.experiment_key == "" || p.experiment_key.nil?  %>
     		<h6> Missing Experiment Key </h6>
     		<% end %>
-    		<% if p.tech_spec == "" %>
+        <% if p.tech_spec == "" || p.tech_spec.nil? %>
     		<h6> Missing Tech Spec </h6>
     		<% end %>
     </td>
