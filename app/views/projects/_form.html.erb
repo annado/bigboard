@@ -38,7 +38,7 @@
         <%= f.text_field :name %>
       </div>
       <div>
-      <%= f.select :initiative_id, options_for_select(@initiatives.map{ |i| [i.name, i.id, {'data-standing'=>i.standing}] }, :selected => @project.initiative.try(:name) ), {}, :onchange => "hideStanding()"%>
+      <%= f.select :initiative_id, options_for_select(@initiatives.map{ |i| [i.name, i.id, {'data-standing'=>i.standing}] }, @project.initiative.id ), {}, :onchange => "hideStanding()"%>
       </div>
       <div class="field">
         <%= f.text_area :project_description, :rows => 5 %>
