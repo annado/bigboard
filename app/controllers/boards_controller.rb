@@ -277,9 +277,7 @@ class BoardsController < ApplicationController
     end
 
     def project_group_id(project)
-      if project.yammer_group.match(/\&feedId=(.+)$/).nil?
-        3716357
-      else
-        project.yammer_group.match(/\&feedId=(.+)$/)[1].to_i
+      return 3716357 if project.yammer_group.nil? || project.yammer_group.match(/\&feedId=(.+)$/).nil?
+      project.yammer_group.match(/\&feedId=(.+)$/)[1].to_i
     end
 end
