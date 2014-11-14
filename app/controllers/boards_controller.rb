@@ -185,11 +185,9 @@ class BoardsController < ApplicationController
   end
 
   def send_reminders
-    # params[:data].each do |id|
-    #   # post_reminder_post_to_yammer(id)
-    #   puts id
-    # end
-    post_reminder_post_to_yammer(params[:data].first)
+    params[:data].each do |id|
+      post_reminder_post_to_yammer(id)
+    end
 
     flash[:notice] = "Reminders posted to Yammer"
     redirect_to board_todo_path
