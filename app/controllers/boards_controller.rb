@@ -189,7 +189,7 @@ class BoardsController < ApplicationController
       # post_reminder_post_to_yammer(id)
       puts id
     end
-    flash[:notice] = "Reminder emails posted to yammer"
+    flash[:notice] = "Reminders posted to yammer"
     redirect_to board_todo_path
   end
 
