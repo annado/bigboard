@@ -6,8 +6,8 @@ class Project < ActiveRecord::Base
   has_many :project_members, :dependent => :destroy
   has_many :members, :through => :project_members, :source => :person
 
-  validates_presence_of :name, :initiative_id, :location
-  validates_presence_of :project_description, :product_spec, :yammer_group, :if => :not_standing?
+  validates_presence_of :name, :initiative_id, :location, :project_description
+  validates_presence_of :product_spec, :yammer_group, :if => :not_standing?
 
   def board_identifier
     self.initiative.board.id
