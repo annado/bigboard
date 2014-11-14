@@ -18,6 +18,8 @@ Rails.application.routes.draw do
     get 'allocation'
     get 'completed'
     get 'todo'
+    post 'send_reminders'
+
   end
 
   resources :initiatives do
@@ -38,6 +40,7 @@ Rails.application.routes.draw do
   get 'sessions/create'
 
   get '/auth/:provider/callback', to: 'sessions#create'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

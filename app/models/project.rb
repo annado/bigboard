@@ -6,12 +6,8 @@ class Project < ActiveRecord::Base
   has_many :project_members, :dependent => :destroy
   has_many :members, :through => :project_members, :source => :person
 
-  validates :name, presence: { message: "Please specify a name"}
-  validates :project_description, presence: { message: "Please specify a project description"}
-  validates :product_spec, presence: { message: "Please specify a product spec"}
-  validates :yammer_group, presence: { message: "Please specify a yammer group"}
-  validates :location, presence: { message: "Please specify a location"}
-  validates :initiative_id, presence: { message: "Initiative required"}
+  validates_presence_of :name, :initiative_id, :location
+  validates_presence_of :project_description, :product_spec, :yammer_group, :if => :not_standing?
 
   def board_identifier
     self.initiative.board.id
@@ -23,5 +19,8 @@ class Project < ActiveRecord::Base
 
   def vacation?
     self.name == "Vacation"
+
+  def not_standing?
+    !self.initiative.standing?
   end
 end

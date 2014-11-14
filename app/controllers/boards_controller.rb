@@ -184,6 +184,15 @@ class BoardsController < ApplicationController
     end
   end
 
+  def send_reminders
+    params[:data].each do |id|
+      # post_reminder_post_to_yammer(id)
+      puts id
+    end
+    flash[:notice] = "Reminder emails posted to yammer"
+    redirect_to board_todo_path
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_board
@@ -254,5 +263,20 @@ class BoardsController < ApplicationController
       end
       return @pie_data
 
+    def post_reminder_post_to_yammer(id)
+      project = Project.find(id)
+      return if project.start_date + 14 == Date.today
+      return if project.experiment_key? && project.tech_spec?
+      #only post to yammer if it's a Product or Internal Project
+      if ["Product", "Internal Projects"].include?(project.project_type) && @board.id && !project.initiative.standing?
+        #if project gets a start date and start date was previously nil, then post to yammer about a new project
+        yamr = Yammer::Client.new(:access_token  => current_user.access_token)
+        yamr.create_message(project.name " in the " + project.initiative.name + " initiative is missing \
+        either the tech spec or experiment key . Go fill it out! " + edit_board_project_url(@board, project), :group_id => project_group_id(project))
+      end
+    end
+
+    def project_group_id(project)
+      project.yammer_group.match(/\&feedId=(.+)$/)[1]
     end
 end

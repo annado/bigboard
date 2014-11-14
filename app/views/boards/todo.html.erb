@@ -1,5 +1,6 @@
 <h1>Todo </h1>
 <h2>The following projects are missing information, would you like to help and complete the information?</h2>
+<%= button_to "Send Reminders", :action => :send_reminders, :data => @todo_projects.map{|p| p.id} %>
 <table class="table table-grid">
 <thead>
   <tr>

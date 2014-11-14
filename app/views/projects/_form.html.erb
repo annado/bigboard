@@ -1,3 +1,24 @@
+ <script type="text/javascript">
+  function hideStanding() {
+    standing = document.getElementById('project_initiative_id').options[document.getElementById('project_initiative_id').selectedIndex].getAttribute('data-standing')
+
+      elements = $(".not-standing-field")
+
+      for (i = 0; i < elements.length ; i++){
+        if (standing == "true") {
+          $(elements[i]).hide()
+          $(elements[i]).find("input").val("")
+        } else {
+          $(elements[i]).show()
+        }
+      }
+  }
+</script>
+  <style>
+  .hide-standing {
+    display :none;
+  }
+</style>
 <div class="row">
   <div class="col-md-6">
     <%= bootstrap_form_for([@board, @project], layout: :horizontal, label_col: "col-md-3", control_col: "col-md-6") do |f| %>
@@ -17,21 +38,21 @@
         <%= f.text_field :name %>
       </div>
       <div>
-        <%= f.collection_select :initiative_id, @initiatives, :id, :name %>
+      <%= f.select :initiative_id, options_for_select(@initiatives.map{ |i| [i.name, i.id, {'data-standing'=>i.standing}] }, :selected => @project.initiative.try(:name) ), {}, :onchange => "hideStanding()"%>
       </div>
       <div class="field">
         <%= f.text_area :project_description, :rows => 5 %>
       </div>
-      <div class="field">
+      <div class="field not-standing-field <%= @project.initiative.present? && @project.initiative.standing ? 'hide-standing' : '' %>">
         <%= f.text_field :product_spec %>
       </div>
-      <div class="field">
+      <div class="field not-standing-field <%= @project.initiative.present? && @project.initiative.standing ? 'hide-standing' : '' %>">
         <%= f.text_field :tech_spec %>
       </div>
-      <div class="field">
+      <div class="field not-standing-field <%= @project.initiative.present? && @project.initiative.standing ? 'hide-standing' : '' %>">
         <%= f.text_field :yammer_group %>
       </div>
-      <div class="field">
+      <div class="field not-standing-field <%= @project.initiative.present? && @project.initiative.standing ? 'hide-standing' : '' %>">
         <%= f.text_field :experiment_key %>
       </div>
       <div class="field">
@@ -49,7 +70,7 @@
           <%= f.check_box :completed %>
         </div>
       </div>
-      <div class="field">
+      <div class="field not-standing-field <%= @project.initiative.present? && @project.initiative.standing ? 'hide-standing' : '' %>">
         <%= f.text_field :retrospective %>
       </div>
       <div class="form-group">

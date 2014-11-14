@@ -1,5 +1,5 @@
 <h1>Search projects</h1>
 <%= form_tag(search_path, :method => "get", id: "search-form") do %>
-  <%= text_field_tag :query, params[:search], placeholder: "Search projects by experiment_key", size: 35 %>
+  <%= text_field_tag :query, params[:search], placeholder: "Search projects by experiment_key ", size: 35 %>
   <%= submit_tag "Search", :name => nil %>
 <% end %>
