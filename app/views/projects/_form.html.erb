@@ -35,22 +35,22 @@
       <% end %>
 
       <div class="field">
-        <%= f.text_field :name %>
+        <%= f.text_field :name, :label => "Name*" %>
       </div>
       <div>
-      <%= f.select :initiative_id, options_for_select(@initiatives.map{ |i| [i.name, i.id, {'data-standing'=>i.standing}] }, @project.initiative.try(:id) ), {}, :onchange => "hideStanding()"%>
+      <%= f.select :initiative_id, options_for_select(@initiatives.map{ |i| [i.name, i.id, {'data-standing'=>i.standing}] }, @project.initiative.try(:id) ), :label => "Initiative*", :onchange => "hideStanding()"%>
       </div>
       <div class="field">
-        <%= f.text_area :project_description, :rows => 5 %>
+        <%= f.text_area :project_description, :label => "Project description*", :rows => 5 %>
       </div>
       <div class="field not-standing-field <%= @project.initiative.present? && @project.initiative.standing ? 'hide-standing' : '' %>">
-        <%= f.text_field :product_spec %>
+        <%= f.text_field :product_spec, :label => "Product spec*" %>
       </div>
       <div class="field not-standing-field <%= @project.initiative.present? && @project.initiative.standing ? 'hide-standing' : '' %>">
         <%= f.text_field :tech_spec %>
       </div>
       <div class="field not-standing-field <%= @project.initiative.present? && @project.initiative.standing ? 'hide-standing' : '' %>">
-        <%= f.text_field :yammer_group %>
+        <%= f.text_field :yammer_group, :label => "Yammer group*" %>
       </div>
       <div class="field not-standing-field <%= @project.initiative.present? && @project.initiative.standing ? 'hide-standing' : '' %>">
         <%= f.text_field :experiment_key %>

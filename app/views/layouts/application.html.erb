@@ -46,22 +46,23 @@
         </ul>
 
         <ul class="nav navbar-nav navbar-right">
-          <% if user_signed_in? %>
+          <% if user_signed_in?%>
+            <% if @board %>
+              <%= form_tag(board_search_path(@board), :method => "get", id: "search-form") do %>
+                <%= text_field_tag :query, params[:search], placeholder: "Search project by name or experiment_key", size: 41 %>
+              <% end %>
+            <% end %>
 
-          <%= form_tag(search_path, :method => "get", id: "search-form") do %>
-            <%= text_field_tag :query, params[:search], placeholder: "Search project by name or experiment_key", size: 41 %>
-          <% end %>
+            <li><a href="/">Boards</a></li>
 
-          <li class="<%= 'active' if params[:controller] == 'boards' && params[:action] != "show" %>"><a href="/">Boards</a></li>
-
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= current_user.name %> <b class="caret"></b></a>
-            <ul class="dropdown-menu">
-            <li><%= link_to('Logout', destroy_user_session_path) %></li>
-            </ul>
-          </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= current_user.name %> <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+              <li><%= link_to('Logout', destroy_user_session_path) %></li>
+              </ul>
+            </li>
           <% else %>
-          <li><a href="<%= user_omniauth_authorize_path(:yammer) %>">Sign in with Yammer</a></li>
+            <li><a href="<%= user_omniauth_authorize_path(:yammer) %>">Sign in with Yammer</a></li>
           <% end %>
         </ul>
 

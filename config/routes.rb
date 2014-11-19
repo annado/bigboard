@@ -1,8 +1,5 @@
 Rails.application.routes.draw do
 
-  get 'search/index'
-  match '/search', to: 'search#search', via: :get
-
   resources :boards do
     resources :initiatives
     resources :teams
@@ -19,6 +16,8 @@ Rails.application.routes.draw do
     get 'completed'
     get 'todo'
     post 'send_reminders'
+    get 'search', to: 'search#search'
+    get 'search/index', to: 'search#index'
 
   end
 

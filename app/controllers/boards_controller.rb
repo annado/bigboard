@@ -1,7 +1,7 @@
 class BoardsController < ApplicationController
   before_action :authenticate_user_from_token!
   before_action :authenticate_user!
-  before_action :set_board, only: [:show, :edit, :changelog, :allocation, :completed, :update, :destroy, :todo]
+  before_action :set_board, only: [:show, :edit, :changelog, :allocation, :completed, :update, :destroy, :todo, :send_reminders]
 
   # GET /boards
   # GET /boards.json
@@ -176,18 +176,16 @@ class BoardsController < ApplicationController
 
   # GET /boards/1/todo
   def todo
-    @todo_projects = [] # list of completed projects from non-standing initiatives, i.e. REAL projects
+    @todo_projects = [] # list of projects missing experiment_key or tech_spec
     @board.initiatives.where(:standing => false).each do |i|
       i.projects.where(:experiment_key => [nil, ""], :tech_spec => [nil, ""]).where(:completed => false).each do |p|
         @todo_projects.push(p)
-    end
+      end
     end
   end
 
   def send_reminders
-    params[:data].each do |id|
-      post_reminder_post_to_yammer(id)
-    end
+    post_reminder_post_to_yammer(params[:data])
 
     flash[:notice] = "Reminders posted to Yammer"
     redirect_to board_todo_path
@@ -263,21 +261,28 @@ class BoardsController < ApplicationController
       end
       return @pie_data
 
-    def post_reminder_post_to_yammer(id)
-      project = Project.find(id)
-      return if project.start_date + 14 == Date.today
-      return if project.experiment_key? && project.tech_spec?
-      #only post to yammer if it's a Product or Internal Project
-      if !project.initiative.standing?
-        #if project gets a start date and start date was previously nil, then post to yammer about a new project
-        yamr = Yammer::Client.new(:access_token  => current_user.access_token)
-        yamr.create_message(project.name + " in the " + project.initiative.name + " initiative is missing \
-        either the tech spec or experiment key . Go fill it out! " + edit_board_project_url(self, project), :group_id => project_group_id(project))
+    def post_reminder_post_to_yammer(todo_project_ids)
+      yamr = Yammer::Client.new(:access_token  => current_user.access_token)
+      message = []
+      todo_project_ids.each do |project_id|
+        project = Project.find(project_id)
+        if !project.initiative.standing?
+          if project_group_id(project) # post to group if project has group link
+            yamr.create_message("The project associated with this group has data missing on the big board (like experiment_key and tech spec link). Can you help us fill in the details? http://0.0.0.0:3001/boards/" + @board.id.to_s + "/projects/" + project.id.to_s + "/edit", :group_id => project_group_id(project))
+          else
+            message << "\n\n" + project.name + ": " +  "http://0.0.0.0:3001/boards/"+ @board.id.to_s + "/projects/" + project.id.to_s + "/edit"
+          end
+        end
       end
+
+      if @board.group_id_for_yammer_post and message.count != 0
+        yamr.create_message("These projects have data missing on the big board (like experiment_key and tech spec link). Can you help us fill in the details? " + message.join, :group_id => @board.group_id_for_yammer_post)
+      end
+
     end
 
     def project_group_id(project)
-      return 3716357 if project.yammer_group.nil? || project.yammer_group.match(/\&feedId=(.+)$/).nil?
+      return nil if project.yammer_group.nil? || project.yammer_group.match(/\&feedId=(.+)$/).nil?
       project.yammer_group.match(/\&feedId=(.+)$/)[1].to_i
     end
 end
