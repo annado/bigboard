@@ -22,16 +22,13 @@ class Person < ActiveRecord::Base
     self.active_projects.size
   end
 
-  def on_product_project?
-    project_types("Product").include?(self.active_projects.first.project_type) unless self.active_project_count == 0
-  end
+  def on_initiative?(type)
+    if ["Support Engineering", "Service Quality", "Engineering Systems", "Market Adoption"].include?(type) && self.active_project_count != 0
+      type == self.active_projects.first.initiative.name
+    else
+      return false
+    end
 
-  def on_support?
-    project_types("Support").include?(self.active_projects.first.project_type) unless self.active_project_count == 0
-  end
-
-  def on_internal_project?
-    project_types("Internal").include?(self.active_projects.first.project_type) unless self.active_project_count == 0
   end
 
   def initiative_owner?

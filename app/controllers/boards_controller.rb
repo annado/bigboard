@@ -75,11 +75,7 @@ class BoardsController < ApplicationController
     @teams = @board.teams.where(:single_project => true).order(:name)
     @allocations = {
       :total => 0,
-      :product => {
-        :total => 0,
-        :people => {}
-      },
-      :internal => {
+      :market_adoption => {
         :total => 0,
         :people => {}
       },
@@ -87,30 +83,42 @@ class BoardsController < ApplicationController
         :total => 0,
         :people => {}
       },
-      :unassigned => {
+      :service_quality => {
+        :total => 0,
+        :people => {}
+      },
+      :engineering_systems => {
+        :total => 0,
+        :people => {}
+      },
+      :product => {
         :total => 0,
         :people => {}
       }
     }
     @teams.each do |t|
-      @allocations[:product][:people][t] = []
-      @allocations[:internal][:people][t] = []
+      @allocations[:market_adoption][:people][t] = []
       @allocations[:support][:people][t] = []
-      @allocations[:unassigned][:people][t] = []
+      @allocations[:service_quality][:people][t] = []
+      @allocations[:engineering_systems][:people][t] = []
+      @allocations[:product][:people][t] = []
       t.people.each do |p|
         @allocations[:total] += 1
-        if p.on_product_project?
-          @allocations[:product][:total] += 1
-          @allocations[:product][:people][t].push(p)
-        elsif p.on_internal_project?
-          @allocations[:internal][:total] += 1
-          @allocations[:internal][:people][t].push(p)
-        elsif p.on_support?
+        if p.on_initiative?("Market Adoption")
+          @allocations[:market_adoption][:total] += 1
+          @allocations[:market_adoption][:people][t].push(p)
+        elsif p.on_initiative?("Support Engineering")
           @allocations[:support][:total] += 1
           @allocations[:support][:people][t].push(p)
+        elsif p.on_initiative?("Service Quality")
+          @allocations[:service_quality][:total] += 1
+          @allocations[:service_quality][:people][t].push(p)
+        elsif p.on_initiative?("Engineering Systems")
+          @allocations[:engineering_systems][:total] += 1
+          @allocations[:engineering_systems][:people][t].push(p)
         else
-          @allocations[:unassigned][:total] += 1
-          @allocations[:unassigned][:people][t].push(p)
+          @allocations[:product][:total] += 1
+          @allocations[:product][:people][t].push(p)
         end
       end
     end

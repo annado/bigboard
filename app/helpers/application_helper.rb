@@ -40,16 +40,4 @@ module ApplicationHelper
     num_weeks(deadline, nil) > -1
   end
 
-  def project_types type
-    if type == "Product"
-      return ["Product", "Product Innovation", "Market Adoption"]
-    elsif type == "Support"
-      return ["Support/Other"]
-    elsif type == "Internal"
-      return ["Internal Projects", "Engineering Systems", "Quality and Repairs"]
-    else
-      return ["Passing Thru", "Vacation", "Unassigned"]
-    end
-  end
-
 end
