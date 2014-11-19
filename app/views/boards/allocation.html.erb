@@ -12,6 +12,7 @@
   </thead>
   <tbody>
 <% @board.initiatives.where(:completed => false).each do |i| %>
+<% if !product_initiative?(i) %>
     <tr>
       <td><%= i.name %></td>
 <% @teams.each do |t| %>
@@ -23,11 +24,73 @@
     <tr>
  <% end %>
     <tr>
+<% end %>
+<% @board.initiatives.where(:completed => false).each do |i| %>
+<% if product_initiative?(i) %>
+    <tr>
+      <td><%= i.name %></td>
+<% @teams.each do |t| %>
+      <td title="<%= @allocations[i][:people][t].collect {|x| x.name} %>"><%= display_percentage @allocations[i][:people][t].size, t.people.size %>
+      </td>
+<% end %>
+      <td><%= display_percentage @allocations[i][:total], @allocations[:total] %></td>
+    </tr>
+    <tr>
+ <% end %>
+    <tr>
+<% end %>
       <th>Total</th>
 <% @teams.each do |t| %>
       <td><%= t.people.size %></td>
 <% end %>
       <td><%= @allocations[:total] %></td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+<h1>Project Allocation with Product grouped together</h1>
+
+<table class="table table-grid">
+  <thead>
+    <tr>
+      <th>Type</th>
+<% @teams.each do |t| %>
+      <th><%= link_to t.name, board_team_path(@board, t) %></th>
+<% end %>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+<% @board.initiatives.where(:completed => false).each do |i| %>
+<% if !product_initiative?(i) %>
+  <tr>
+      <td><%= i.name %></td>
+<% @teams.each do |t| %>
+      <td title="<%= @allocations_product_bucket[i][:people][t].collect {|x| x.name} %>"><%= display_percentage @allocations_product_bucket[i][:people][t].size, t.people.size %>
+      </td>
+<% end %>
+      <td><%= display_percentage @allocations_product_bucket[i][:total], @allocations_product_bucket[:total] %></td>
+    </tr>
+    <tr>
+ <% end %>
+ <% end %>
+     <tr>
+      <td> Product </td>
+<% @teams.each do |t| %>
+      <td title="<%= @allocations_product_bucket[:product][:people][t].collect {|x| x.name} %>"><%= display_percentage @allocations_product_bucket[:product][:people][t].size, t.people.size %>
+      </td>
+<% end %>
+      <td><%= display_percentage @allocations_product_bucket[:product][:total], @allocations_product_bucket[:total] %></td>
+    </tr>
+    <tr>
+    <tr>
+      <th>Total</th>
+<% @teams.each do |t| %>
+      <td><%= t.people.size %></td>
+<% end %>
+      <td><%= @allocations_product_bucket[:total] %></td>
     </tr>
   </tbody>
 </table>

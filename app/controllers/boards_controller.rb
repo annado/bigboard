@@ -151,8 +151,47 @@ class BoardsController < ApplicationController
         end
       end
     end
-  end
 
+    # group together product initiatives
+    @allocations_product_bucket = {}
+    @allocations_product_bucket[:total] = 0
+    @allocations_product_bucket[:product] = {}
+
+    @initiatives.each do |i|
+      if product_initiative?(i)
+        @allocations_product_bucket[:product][:total] = 0
+        @allocations_product_bucket[:product][:people] = {}
+        @teams.each do |t|
+          @allocations_product_bucket[:product][:people][t] = []
+        end
+      else
+        @allocations_product_bucket[i] = {}
+        @allocations_product_bucket[i][:total] = 0
+        @allocations_product_bucket[i][:people] = {}
+        @teams.each do |t|
+          @allocations_product_bucket[i][:people][t] = []
+        end
+      end
+    end
+
+    @teams.each do |t|
+      t.people.each do |p|
+        if p.active_project_count != 0
+          person_initiative = p.active_projects.first.initiative
+          if !person_initiative.completed
+            @allocations_product_bucket[:total] += 1
+            if product_initiative?(person_initiative)
+              @allocations_product_bucket[:product][:total] += 1
+              @allocations_product_bucket[:product][:people][t].push(p)
+            else
+              @allocations_product_bucket[person_initiative][:total] += 1
+              @allocations_product_bucket[person_initiative][:people][t].push(p)
+            end
+          end
+        end
+      end
+    end
+  end
 
   # GET /boards/1/changelog
   def changelog

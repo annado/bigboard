@@ -40,4 +40,9 @@ module ApplicationHelper
     num_weeks(deadline, nil) > -1
   end
 
+   def product_initiative?(initiative)
+    initiative.name.include?("*")
+  end
+
+
 end

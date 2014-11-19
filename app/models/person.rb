@@ -22,15 +22,6 @@ class Person < ActiveRecord::Base
     self.active_projects.size
   end
 
-  def on_initiative?(type)
-    if ["Support Engineering", "Service Quality", "Engineering Systems", "Market Adoption"].include?(type) && self.active_project_count != 0
-      type == self.active_projects.first.initiative.name
-    else
-      return false
-    end
-
-  end
-
   def initiative_owner?
     self.board.initiatives.any? do |i|
       i.owner == self
