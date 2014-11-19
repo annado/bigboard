@@ -11,43 +11,17 @@
     </tr>
   </thead>
   <tbody>
+<% @board.initiatives.where(:completed => false).each do |i| %>
     <tr>
-      <td>Product</td>
+      <td><%= i.name %></td>
 <% @teams.each do |t| %>
-      <td title="<%= @allocations[:product][:people][t].collect {|x| x.name} %>"><%= display_percentage @allocations[:product][:people][t].size, t.people.size %>
+      <td title="<%= @allocations[i][:people][t].collect {|x| x.name} %>"><%= display_percentage @allocations[i][:people][t].size, t.people.size %>
       </td>
 <% end %>
-      <td><%= display_percentage @allocations[:product][:total], @allocations[:total] %></td>
+      <td><%= display_percentage @allocations[i][:total], @allocations[:total] %></td>
     </tr>
     <tr>
-      <td>Market Adoption</td>
-<% @teams.each do |t| %>
-      <td title="<%= @allocations[:market_adoption][:people][t].collect {|x| x.name} %>"><%= display_percentage @allocations[:market_adoption][:people][t].size, t.people.size %></td>
-<% end %>
-      <td><%= display_percentage @allocations[:market_adoption][:total], @allocations[:total] %></td>
-    </tr>
-    <tr>
-      <td>Support Engineering</td>
-<% @teams.each do |t| %>
-      <td title="<%= @allocations[:support][:people][t].collect {|x| x.name} %>"><%= display_percentage @allocations[:support][:people][t].size, t.people.size %></td>
-<% end %>
-      <td><%= display_percentage @allocations[:support][:total], @allocations[:total] %></td>
-    </tr>
-    <tr>
-      <td>Service Quality</td>
-<% @teams.each do |t| %>
-      <td title="<%= @allocations[:service_quality][:people][t].collect {|x| x.name} %>"><%= display_percentage @allocations[:service_quality][:people][t].size, t.people.size %></td>
-<% end %>
-      <td><%= display_percentage @allocations[:service_quality][:total], @allocations[:total] %></td>
-    </tr>
-    <tr>
-    <tr>
-      <td>Engineering Systems</td>
-<% @teams.each do |t| %>
-      <td title="<%= @allocations[:engineering_systems][:people][t].collect {|x| x.name} %>"><%= display_percentage @allocations[:engineering_systems][:people][t].size, t.people.size %></td>
-<% end %>
-      <td><%= display_percentage @allocations[:engineering_systems][:total], @allocations[:total] %></td>
-    </tr>
+ <% end %>
     <tr>
       <th>Total</th>
 <% @teams.each do |t| %>

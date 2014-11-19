@@ -71,7 +71,7 @@ class BoardsController < ApplicationController
   end
 
   # GET /boards/1/allocation
-  def allocation
+  def allocation_old
     @teams = @board.teams.where(:single_project => true).order(:name)
     @allocations = {
       :total => 0,
@@ -123,6 +123,36 @@ class BoardsController < ApplicationController
       end
     end
   end
+
+  def allocation
+    @teams = @board.teams.where(:single_project => true).order(:name)
+    @initiatives = @board.initiatives.where(:completed => false)
+    @allocations = {}
+    @allocations[:total] = 0
+
+    @initiatives.each do |i|
+      @allocations[i] = {}
+      @allocations[i][:total] = 0
+      @allocations[i][:people] = {}
+      @teams.each do |t|
+        @allocations[i][:people][t] = []
+      end
+    end
+
+    @teams.each do |t|
+      t.people.each do |p|
+        if p.active_project_count != 0
+          person_initiative = p.active_projects.first.initiative
+          if !person_initiative.completed
+            @allocations[:total] += 1
+            @allocations[person_initiative][:total] += 1
+            @allocations[person_initiative][:people][t].push(p)
+          end
+        end
+      end
+    end
+  end
+
 
   # GET /boards/1/changelog
   def changelog
