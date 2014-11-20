@@ -49,7 +49,6 @@
 </table>
 
 
-
 <h1>Project Allocation with Product grouped together</h1>
 
 <table class="table table-grid">
@@ -73,7 +72,6 @@
 <% end %>
       <td><%= display_percentage @allocations_product_bucket[i][:total], @allocations_product_bucket[:total] %></td>
     </tr>
-    <tr>
  <% end %>
  <% end %>
      <tr>
@@ -85,7 +83,6 @@
       <td><%= display_percentage @allocations_product_bucket[:product][:total], @allocations_product_bucket[:total] %></td>
     </tr>
     <tr>
-    <tr>
       <th>Total</th>
 <% @teams.each do |t| %>
       <td><%= t.people.size %></td>
@@ -94,6 +91,19 @@
     </tr>
   </tbody>
 </table>
+
+<%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
+<h2>Bucket breakdown</h2>
+<%= pie_chart(@allocations_bucket_pie) %>
+<h2>Product initiatives breakdown</h2>
+<%= pie_chart(@allocations_product_pie) %>
+<h2>Supeng breakdown by functional team</h2>
+<%= pie_chart(@allocations_supeng_pie) %>
+
+
+<br/>
+
+
 
 <%= render partial: "validations" %>
 

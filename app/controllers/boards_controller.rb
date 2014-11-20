@@ -70,60 +70,6 @@ class BoardsController < ApplicationController
     end
   end
 
-  # GET /boards/1/allocation
-  def allocation_old
-    @teams = @board.teams.where(:single_project => true).order(:name)
-    @allocations = {
-      :total => 0,
-      :market_adoption => {
-        :total => 0,
-        :people => {}
-      },
-      :support => {
-        :total => 0,
-        :people => {}
-      },
-      :service_quality => {
-        :total => 0,
-        :people => {}
-      },
-      :engineering_systems => {
-        :total => 0,
-        :people => {}
-      },
-      :product => {
-        :total => 0,
-        :people => {}
-      }
-    }
-    @teams.each do |t|
-      @allocations[:market_adoption][:people][t] = []
-      @allocations[:support][:people][t] = []
-      @allocations[:service_quality][:people][t] = []
-      @allocations[:engineering_systems][:people][t] = []
-      @allocations[:product][:people][t] = []
-      t.people.each do |p|
-        @allocations[:total] += 1
-        if p.on_initiative?("Market Adoption")
-          @allocations[:market_adoption][:total] += 1
-          @allocations[:market_adoption][:people][t].push(p)
-        elsif p.on_initiative?("Support Engineering")
-          @allocations[:support][:total] += 1
-          @allocations[:support][:people][t].push(p)
-        elsif p.on_initiative?("Service Quality")
-          @allocations[:service_quality][:total] += 1
-          @allocations[:service_quality][:people][t].push(p)
-        elsif p.on_initiative?("Engineering Systems")
-          @allocations[:engineering_systems][:total] += 1
-          @allocations[:engineering_systems][:people][t].push(p)
-        else
-          @allocations[:product][:total] += 1
-          @allocations[:product][:people][t].push(p)
-        end
-      end
-    end
-  end
-
   def allocation
     @teams = @board.teams.where(:single_project => true).order(:name)
     @initiatives = @board.initiatives.where(:completed => false)
@@ -157,10 +103,18 @@ class BoardsController < ApplicationController
     @allocations_product_bucket[:total] = 0
     @allocations_product_bucket[:product] = {}
 
+    # create data for pie charts
+    @allocations_bucket_pie = {}
+    @allocations_product_pie = {}
+    @allocations_supeng_pie = {}
+
+    #set up hashes
     @initiatives.each do |i|
       if product_initiative?(i)
         @allocations_product_bucket[:product][:total] = 0
         @allocations_product_bucket[:product][:people] = {}
+        @allocations_bucket_pie["Product"] = 0
+        @allocations_product_pie[i.name] = 0
         @teams.each do |t|
           @allocations_product_bucket[:product][:people][t] = []
         end
@@ -168,12 +122,15 @@ class BoardsController < ApplicationController
         @allocations_product_bucket[i] = {}
         @allocations_product_bucket[i][:total] = 0
         @allocations_product_bucket[i][:people] = {}
+        @allocations_bucket_pie[i.name] = 0
         @teams.each do |t|
           @allocations_product_bucket[i][:people][t] = []
+          @allocations_supeng_pie[t.name] = 0
         end
       end
     end
 
+    # populate hashes with data
     @teams.each do |t|
       t.people.each do |p|
         if p.active_project_count != 0
@@ -183,14 +140,21 @@ class BoardsController < ApplicationController
             if product_initiative?(person_initiative)
               @allocations_product_bucket[:product][:total] += 1
               @allocations_product_bucket[:product][:people][t].push(p)
+              @allocations_bucket_pie["Product"] += 1
+              @allocations_product_pie[person_initiative.name] += 1
             else
               @allocations_product_bucket[person_initiative][:total] += 1
               @allocations_product_bucket[person_initiative][:people][t].push(p)
+              @allocations_bucket_pie[person_initiative.name] += 1
+              @allocations_supeng_pie[t.name] += 1
             end
           end
         end
       end
     end
+
+    
+
   end
 
   # GET /boards/1/changelog

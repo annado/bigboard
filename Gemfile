@@ -25,6 +25,7 @@ gem 'bootstrap_form'
 gem 'backbone-on-rails'
 
 gem 'searchkick'
+gem 'chartkick', '~> 1.3.2'
 
 # heroku
 gem 'rails_12factor', group: :production
