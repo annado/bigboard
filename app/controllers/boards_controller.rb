@@ -105,6 +105,7 @@ class BoardsController < ApplicationController
 
     # create data for pie charts
     @allocations_bucket_pie = {}
+    @allocations_bucket_pie_sf = {}
     @allocations_product_pie = {}
     @allocations_supeng_pie = {}
 
@@ -114,6 +115,7 @@ class BoardsController < ApplicationController
         @allocations_product_bucket[:product][:total] = 0
         @allocations_product_bucket[:product][:people] = {}
         @allocations_bucket_pie["Product"] = 0
+        @allocations_bucket_pie_sf["Product"] = 0
         @allocations_product_pie[i.name] = 0
         @teams.each do |t|
           @allocations_product_bucket[:product][:people][t] = []
@@ -123,6 +125,7 @@ class BoardsController < ApplicationController
         @allocations_product_bucket[i][:total] = 0
         @allocations_product_bucket[i][:people] = {}
         @allocations_bucket_pie[i.name] = 0
+        @allocations_bucket_pie_sf[i.name] = 0
         @teams.each do |t|
           @allocations_product_bucket[i][:people][t] = []
           @allocations_supeng_pie[t.name] = 0
@@ -141,12 +144,15 @@ class BoardsController < ApplicationController
               @allocations_product_bucket[:product][:total] += 1
               @allocations_product_bucket[:product][:people][t].push(p)
               @allocations_bucket_pie["Product"] += 1
+              @allocations_bucket_pie_sf["Product"] += 1 if p.location.name == "SF"
               @allocations_product_pie[person_initiative.name] += 1
             else
               @allocations_product_bucket[person_initiative][:total] += 1
               @allocations_product_bucket[person_initiative][:people][t].push(p)
               @allocations_bucket_pie[person_initiative.name] += 1
+              @allocations_bucket_pie_sf[person_initiative.name] += 1 if p.location.name == "SF"
               @allocations_supeng_pie[t.name] += 1
+
             end
           end
         end

@@ -93,10 +93,17 @@
 </table>
 
 <%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
-<h2>Bucket breakdown</h2>
-<%= pie_chart(@allocations_bucket_pie) %>
+<div class="pie-row">
+  <h2>Bucket breakdown</h2>
+  <div class="pie-container">TOTAL<%= pie_chart(@allocations_bucket_pie, height: "200px") %></div>
+  <div class="pie-container">SF<%= pie_chart(@allocations_bucket_pie_sf, height: "200px") %></div>
+</div>
+
+<div class="pie-row">
 <h2>Product initiatives breakdown</h2>
 <%= pie_chart(@allocations_product_pie) %>
+</div>
+
 <h2>Supeng breakdown by functional team</h2>
 <%= pie_chart(@allocations_supeng_pie) %>
 
