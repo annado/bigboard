@@ -46,7 +46,7 @@ class ProjectsController < ApplicationController
   def update
     respond_to do |format|
       if @project.update(project_params)
-        update_dates
+        update_dates if !@project.initiative.standing?
         format.html { redirect_to @board, notice: @project.name + ' was successfully updated.' }
         format.json { render :show, status: :ok, location: @project }
       else
