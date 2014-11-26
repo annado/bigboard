@@ -19,6 +19,7 @@ class Project < ActiveRecord::Base
 
   def vacation?
     self.name == "Vacation"
+  end
 
   def not_standing?
     !self.initiative.standing?

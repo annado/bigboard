@@ -15,11 +15,12 @@ class SearchController < ApplicationController
       @good_matches = {}
       exact_match_by_key = Project.find_by_experiment_key(@query)
       exact_match_by_name = Project.find_by_name(@query)
-      if !exact_match_by_key.nil? && exact_match_by_key.initiative.board.id == @board_id
+
+      if !exact_match_by_key.nil? && exact_match_by_key.initiative.board.id.to_s == @board_id
         @good_matches = {exact_match_by_key => 1}
       end
 
-      if !exact_match_by_name.nil? && exact_match_by_name.initiative.board.id == @board_id
+      if !exact_match_by_name.nil? && exact_match_by_name.initiative.board.id.to_s == @board_id
         @good_matches = {exact_match_by_name => 1}
       end
 

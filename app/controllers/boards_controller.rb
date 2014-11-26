@@ -260,17 +260,18 @@ class BoardsController < ApplicationController
         end
       end
       return @pie_data
+    end
 
     def post_reminder_post_to_yammer(todo_project_ids)
       yamr = Yammer::Client.new(:access_token  => current_user.access_token)
       message = []
-      todo_project_ids.each do |project_id|
+      todo_project_ids[0,3].each do |project_id|
         project = Project.find(project_id)
         if !project.initiative.standing?
           if project_group_id(project) # post to group if project has group link
-            yamr.create_message("The project associated with this group has data missing on the big board (like experiment_key and tech spec link). Can you help us fill in the details? http://0.0.0.0:3001/boards/" + @board.id.to_s + "/projects/" + project.id.to_s + "/edit", :group_id => project_group_id(project))
+            yamr.create_message("The project associated with this group has data missing on the big board (like experiment_key and tech spec link). Can you help us fill in the details? " + edit_board_project_url(@board, project), :group_id => project_group_id(project))
           else
-            message << "\n\n" + project.name + ": " +  "http://0.0.0.0:3001/boards/"+ @board.id.to_s + "/projects/" + project.id.to_s + "/edit"
+            message << "\n\n" + project.name + ": " + edit_board_project_url(@board, project)
           end
         end
       end
@@ -278,7 +279,6 @@ class BoardsController < ApplicationController
       if @board.group_id_for_yammer_post and message.count != 0
         yamr.create_message("These projects have data missing on the big board (like experiment_key and tech spec link). Can you help us fill in the details? " + message.join, :group_id => @board.group_id_for_yammer_post)
       end
-
     end
 
     def project_group_id(project)

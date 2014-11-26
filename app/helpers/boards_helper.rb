@@ -22,19 +22,6 @@ module BoardsHelper
     end
   end
 
-  def actual_minus_desired_allocation(team, allocations, project_type)
-    if team.product_allocation
-      delta = (allocations[:product][:people][team].size - team.people.count*team.product_allocation.to_f/100).round(2) if project_type=="Product"
-      delta = (allocations[:internal][:people][team].size - team.people.count*team.internal_projects_allocation.to_f/100).round(2) if project_type=="Internal Projects"
-      delta = (allocations[:internal][:support][team].size - team.people.count*team.support_allocation.to_f/100).round(2) if project_type=="Support"
-      delta = (allocations[:unassigned][team].size - team.people.count*team.unallocated_allocation.to_f/100).round(2) if project_type=="Unallocated"
-    end
-    if delta.to_i > 0
-      delta = "+"+delta.to_s
-    end
-    return delta
-  end
-
   def version_object_link board, version
     link = ''
     name = ''
