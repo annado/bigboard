@@ -104,8 +104,6 @@ class BoardsController < ApplicationController
     @allocations_product_bucket[:product] = {}
 
     # create data for pie charts
-    @allocations_bucket_pie = {}
-    @allocations_bucket_pie_sf = {}
     @allocations_product_pie = {}
     @allocations_supeng_pie = {}
 
@@ -114,8 +112,6 @@ class BoardsController < ApplicationController
       if product_initiative?(i)
         @allocations_product_bucket[:product][:total] = 0
         @allocations_product_bucket[:product][:people] = {}
-        @allocations_bucket_pie["Product"] = 0
-        @allocations_bucket_pie_sf["Product"] = 0
         @allocations_product_pie[i.name] = 0
         @teams.each do |t|
           @allocations_product_bucket[:product][:people][t] = []
@@ -124,8 +120,6 @@ class BoardsController < ApplicationController
         @allocations_product_bucket[i] = {}
         @allocations_product_bucket[i][:total] = 0
         @allocations_product_bucket[i][:people] = {}
-        @allocations_bucket_pie[i.name] = 0
-        @allocations_bucket_pie_sf[i.name] = 0
         @teams.each do |t|
           @allocations_product_bucket[i][:people][t] = []
           @allocations_supeng_pie[t.name] = 0
@@ -143,23 +137,25 @@ class BoardsController < ApplicationController
             if product_initiative?(person_initiative)
               @allocations_product_bucket[:product][:total] += 1
               @allocations_product_bucket[:product][:people][t].push(p)
-              @allocations_bucket_pie["Product"] += 1
-              @allocations_bucket_pie_sf["Product"] += 1 if p.location.name == "SF"
               @allocations_product_pie[person_initiative.name] += 1
             else
               @allocations_product_bucket[person_initiative][:total] += 1
               @allocations_product_bucket[person_initiative][:people][t].push(p)
-              @allocations_bucket_pie[person_initiative.name] += 1
-              @allocations_bucket_pie_sf[person_initiative.name] += 1 if p.location.name == "SF"
               @allocations_supeng_pie[t.name] += 1
-
             end
           end
         end
       end
     end
 
-    
+    @pie_all = allocations_pie_by_location("", @initiatives, @teams)
+    @pie_sf = allocations_pie_by_location("SF", @initiatives, @teams)
+    @pie_uk = allocations_pie_by_location("UK", @initiatives, @teams)
+    @pie_red = allocations_pie_by_location("RED", @initiatives, @teams)
+    @supeng_pie_all = supeng_pie_by_location("", @initiatives, @teams)
+    @supeng_pie_sf = supeng_pie_by_location("SF", @initiatives, @teams)
+    @supeng_pie_uk = supeng_pie_by_location("UK", @initiatives, @teams)
+    @supeng_pie_red = supeng_pie_by_location("RED", @initiatives, @teams)
 
   end
 
@@ -203,5 +199,50 @@ class BoardsController < ApplicationController
       if user && Devise.secure_compare(user.encrypted_password, params[:token])
         sign_in user, store: false
       end
+    end
+
+    def allocations_pie_by_location(location, initiatives, teams)
+      @pie_data = {}
+
+      initiatives.each do |i|
+        if product_initiative?(i)
+          @pie_data["Product"] = 0
+        else
+          @pie_data[i.name] = 0
+        end
+      end
+
+      @teams.each do |t|
+        t.people.each do |p|
+          if p.active_project_count != 0
+            person_initiative = p.active_projects.first.initiative
+            if !person_initiative.completed
+              if product_initiative?(person_initiative)
+                @pie_data["Product"] += 1 if [p.location.name, ""].include?(location)
+              else
+                @pie_data[person_initiative.name] += 1 if [p.location.name, ""].include?(location)
+              end
+            end
+          end
+        end
+      end
+      return @pie_data
+    end
+
+    def supeng_pie_by_location(location, initiatives, teams)
+      @pie_data = {}
+
+      @teams.each do |t|
+        @pie_data[t.name] = 0
+        t.people.each do |p|
+          if p.active_project_count != 0
+            if p.active_projects.first.initiative.name == "Support Engineering"
+              @pie_data[t.name] += 1 if [p.location.name, ""].include?(location)
+            end
+          end
+        end
+      end
+      return @pie_data
+
     end
 end

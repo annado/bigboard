@@ -95,8 +95,10 @@
 <%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
 <div class="pie-row">
   <h2>Bucket breakdown</h2>
-  <div class="pie-container">TOTAL<%= pie_chart(@allocations_bucket_pie, height: "200px") %></div>
-  <div class="pie-container">SF<%= pie_chart(@allocations_bucket_pie_sf, height: "200px") %></div>
+  <div class="pie-container">TOTAL<%= pie_chart(@pie_all, height: "200px") %></div>
+  <div class="pie-container">SF<%= pie_chart(@pie_sf, height: "200px") %></div>
+  <div class="pie-container">UK<%= pie_chart(@pie_uk, height: "200px") %></div>
+  <div class="pie-container">RED<%= pie_chart(@pie_red, height: "200px") %></div>
 </div>
 
 <div class="pie-row">
@@ -104,11 +106,17 @@
 <%= pie_chart(@allocations_product_pie) %>
 </div>
 
+<div class="pie-row">
 <h2>Supeng breakdown by functional team</h2>
-<%= pie_chart(@allocations_supeng_pie) %>
-<br/>
+  <div class="pie-container">TOTAL<%= pie_chart(@supeng_pie_all, height: "200px") %></div>
+  <div class="pie-container">SF<%= pie_chart(@supeng_pie_sf, height: "200px") %></div>
+  <div class="pie-container">UK<%= pie_chart(@supeng_pie_uk, height: "200px") %></div>
+  <div class="pie-container">RED<%= pie_chart(@supeng_pie_red, height: "200px") %></div>
+</div>
 
+<div style="clear:both">
 <%= render partial: "validations" %>
+</div>
 
 <% if @board.id == 2 %>
   <div class="alert alert-warning">
