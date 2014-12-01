@@ -105,7 +105,7 @@ class ProjectsController < ApplicationController
         permalinks_to_alert = []
         people_to_alert = Person.where(:new_project_alert => [@project.project_type, "All"], :board => @board).where.not(:permalink => nil)
         people_to_alert.each do |p|
-          permalinks_to_alert.push("@"+p.permalink)
+          permalinks_to_alert.push("@"+p.permalink) if !p.new_project_alert.blank?
         end
 
         yamr.create_message("A new project called '" + @project.name + "' in the " + @project.initiative.name + " initiative has been \
